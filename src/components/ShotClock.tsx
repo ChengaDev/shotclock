@@ -95,14 +95,13 @@ const TimeDisplay = styled.div`
 	font-size: 100px;
 	text-align: center;
 	border: 2px solid #8993a3;
-	margin-bottom: 20px;
 	color: white;
 	padding: 30px;
 	background-color: #373b4a;
 	width: 15%;
 	min-width: 200px;
 	margin: 0 auto;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 
 	@media ${'(min-width: 1000px)'} {
 		margin-bottom: 100px;
@@ -111,15 +110,17 @@ const TimeDisplay = styled.div`
 `;
 
 const ClockButton = styled.button`
-	font-size: 25px;
+	font-size: 22px;
 	height: 100px;
-	width: 100px;
+	min-width: 100px;
 	padding: 10px;
 	box-shadow: none;
 	border: none;
 	margin-right: 20px;
 	outline: none;
 	border-radius: 5px;
+	cursor: pointer;
+	color: #333;
 
 	@media ${'(min-width: 1000px)'} {
 		width: 150px;
@@ -138,6 +139,9 @@ const TimeToggleButton = styled(ClockButton)<TimeToggleButtonProps>`
 
 const ResetButton = styled(ClockButton)`
 	font-size: 50px;
+	font-weight: bold;
+	background-color: #e8ddbe;
+	color: #456fa3;
 `;
 
 const Title = styled.h1`
@@ -145,6 +149,7 @@ const Title = styled.h1`
 	font-size: 35px;
 	color: #333;
 	margin-top: 0;
+	margin-bottom: 50px;
 	text-align: center;
 
 	@media ${'(min-width: 770px)'} {
