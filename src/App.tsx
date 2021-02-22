@@ -1,10 +1,10 @@
 import React from 'react';
-import YellowSkin from './components/skins/YellowSkin';
+import ShotClock from './components/skins/ShotClock';
 
 function App() {
 	return (
 		<div className='App'>
-			<YellowSkin />
+			<ShotClock />
 		</div>
 	);
 }
