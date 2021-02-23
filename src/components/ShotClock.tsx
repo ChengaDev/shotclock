@@ -15,6 +15,18 @@ const ShotClock = () => {
 	isTickingRef.current = isTicking;
 	intervalRef.current = tickInterval;
 
+	const incrementSecond = () => {
+		if (currentSeconds < 24 && !isTicking) {
+			setCurrentSeconds(currentSeconds + 1);
+		}
+	};
+
+	const decrementSecond = () => {
+		if (currentSeconds > 0 && !isTicking) {
+			setCurrentSeconds(currentSeconds - 1);
+		}
+	};
+
 	const on14SecondsClick = () => {
 		if (!isTickingRef.current && intervalRef.current) {
 			clearInterval(intervalRef.current);
@@ -66,6 +78,11 @@ const ShotClock = () => {
 		<>
 			<Title>Shot clock practice</Title>
 			<TimeDisplay markSeconds={currentSeconds < 5}>{isTimeDisplay ? currentSeconds : '--'}</TimeDisplay>
+			<Correction>
+				<AdjustIcon onClick={decrementSecond} className='fa fa-minus' aria-hidden='true' />
+				<CorrectionSign>C</CorrectionSign>
+				<AdjustIcon onClick={incrementSecond} className='fa fa-plus' aria-hidden='true' />
+			</Correction>
 			<Buttons>
 				<TimeToggleButton id='btnStart' onClick={onTickToggle} isCurrentlyTicking={isTicking}>
 					{isTicking ? 'Stop' : 'Start'}
@@ -83,6 +100,43 @@ const ShotClock = () => {
 		</>
 	);
 };
+
+const CorrectionSign = styled.span`
+	font-size: 30px;
+	line-height: 50px;
+	margin-right: 20px;
+	user-select: none;
+	margin-left: 20px;
+	height: 50px;
+	width: 50px;
+	background-color: #3486eb;
+	color: white;
+	font-weight: bold;
+	border-radius: 50%;
+	display: inline-block;
+	margin-bottom: 80px;
+
+	@media ${'(max-width: 550px)'} {
+		margin-bottom: 20px;
+		font-size: 15px;
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+	}
+`;
+
+const AdjustIcon = styled.i`
+	cursor: pointer;
+	font-size: 30px;
+
+	@media ${'(max-width: 550px)'} {
+		font-size: 14px;
+	}
+`;
+
+const Correction = styled.div`
+	text-align: center;
+`;
 
 const Buttons = styled.div`
 	display: flex;
@@ -108,10 +162,10 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 	background-color: #373b4a;
 	width: 200px;
 	margin: 0 auto;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 
 	@media ${'(min-width: 1000px)'} {
-		margin-bottom: 100px;
+		margin-bottom: 30px;
 		margin-top: 60px;
 	}
 
@@ -142,8 +196,8 @@ const ClockButton = styled.button`
 
 	@media ${'(max-width: 550px)'} {
 		margin: 0 auto;
-		width: 100px;
-		height: 100px;
+		width: 85px;
+		height: 85px;
 		margin-bottom: 20px;
 	}
 `;
