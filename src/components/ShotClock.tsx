@@ -65,7 +65,7 @@ const ShotClock = () => {
 	return (
 		<>
 			<Title>Shot clock practise</Title>
-			<TimeDisplay>{isTimeDisplay ? currentSeconds : '--'}</TimeDisplay>
+			<TimeDisplay markSeconds={currentSeconds < 5}>{isTimeDisplay ? currentSeconds : '--'}</TimeDisplay>
 			<Buttons>
 				<TimeToggleButton id='btnStart' onClick={onTickToggle} isCurrentlyTicking={isTicking}>
 					{isTicking ? 'Stop' : 'Start'}
@@ -94,11 +94,16 @@ const Buttons = styled.div`
 	}
 `;
 
-const TimeDisplay = styled.div`
+type TimeDisplayProps = {
+	markSeconds: boolean;
+};
+
+const TimeDisplay = styled.div<TimeDisplayProps>`
 	font-size: 100px;
 	text-align: center;
 	border: 2px solid #8993a3;
-	color: white;
+	color: ${(props) => (props.markSeconds ? 'red' : 'white')};
+	font-weight: ${(props) => (props.markSeconds ? 'bold' : '400')};
 	padding: 30px;
 	background-color: #373b4a;
 	width: 200px;
