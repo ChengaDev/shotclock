@@ -87,8 +87,11 @@ const ShotClock = () => {
 const Buttons = styled.div`
 	display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
 	justify-content: space-between;
+
+	@media ${'(max-width: 550px)'} {
+		flex-direction: column;
+	}
 `;
 
 const TimeDisplay = styled.div`
@@ -98,14 +101,20 @@ const TimeDisplay = styled.div`
 	color: white;
 	padding: 30px;
 	background-color: #373b4a;
-	width: 15%;
-	min-width: 200px;
+	width: 200px;
 	margin: 0 auto;
 	margin-bottom: 50px;
 
 	@media ${'(min-width: 1000px)'} {
 		margin-bottom: 100px;
 		margin-top: 60px;
+	}
+
+	@media ${'(max-width: 550px)'} {
+		width: 100px;
+		font-size: 40px;
+		margin-bottom: 20px;
+		padding: 15px;
 	}
 `;
 
@@ -116,7 +125,6 @@ const ClockButton = styled.button`
 	padding: 10px;
 	box-shadow: none;
 	border: none;
-	margin-right: 20px;
 	outline: none;
 	border-radius: 5px;
 	cursor: pointer;
@@ -125,6 +133,13 @@ const ClockButton = styled.button`
 	@media ${'(min-width: 1000px)'} {
 		width: 150px;
 		height: 150px;
+	}
+
+	@media ${'(max-width: 550px)'} {
+		margin: 0 auto;
+		width: 100px;
+		height: 100px;
+		margin-bottom: 20px;
 	}
 `;
 
@@ -154,6 +169,12 @@ const Title = styled.h1`
 
 	@media ${'(min-width: 770px)'} {
 		font-size: 50px;
+	}
+
+	@media ${'(max-width: 550px)'} {
+		font-size: 20px;
+		margin-top: 20px;
+		margin-bottom: 20px;
 	}
 `;
 
