@@ -64,7 +64,7 @@ const ShotClock = () => {
 
 	return (
 		<>
-			<Title>Shot clock practise</Title>
+			<Title>Shot clock practice</Title>
 			<TimeDisplay markSeconds={currentSeconds < 5}>{isTimeDisplay ? currentSeconds : '--'}</TimeDisplay>
 			<Buttons>
 				<TimeToggleButton id='btnStart' onClick={onTickToggle} isCurrentlyTicking={isTicking}>
