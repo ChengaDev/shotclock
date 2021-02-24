@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import Controls from './Controls';
+import Correction from './Correction';
 
 const ShotClock = () => {
 	const [currentSeconds, setCurrentSeconds] = useState<number>(24);
@@ -78,75 +80,17 @@ const ShotClock = () => {
 		<>
 			<Title>Shot clock practice</Title>
 			<TimeDisplay markSeconds={currentSeconds < 5}>{isTimeDisplay ? currentSeconds : '--'}</TimeDisplay>
-			<Correction>
-				<AdjustIcon onClick={decrementSecond} className='fa fa-minus' aria-hidden='true' />
-				<CorrectionSign>C</CorrectionSign>
-				<AdjustIcon onClick={incrementSecond} className='fa fa-plus' aria-hidden='true' />
-			</Correction>
-			<Buttons>
-				<TimeToggleButton id='btnStart' onClick={onTickToggle} isCurrentlyTicking={isTicking}>
-					{isTicking ? 'Stop' : 'Start'}
-				</TimeToggleButton>
-				<ResetButton id='btnReset14' onClick={on14SecondsClick}>
-					14
-				</ResetButton>
-				<ResetButton id='btnReset24' onClick={on24SecondsClick}>
-					24
-				</ResetButton>
-				<ClockButton id='btnToggleDisplay' onClick={toggleDisplay}>
-					Display
-				</ClockButton>
-			</Buttons>
+			<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
+			<Controls
+				isTicking={isTicking}
+				on14SecondsClick={on14SecondsClick}
+				on24SecondsClick={on24SecondsClick}
+				onTickToggle={onTickToggle}
+				toggleDisplay={toggleDisplay}
+			/>
 		</>
 	);
 };
-
-const CorrectionSign = styled.span`
-	font-size: 30px;
-	line-height: 50px;
-	margin-right: 20px;
-	user-select: none;
-	margin-left: 20px;
-	height: 50px;
-	width: 50px;
-	background-color: #3486eb;
-	color: white;
-	font-weight: bold;
-	border-radius: 50%;
-	display: inline-block;
-	margin-bottom: 80px;
-
-	@media ${'(max-width: 550px)'} {
-		margin-bottom: 20px;
-		font-size: 15px;
-		height: 30px;
-		width: 30px;
-		line-height: 30px;
-	}
-`;
-
-const AdjustIcon = styled.i`
-	cursor: pointer;
-	font-size: 30px;
-
-	@media ${'(max-width: 550px)'} {
-		font-size: 14px;
-	}
-`;
-
-const Correction = styled.div`
-	text-align: center;
-`;
-
-const Buttons = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-
-	@media ${'(max-width: 550px)'} {
-		flex-direction: column;
-	}
-`;
 
 type TimeDisplayProps = {
 	markSeconds: boolean;
@@ -175,47 +119,6 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 		margin-bottom: 20px;
 		padding: 15px;
 	}
-`;
-
-const ClockButton = styled.button`
-	font-size: 22px;
-	height: 100px;
-	min-width: 100px;
-	padding: 10px;
-	box-shadow: none;
-	border: none;
-	outline: none;
-	border-radius: 5px;
-	cursor: pointer;
-	color: #333;
-
-	@media ${'(min-width: 1000px)'} {
-		width: 150px;
-		height: 150px;
-	}
-
-	@media ${'(max-width: 550px)'} {
-		margin: 0 auto;
-		width: 85px;
-		height: 85px;
-		margin-bottom: 20px;
-	}
-`;
-
-type TimeToggleButtonProps = {
-	isCurrentlyTicking: boolean;
-};
-
-const TimeToggleButton = styled(ClockButton)<TimeToggleButtonProps>`
-	color: white;
-	background-color: ${(props) => (props.isCurrentlyTicking ? 'red' : 'green')};
-`;
-
-const ResetButton = styled(ClockButton)`
-	font-size: 50px;
-	font-weight: bold;
-	background-color: #e8ddbe;
-	color: #456fa3;
 `;
 
 const Title = styled.h1`
