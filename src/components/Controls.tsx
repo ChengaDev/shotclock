@@ -50,7 +50,7 @@ const ClockButton = styled.button`
 	cursor: pointer;
 	color: #333;
 
-	@media ${'(min-width: 1000px)'} {
+	@media ${'(min-width: 1200px)'} {
 		width: 150px;
 		height: 150px;
 	}

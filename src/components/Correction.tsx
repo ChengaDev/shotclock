@@ -38,7 +38,7 @@ const CorrectionSign = styled.span`
 	font-weight: bold;
 	border-radius: 50%;
 	display: inline-block;
-	margin-bottom: 80px;
+	margin-bottom: 50px;
 
 	@media ${'(max-width: 550px)'} {
 		margin-bottom: 20px;

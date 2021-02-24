@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import Controls from './Controls';
 import Correction from './Correction';
@@ -17,19 +17,19 @@ const ShotClock = () => {
 	isTickingRef.current = isTicking;
 	intervalRef.current = tickInterval;
 
-	const incrementSecond = () => {
-		if (currentSeconds < 24 && !isTicking) {
+	const incrementSecond = useCallback(() => {
+		if (currentSeconds < 24 && !isTickingRef.current) {
 			setCurrentSeconds(currentSeconds + 1);
 		}
-	};
+	}, [isTickingRef.current, currentSeconds]);
 
-	const decrementSecond = () => {
-		if (currentSeconds > 0 && !isTicking) {
+	const decrementSecond = useCallback(() => {
+		if (currentSeconds > 0 && !isTickingRef.current) {
 			setCurrentSeconds(currentSeconds - 1);
 		}
-	};
+	}, [isTickingRef.current, currentSeconds]);
 
-	const on14SecondsClick = () => {
+	const on14SecondsClick = useCallback(() => {
 		if (!isTickingRef.current && intervalRef.current) {
 			clearInterval(intervalRef.current);
 			setTickInterval(null);
@@ -37,9 +37,9 @@ const ShotClock = () => {
 
 		setIsTimeDisplay(true);
 		setCurrentSeconds(14);
-	};
+	}, [isTickingRef.current, intervalRef.current]);
 
-	const on24SecondsClick = () => {
+	const on24SecondsClick = useCallback(() => {
 		if (!isTickingRef.current && intervalRef.current) {
 			clearInterval(intervalRef.current);
 			setTickInterval(null);
@@ -47,7 +47,7 @@ const ShotClock = () => {
 
 		setIsTimeDisplay(true);
 		setCurrentSeconds(24);
-	};
+	}, [isTickingRef.current, intervalRef.current]);
 
 	const onTickToggle = () => {
 		if (!isTickingRef.current) {
