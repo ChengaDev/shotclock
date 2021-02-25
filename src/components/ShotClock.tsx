@@ -77,9 +77,8 @@ const ShotClock = () => {
 	};
 
 	const titleAnimationProps = useSpring({
-		maxHeight: 60,
 		opacity: 1,
-		from: { opacity: 0, maxHeight: 0 },
+		from: { opacity: 0 },
 		config: { duration: 1000 }
 	});
 
