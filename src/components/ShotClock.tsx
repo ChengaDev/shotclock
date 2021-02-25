@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Controls from './Controls';
 import Correction from './Correction';
 import ShotClockReset from '../Constants';
+import { useSpring, useTransition, animated } from 'react-spring';
 
 const ShotClock = () => {
 	const [currentSeconds, setCurrentSeconds] = useState<number>(ShotClockReset.BackCountPosition);
@@ -75,20 +76,38 @@ const ShotClock = () => {
 		}
 	};
 
+	const titleAnimationProps = useSpring({
+		maxHeight: 60,
+		opacity: 1,
+		from: { opacity: 0, maxHeight: 0 },
+		config: { duration: 1000 }
+	});
+
+	const timeDisplayAnimationProps = useSpring({
+		opacity: 1,
+		from: { opacity: 0 },
+		config: { duration: 2000 }
+	});
+
 	return (
 		<>
-			<Title>Shot clock practice</Title>
-			<TimeDisplay isClockEnded={currentSeconds === 0} markSeconds={currentSeconds < 5}>
-				{isTimeDisplay ? currentSeconds : '--'}
-			</TimeDisplay>
-			<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
-			<Controls
-				isTicking={isTicking}
-				on14SecondsClick={on14SecondsClick}
-				on24SecondsClick={on24SecondsClick}
-				onTickToggle={onTickToggle}
-				toggleDisplay={toggleDisplay}
-			/>
+			<animated.div style={titleAnimationProps}>
+				<Title>Shot clock practice</Title>
+			</animated.div>
+			<animated.div style={timeDisplayAnimationProps}>
+				<TimeDisplay isClockEnded={currentSeconds === 0} markSeconds={currentSeconds < 5}>
+					{isTimeDisplay ? currentSeconds : '--'}
+				</TimeDisplay>
+
+				<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
+				<Controls
+					isTicking={isTicking}
+					on14SecondsClick={on14SecondsClick}
+					on24SecondsClick={on24SecondsClick}
+					onTickToggle={onTickToggle}
+					toggleDisplay={toggleDisplay}
+				/>
+			</animated.div>
 		</>
 	);
 };
