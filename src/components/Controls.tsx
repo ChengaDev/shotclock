@@ -43,16 +43,16 @@ const ClockButton = styled.button`
 	height: 100px;
 	min-width: 100px;
 	padding: 10px;
-	box-shadow: none;
 	border: none;
 	outline: none;
 	border-radius: 5px;
 	cursor: pointer;
 	color: #333;
+	box-shadow: 1px 1px #888888;
 
 	@media ${'(min-width: 1200px)'} {
-		width: 150px;
-		height: 150px;
+		width: 130px;
+		height: 130px;
 	}
 
 	@media ${'(max-width: 550px)'} {

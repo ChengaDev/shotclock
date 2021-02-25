@@ -2,9 +2,10 @@ import React, { useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import Controls from './Controls';
 import Correction from './Correction';
+import ShotClockReset from '../Constants';
 
 const ShotClock = () => {
-	const [currentSeconds, setCurrentSeconds] = useState<number>(24);
+	const [currentSeconds, setCurrentSeconds] = useState<number>(ShotClockReset.BackCountPosition);
 	const [isTicking, setIsTicking] = useState<boolean>(false);
 	const [isTimeDisplay, setIsTimeDisplay] = useState<boolean>(true);
 	const [tickInterval, setTickInterval] = useState<any>(null);
@@ -18,7 +19,7 @@ const ShotClock = () => {
 	intervalRef.current = tickInterval;
 
 	const incrementSecond = useCallback(() => {
-		if (currentSeconds < 24 && !isTickingRef.current) {
+		if (currentSeconds < ShotClockReset.BackCountPosition && !isTickingRef.current) {
 			setCurrentSeconds(currentSeconds + 1);
 		}
 	}, [isTickingRef.current, currentSeconds]);
@@ -36,7 +37,7 @@ const ShotClock = () => {
 		}
 
 		setIsTimeDisplay(true);
-		setCurrentSeconds(14);
+		setCurrentSeconds(ShotClockReset.FrontCountPosition);
 	}, [isTickingRef.current, intervalRef.current]);
 
 	const on24SecondsClick = useCallback(() => {
@@ -46,7 +47,7 @@ const ShotClock = () => {
 		}
 
 		setIsTimeDisplay(true);
-		setCurrentSeconds(24);
+		setCurrentSeconds(ShotClockReset.BackCountPosition);
 	}, [isTickingRef.current, intervalRef.current]);
 
 	const onTickToggle = () => {
@@ -55,10 +56,8 @@ const ShotClock = () => {
 				const interval = setInterval(tickIntervalHandler, 1000);
 				setTickInterval(interval);
 			}
-
 			setIsTimeDisplay(true);
 		}
-
 		setIsTicking(!isTickingRef.current);
 	};
 
@@ -79,7 +78,9 @@ const ShotClock = () => {
 	return (
 		<>
 			<Title>Shot clock practice</Title>
-			<TimeDisplay markSeconds={currentSeconds < 5}>{isTimeDisplay ? currentSeconds : '--'}</TimeDisplay>
+			<TimeDisplay isClockEnded={currentSeconds === 0} markSeconds={currentSeconds < 5}>
+				{isTimeDisplay ? currentSeconds : '--'}
+			</TimeDisplay>
 			<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
 			<Controls
 				isTicking={isTicking}
@@ -94,15 +95,16 @@ const ShotClock = () => {
 
 type TimeDisplayProps = {
 	markSeconds: boolean;
+	isClockEnded: boolean;
 };
 
 const TimeDisplay = styled.div<TimeDisplayProps>`
 	font-size: 100px;
 	text-align: center;
-	border: 2px solid #8993a3;
+	border: 4px solid ${(props) => (props.isClockEnded ? '#C85036' : '#8993a3')};
 	color: ${(props) => (props.markSeconds ? 'red' : 'white')};
 	font-weight: ${(props) => (props.markSeconds ? 'bold' : '400')};
-	padding: 30px;
+	padding: 24px;
 	background-color: #373b4a;
 	width: 200px;
 	margin: 0 auto;
