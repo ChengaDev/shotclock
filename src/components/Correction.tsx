@@ -19,6 +19,7 @@ const Correction = (props: CorrectionProps) => {
 const AdjustIcon = styled.i`
 	cursor: pointer;
 	font-size: 30px;
+	color: ${(props) => props.theme.correctionButtonsColor};
 
 	@media ${'(max-width: 550px)'} {
 		font-size: 14px;
