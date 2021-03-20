@@ -6,9 +6,7 @@ import LanguageCodes from '../../constants/LanguageCodes';
 const languageContextDefaultValues: LocalizationContextType = {
 	languageCode: LanguageCodes.English,
 	locals: Localization[LanguageCodes.English],
-	changeLocale: () => {
-		console.log('clickes');
-	}
+	changeLocale: () => {}
 };
 
 export const LocalizationContext = createContext<LocalizationContextType>(languageContextDefaultValues);
