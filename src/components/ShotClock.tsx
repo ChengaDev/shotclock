@@ -5,10 +5,10 @@ import Correction from './Correction';
 import ShotClockReset from '../Constants';
 import { useSpring, animated } from 'react-spring';
 
-import { LocalizationContext } from '../contexts/Language/LanguageProvider';
+import { useLocalization } from '../contexts/Language/LanguageProvider';
 
 const ShotClock = () => {
-	const { locals } = useContext(LocalizationContext);
+	const { locals } = useLocalization();
 
 	const [currentSeconds, setCurrentSeconds] = useState<number>(ShotClockReset.BackCountPosition);
 	const [isTicking, setIsTicking] = useState<boolean>(false);
@@ -155,7 +155,7 @@ const Title = styled.h1`
 	text-align: center;
 
 	@media ${'(min-width: 770px)'} {
-		font-size: 50px;
+		font-size: 40px;
 	}
 
 	@media ${'(max-width: 550px)'} {

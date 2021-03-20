@@ -1,4 +1,4 @@
-import React, { useState, createContext, FC } from 'react';
+import React, { useState, createContext, useContext, FC } from 'react';
 import { LocalizationContextType } from './types';
 import Localization from '../../localization/locailzation';
 import LanguageCodes from '../../constants/LanguageCodes';
@@ -6,7 +6,9 @@ import LanguageCodes from '../../constants/LanguageCodes';
 const languageContextDefaultValues: LocalizationContextType = {
 	languageCode: LanguageCodes.English,
 	locals: Localization[LanguageCodes.English],
-	changeLocale: () => {}
+	changeLocale: () => {
+		console.log('clickes');
+	}
 };
 
 export const LocalizationContext = createContext<LocalizationContextType>(languageContextDefaultValues);
@@ -24,5 +26,7 @@ const LanguageProvider: FC = ({ children }) => {
 		</LocalizationContext.Provider>
 	);
 };
+
+export const useLocalization = () => useContext(LocalizationContext);
 
 export default LanguageProvider;

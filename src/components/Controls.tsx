@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { LocalizationContext } from '../contexts/Language/LanguageProvider';
+import { useLocalization } from '../contexts/Language/LanguageProvider';
 
 type ControlsProps = {
 	isTicking: boolean;
@@ -12,7 +12,7 @@ type ControlsProps = {
 };
 
 function Buttons(props: ControlsProps) {
-	const { locals } = useContext(LocalizationContext);
+	const { locals } = useLocalization();
 
 	return (
 		<Container>
