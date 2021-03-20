@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
+import { LocalizationContext } from '../contexts/Language/LanguageProvider';
 
 type ControlsProps = {
 	isTicking: boolean;
@@ -10,10 +12,12 @@ type ControlsProps = {
 };
 
 function Buttons(props: ControlsProps) {
+	const { locals } = useContext(LocalizationContext);
+
 	return (
 		<Container>
 			<TimeToggleButton id='btnStart' onClick={props.onTickToggle} isCurrentlyTicking={props.isTicking}>
-				{props.isTicking ? 'Stop' : 'Start'}
+				{props.isTicking ? locals.stopLabel : locals.startLabel}
 			</TimeToggleButton>
 			<ResetButton id='btnReset14' onClick={props.on14SecondsClick}>
 				14
@@ -22,7 +26,7 @@ function Buttons(props: ControlsProps) {
 				24
 			</ResetButton>
 			<ClockButton id='btnToggleDisplay' onClick={props.toggleDisplay}>
-				Display
+				{locals.removeDisplayLabel}
 			</ClockButton>
 		</Container>
 	);

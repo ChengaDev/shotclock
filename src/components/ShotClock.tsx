@@ -1,11 +1,15 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useContext } from 'react';
 import styled from 'styled-components';
 import Controls from './Controls';
 import Correction from './Correction';
 import ShotClockReset from '../Constants';
-import { useSpring, useTransition, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
+
+import { LocalizationContext } from '../contexts/Language/LanguageProvider';
 
 const ShotClock = () => {
+	const { locals } = useContext(LocalizationContext);
+
 	const [currentSeconds, setCurrentSeconds] = useState<number>(ShotClockReset.BackCountPosition);
 	const [isTicking, setIsTicking] = useState<boolean>(false);
 	const [isTimeDisplay, setIsTimeDisplay] = useState<boolean>(true);
@@ -91,7 +95,8 @@ const ShotClock = () => {
 	return (
 		<>
 			<animated.div style={titleAnimationProps}>
-				<Title>Shot clock practice</Title>
+				<Title>{locals.title}</Title>
+				<SubTitle>{locals.subtitle}</SubTitle>
 			</animated.div>
 			<animated.div style={timeDisplayAnimationProps}>
 				<TimeDisplay isClockEnded={currentSeconds === 0} markSeconds={currentSeconds < 5}>
@@ -158,6 +163,15 @@ const Title = styled.h1`
 		margin-top: 20px;
 		margin-bottom: 20px;
 	}
+`;
+
+const SubTitle = styled.h2`
+	position: absolute;
+	width: 0;
+	margin: 0;
+	padding: 0;
+	height: 0;
+	visibility: hidden;
 `;
 
 export default ShotClock;
