@@ -144,13 +144,6 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 		margin-bottom: 20px;
 		padding: 15px;
 	}
-
-	@media (orientation: landscape) {
-		width: 70px;
-		height: 40px;
-		font-size: 40px;
-		line-height: 40px;
-	}
 `;
 
 const Title = styled.h1`
