@@ -40,6 +40,7 @@ type LanguageDisplayProps = {
 const LanguageDisplay = styled.div<LanguageDisplayProps>`
 	cursor: pointer;
 	margin-right: 10px;
+	color: ${(props) => props.theme.mainTextColor};
 
 	:hover {
 		font-weight: bold;

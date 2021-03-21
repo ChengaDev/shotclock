@@ -149,7 +149,7 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 const Title = styled.h1`
 	width: 100%;
 	font-size: 35px;
-	color: ${(props) => props.theme.titleColor};
+	color: ${(props) => props.theme.mainTextColor};
 	margin-top: 0;
 	margin-bottom: 50px;
 	text-align: center;
