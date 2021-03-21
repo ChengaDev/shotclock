@@ -65,6 +65,12 @@ const ClockButton = styled.button`
 		height: 85px;
 		margin-bottom: 20px;
 	}
+
+	@media (orientation: landscape) {
+		width: 60px;
+		height: 60px;
+		font-size: 15px;
+	}
 `;
 
 type TimeToggleButtonProps = {
@@ -81,6 +87,12 @@ const ResetButton = styled(ClockButton)`
 	font-weight: bold;
 	background-color: #e8ddbe;
 	color: #456fa3;
+
+	@media (orientation: landscape) {
+		width: 60px;
+		height: 60px;
+		font-size: 22px;
+	}
 `;
 
 export default Buttons;
