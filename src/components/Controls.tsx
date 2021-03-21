@@ -43,7 +43,7 @@ const Container = styled.div`
 `;
 
 const ClockButton = styled.button`
-	font-size: 22px;
+	font-size: 17px;
 	height: 100px;
 	min-width: 100px;
 	padding: 10px;

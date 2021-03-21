@@ -36,6 +36,16 @@ const GlobalStyle = createGlobalStyle`
 	body {
 		background-color: ${(props) => props.theme.mainBackgroundColor};
 	}
+
+	#root {
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
+	@media (min-width: 1200px) {
+		margin-top: 5%;
+		margin-bottom: 5%;
+	}
 `;
 
 export default App;
