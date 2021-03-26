@@ -17,6 +17,10 @@ const Container = styled.div`
 	color: ${(props) => props.theme.mainTextColor};
 	margin-top: 20px;
 	text-align: center;
+
+	a {
+		color: ${(props) => props.theme.mainTextColor};
+	}
 `;
 
 export default Footer;

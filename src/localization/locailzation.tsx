@@ -15,9 +15,9 @@ const AppLocalization: AppLocalizationType = {
 	en: {
 		title: 'Basketball shot clock practice',
 		subtitle: 'Practice your 24 shot clock operation skills',
-		startLabel: 'Start',
-		stopLabel: 'Stop',
-		removeDisplayLabel: 'Display'
+		startLabel: 'START',
+		stopLabel: 'STOP',
+		removeDisplayLabel: 'Clear'
 	},
 	it: {
 		title: "Practica dell'orologio di pallacanestro",

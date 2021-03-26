@@ -21,17 +21,17 @@ function App() {
 
 	return (
 		<div className='App'>
-			<Content>
-				<ThemeProvider theme={currentTheme}>
+			<ThemeProvider theme={currentTheme}>
+				<Content>
 					<GlobalStyle />
 					<LanguageProvider>
 						<LanguageSelector />
-						<ThemeSelector setTheme={setSelectedTheme} />
+						<ThemeSelector theme={selectedTheme} setTheme={setSelectedTheme} />
 						<ShotClock />
 					</LanguageProvider>
-				</ThemeProvider>
-			</Content>
-			<Footer />
+				</Content>
+				<Footer />
+			</ThemeProvider>
 		</div>
 	);
 }

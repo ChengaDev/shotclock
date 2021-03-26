@@ -30,7 +30,6 @@ const Container = styled.div`
 	text-align: center;
 	width: 100%;
 	justify-content: center;
-	margin-bottom: 20px;
 `;
 
 type LanguageDisplayProps = {

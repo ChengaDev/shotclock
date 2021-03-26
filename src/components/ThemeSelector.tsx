@@ -3,6 +3,7 @@ import Themes from '../constants/Themes';
 
 type ThemeSelcetorProps = {
 	setTheme: (newTheme: string) => void;
+	theme: string;
 };
 
 const ThemeSelector = (props: ThemeSelcetorProps) => {
@@ -15,7 +16,13 @@ const ThemeSelector = (props: ThemeSelcetorProps) => {
 
 	return (
 		<Container>
-			<ThemeItem onClick={useLightTheme}>Light</ThemeItem>|<ThemeItem onClick={useDarkTheme}>Dark</ThemeItem>
+			<ThemeItem isSelected={props.theme === Themes.Light} onClick={useLightTheme}>
+				Light
+			</ThemeItem>
+			|
+			<ThemeItem isSelected={props.theme === Themes.Dark} onClick={useDarkTheme}>
+				Dark
+			</ThemeItem>
 		</Container>
 	);
 };
@@ -24,16 +31,22 @@ const Container = styled.div`
 	display: flex;
 	margin-bottom: 20px;
 	justify-content: center;
-	margin-top: 15px;
+	margin-top: 10px;
 	color: ${(props) => props.theme.mainTextColor};
 `;
 
-const ThemeItem = styled.div`
-	font-size: 14px;
+type ThemeItemProps = {
+	isSelected: boolean;
+};
+
+const ThemeItem = styled.div<ThemeItemProps>`
+	font-size: 15px;
 	margin-right: 10px;
 	margin-left: 10px;
 	cursor: pointer;
 	line-height: 22px;
+
+	font-weight: ${(props) => (props.isSelected ? 'bold' : '')};
 `;
 
 export default ThemeSelector;

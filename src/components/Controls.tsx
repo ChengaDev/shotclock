@@ -41,6 +41,10 @@ const Container = styled.div`
 
 	@media ${'(max-width: 550px)'} {
 		flex-direction: column;
+
+		#btnToggleDisplay {
+			margin-top: 20px;
+		}
 	}
 `;
 
@@ -55,7 +59,7 @@ const ClockButton = styled.button`
 	border-radius: 20px;
 	cursor: pointer;
 	color: #333;
-	box-shadow: 1px 1px #888888;
+	font-weight: bold;
 
 	@media ${'(min-width: 1200px)'} {
 		width: 130px;
@@ -63,9 +67,9 @@ const ClockButton = styled.button`
 	}
 
 	@media ${'(max-width: 550px)'} {
+		font-size: 16px;
 		margin: 0 auto;
-		width: 85px;
-		height: 85px;
+		height: 80px;
 		margin-bottom: 20px;
 	}
 `;
@@ -85,6 +89,11 @@ const ResetButton = styled(ClockButton)`
 	text-align: center;
 	font-weight: bold;
 	color: #1d1d1b;
+
+	@media ${'(max-width: 550px)'} {
+		height: 80px;
+		font-size: 16px;
+	}
 `;
 
 export default Buttons;
