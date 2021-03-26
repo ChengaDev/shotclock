@@ -135,7 +135,7 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 
 	@media ${'(min-width: 1000px)'} {
 		margin-bottom: 30px;
-		margin-top: 60px;
+		margin-top: 30px;
 	}
 
 	@media ${'(max-width: 550px)'} {
@@ -153,6 +153,12 @@ const Title = styled.h1`
 	margin-top: 0;
 	margin-bottom: 50px;
 	text-align: center;
+	position: absolute;
+	width: 0;
+	margin: 0;
+	padding: 0;
+	height: 0;
+	visibility: hidden;
 
 	@media ${'(min-width: 770px)'} {
 		font-size: 40px;

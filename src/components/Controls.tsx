@@ -20,10 +20,12 @@ function Buttons(props: ControlsProps) {
 				{props.isTicking ? locals.stopLabel : locals.startLabel}
 			</TimeToggleButton>
 			<ResetButton id='btnReset14' onClick={props.on14SecondsClick}>
-				14
+				<div>Reset</div>
+				<div>14s</div>
 			</ResetButton>
 			<ResetButton id='btnReset24' onClick={props.on24SecondsClick}>
-				24
+				<div>Reset</div>
+				<div>Poss.</div>
 			</ResetButton>
 			<ClockButton id='btnToggleDisplay' onClick={props.toggleDisplay}>
 				{locals.removeDisplayLabel}
@@ -47,9 +49,10 @@ const ClockButton = styled.button`
 	height: 100px;
 	min-width: 100px;
 	padding: 10px;
-	border: none;
+	border: 4px solid #ffffff;
+	background: #fdcd27;
 	outline: none;
-	border-radius: 5px;
+	border-radius: 20px;
 	cursor: pointer;
 	color: #333;
 	box-shadow: 1px 1px #888888;
@@ -77,10 +80,11 @@ const TimeToggleButton = styled(ClockButton)<TimeToggleButtonProps>`
 `;
 
 const ResetButton = styled(ClockButton)`
-	font-size: 50px;
+	background: #fdcd27;
+	font-size: 18px;
+	text-align: center;
 	font-weight: bold;
-	background-color: #e8ddbe;
-	color: #456fa3;
+	color: #1d1d1b;
 `;
 
 export default Buttons;

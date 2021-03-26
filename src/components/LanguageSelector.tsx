@@ -25,7 +25,7 @@ const LanguageSelector = () => {
 };
 
 const Container = styled.div`
-	font-size: 12px;
+	font-size: 14px;
 	display: flex;
 	text-align: center;
 	width: 100%;
@@ -41,6 +41,10 @@ const LanguageDisplay = styled.div<LanguageDisplayProps>`
 	cursor: pointer;
 	margin-right: 10px;
 	color: ${(props) => props.theme.mainTextColor};
+
+	:last-child {
+		margin-right: 0;
+	}
 
 	:hover {
 		font-weight: bold;

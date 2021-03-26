@@ -1,11 +1,11 @@
 import { ThemeSchema } from './types';
 
 export const lightTheme: ThemeSchema = {
-	mainBackgroundColor: '#ccc6b6',
-	mainTextColor: '#333'
+	mainBackgroundColor: '#f7ab41',
+	mainTextColor: '#1D1D1B'
 };
 
 export const darkTheme: ThemeSchema = {
-	mainBackgroundColor: '#000',
+	mainBackgroundColor: '#2C2C2C',
 	mainTextColor: '#fff'
 };
