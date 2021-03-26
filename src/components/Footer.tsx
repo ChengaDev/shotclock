@@ -15,7 +15,7 @@ const Footer = () => {
 
 const Container = styled.div`
 	color: ${(props) => props.theme.mainTextColor};
-	margin-top: 30px;
+	margin-top: 20px;
 	text-align: center;
 `;
 

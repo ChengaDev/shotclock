@@ -21,33 +21,34 @@ function App() {
 
 	return (
 		<div className='App'>
-			<ThemeProvider theme={currentTheme}>
-				<GlobalStyle />
-				<LanguageProvider>
-					<LanguageSelector />
-					<ThemeSelector setTheme={setSelectedTheme} />
-					<ShotClock />
-					<Footer />
-				</LanguageProvider>
-			</ThemeProvider>
+			<Content>
+				<ThemeProvider theme={currentTheme}>
+					<GlobalStyle />
+					<LanguageProvider>
+						<LanguageSelector />
+						<ThemeSelector setTheme={setSelectedTheme} />
+						<ShotClock />
+					</LanguageProvider>
+				</ThemeProvider>
+			</Content>
+			<Footer />
 		</div>
 	);
 }
 
+const Content = styled.div`
+	max-width: 700px;
+	margin: 0 auto;
+	background-color: rgba(3, 3, 3, 0.15);
+	border-radius: 10px;
+	padding: 20px;
+`;
+
 const GlobalStyle = createGlobalStyle`
 	body {
-		
 		background: transparent url(${background}) 0% 0% no-repeat padding-box;
 		background-size: cover;
 		background-color: ${(props) => props.theme.mainBackgroundColor};
-	}
-
-	#root {
-		max-width: 700px;
-		margin: 0 auto;
-    	background-color: rgba(3,3,3,0.15);
-    	border-radius: 10px;
-		padding: 20px;
 	}
 
 	@media (min-width: 1200px) {

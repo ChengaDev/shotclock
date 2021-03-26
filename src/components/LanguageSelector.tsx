@@ -25,7 +25,7 @@ const LanguageSelector = () => {
 };
 
 const Container = styled.div`
-	font-size: 14px;
+	font-size: 15px;
 	display: flex;
 	text-align: center;
 	width: 100%;
