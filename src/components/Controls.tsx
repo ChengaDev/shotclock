@@ -43,7 +43,7 @@ const Container = styled.div`
 		flex-direction: column;
 
 		#btnToggleDisplay {
-			margin-top: 20px;
+			margin-bottom: 0;
 		}
 	}
 `;
