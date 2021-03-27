@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useContext } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import Controls from './Controls';
 import Correction from './Correction';
@@ -9,11 +9,13 @@ import { useLocalization } from '../contexts/Language/LanguageProvider';
 
 const ShotClock = () => {
 	const { locals } = useLocalization();
+	const buzzerSoundElementRef = useRef<HTMLAudioElement>(null);
 
 	const [currentSeconds, setCurrentSeconds] = useState<number>(ShotClockReset.BackCountPosition);
 	const [isTicking, setIsTicking] = useState<boolean>(false);
 	const [isTimeDisplay, setIsTimeDisplay] = useState<boolean>(true);
 	const [tickInterval, setTickInterval] = useState<any>(null);
+	const [timeReset, setTimeReset] = useState<boolean>(true);
 
 	const secondsRef = useRef<number>();
 	const isTickingRef = useRef<boolean>();
@@ -36,6 +38,7 @@ const ShotClock = () => {
 	}, [isTickingRef.current, currentSeconds]);
 
 	const on14SecondsClick = useCallback(() => {
+		setTimeReset(true);
 		if (!isTickingRef.current && intervalRef.current) {
 			clearInterval(intervalRef.current);
 			setTickInterval(null);
@@ -46,6 +49,7 @@ const ShotClock = () => {
 	}, [isTickingRef.current, intervalRef.current]);
 
 	const on24SecondsClick = useCallback(() => {
+		setTimeReset(true);
 		if (!isTickingRef.current && intervalRef.current) {
 			clearInterval(intervalRef.current);
 			setTickInterval(null);
@@ -58,6 +62,13 @@ const ShotClock = () => {
 	const onTickToggle = () => {
 		if (!isTickingRef.current) {
 			if (!intervalRef.current) {
+				if (currentSeconds === ShotClockReset.BackCountPosition && timeReset) {
+					setCurrentSeconds(23);
+					setTimeReset(false);
+				} else if (currentSeconds === ShotClockReset.FrontCountPosition && timeReset) {
+					setCurrentSeconds(13);
+					setTimeReset(false);
+				}
 				const interval = setInterval(tickIntervalHandler, 1000);
 				setTickInterval(interval);
 			}
@@ -76,6 +87,9 @@ const ShotClock = () => {
 			setCurrentSeconds(currentSecondsValue - 1);
 		}
 		if (currentSecondsValue === 0) {
+			if (isTickingRef.current) {
+				buzzerSoundElementRef.current?.play();
+			}
 			setIsTicking(false);
 		}
 	};
@@ -94,6 +108,12 @@ const ShotClock = () => {
 
 	return (
 		<>
+			<audio
+				loop={false}
+				ref={buzzerSoundElementRef}
+				src={process.env.PUBLIC_URL + '/BuzzerShort.mp3'}
+				style={{ display: 'none' }}
+			></audio>
 			<animated.div style={titleAnimationProps}>
 				<Title>{locals.title}</Title>
 				<SubTitle>{locals.subtitle}</SubTitle>
