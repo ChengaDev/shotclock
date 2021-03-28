@@ -33,6 +33,7 @@ const Container = styled.div`
 	justify-content: center;
 	margin-top: 10px;
 	color: ${(props) => props.theme.mainTextColor};
+	line-height: 20px;
 `;
 
 type ThemeItemProps = {
