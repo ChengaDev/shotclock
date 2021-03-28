@@ -33,9 +33,9 @@ function App() {
 								</Route>
 								<Route exact path={Routes.App}></Route>
 							</Switch>
-							<Footer />
 						</LanguageProvider>
 					</Content>
+					<Footer />
 				</ThemeProvider>
 			</Router>
 		</div>
