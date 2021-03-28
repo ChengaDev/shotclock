@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 type CorrectionProps = {
@@ -28,7 +27,7 @@ const AdjustIcon = styled.i`
 `;
 
 const CorrectionSign = styled.span`
-	font-size: 25px;
+	font-size: 22px;
 	margin-right: 20px;
 	user-select: none;
 	margin-left: 20px;
@@ -39,7 +38,7 @@ const CorrectionSign = styled.span`
 	border: 4px solid #fff;
 	display: inline-block;
 	margin-top: -4px;
-	line-height: 40px;
+	line-height: 35px;
 
 	@media ${'(max-width: 550px)'} {
 		font-size: 20px;

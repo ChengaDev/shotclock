@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import background from './assets/Group8.svg';
-
-import LanguageSelector from './components/LanguageSelector';
-import ShotClock from './components/ShotClock';
 import Footer from './components/Footer';
-import ThemeSelector from './components/ThemeSelector';
+import ShotClockPage from './components/ShotClockPage';
 
 import LanguageProvider from './contexts/Language/LanguageProvider';
+import Navigation from './components/Navigation';
 
 import { lightTheme, darkTheme } from './themes/themes';
 
 import Themes from './constants/Themes';
+import Routes from './AppRoutes';
 
 function App() {
 	const [selectedTheme, setSelectedTheme] = useState<string>(Themes.Light);
@@ -21,17 +21,23 @@ function App() {
 
 	return (
 		<div className='App'>
-			<ThemeProvider theme={currentTheme}>
-				<Content>
-					<GlobalStyle />
-					<LanguageProvider>
-						<LanguageSelector />
-						<ThemeSelector theme={selectedTheme} setTheme={setSelectedTheme} />
-						<ShotClock />
-					</LanguageProvider>
-				</Content>
-				<Footer />
-			</ThemeProvider>
+			<Router>
+				<ThemeProvider theme={currentTheme}>
+					<Navigation currentTheme={selectedTheme} />
+					<Content>
+						<GlobalStyle />
+						<LanguageProvider>
+							<Switch>
+								<Route exact path={Routes.Home}>
+									<ShotClockPage selectedTheme={selectedTheme} setSelectedTheme={setSelectedTheme} />
+								</Route>
+								<Route exact path={Routes.App}></Route>
+							</Switch>
+							<Footer />
+						</LanguageProvider>
+					</Content>
+				</ThemeProvider>
+			</Router>
 		</div>
 	);
 }
