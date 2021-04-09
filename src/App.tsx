@@ -14,6 +14,8 @@ import { lightTheme, darkTheme } from './themes/themes';
 import Themes from './constants/Themes';
 import Routes from './AppRoutes';
 
+import './assets/fonts/dseg14/dseg14.css';
+
 function App() {
 	const [selectedTheme, setSelectedTheme] = useState<string>(Themes.Light);
 

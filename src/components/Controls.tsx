@@ -20,11 +20,11 @@ function Buttons(props: ControlsProps) {
 				{props.isTicking ? locals.stopLabel : locals.startLabel}
 			</TimeToggleButton>
 			<ResetButton id='btnReset14' onClick={props.on14SecondsClick}>
-				<div>Reset</div>
+				<div>{locals.resetButtonText}</div>
 				<div>14s</div>
 			</ResetButton>
 			<ResetButton id='btnReset24' onClick={props.on24SecondsClick}>
-				<div>Reset</div>
+				<div>{locals.resetButtonText}</div>
 				<div>Poss.</div>
 			</ResetButton>
 			<ClockButton id='btnToggleDisplay' onClick={props.toggleDisplay}>

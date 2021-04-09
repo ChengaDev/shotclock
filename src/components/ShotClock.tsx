@@ -106,6 +106,8 @@ const ShotClock = () => {
 		config: { duration: 2000 }
 	});
 
+	const timeDisplayText = currentSeconds > 9 ? currentSeconds : `0${currentSeconds}`;
+
 	return (
 		<>
 			<audio
@@ -120,7 +122,8 @@ const ShotClock = () => {
 			</animated.div>
 			<animated.div style={timeDisplayAnimationProps}>
 				<TimeDisplay isClockEnded={currentSeconds === 0} markSeconds={currentSeconds < 5}>
-					{isTimeDisplay ? currentSeconds : '--'}
+					<FakeDigitsDisplay>88</FakeDigitsDisplay>
+					{isTimeDisplay ? timeDisplayText : '--'}
 				</TimeDisplay>
 
 				<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
@@ -142,16 +145,25 @@ type TimeDisplayProps = {
 };
 
 const TimeDisplay = styled.div<TimeDisplayProps>`
-	font-size: 100px;
+	text-shadow: 0px 0px 10px #ff0000;
+	font-family: 'DSEG14ClassicRegular';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 60px;
 	text-align: center;
 	border: 4px solid ${(props) => (props.isClockEnded ? '#C85036' : '#8993a3')};
-	color: ${(props) => (props.markSeconds ? 'red' : 'white')};
+	color: ${(props) => (props.markSeconds ? '#ff0000' : 'white')};
 	font-weight: ${(props) => (props.markSeconds ? 'bold' : '400')};
 	padding: 24px;
 	background-color: #373b4a;
 	width: 200px;
 	margin: 0 auto;
 	margin-bottom: 20px;
+	position: relative;
+	z-index: 2;
+
+	background: transparent linear-gradient(134deg, #1d1b1b 0%, #383834 55%, #1d1d1b 55%, #1d1d1b 100%) 0% 0% no-repeat
+		padding-box;
 
 	@media ${'(min-width: 1000px)'} {
 		margin-bottom: 30px;
@@ -160,7 +172,33 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 
 	@media ${'(max-width: 550px)'} {
 		width: 100px;
-		font-size: 40px;
+		font-size: 35px;
+		margin-bottom: 20px;
+		padding: 15px;
+	}
+`;
+
+const FakeDigitsDisplay = styled.div`
+	color: gray;
+	font-family: 'DSEG14ClassicRegular';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 60px;
+	text-align: center;
+	padding: 24px;
+	position: absolute;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	width: 200px;
+	opacity: 0.25;
+	text-shadow: none;
+	z-index: 1;
+	left: -4px;
+	top: 0;
+
+	@media ${'(max-width: 550px)'} {
+		width: 100px;
+		font-size: 35px;
 		margin-bottom: 20px;
 		padding: 15px;
 	}

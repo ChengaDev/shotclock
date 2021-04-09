@@ -4,4 +4,5 @@ export type LocalizationType = {
 	startLabel: string;
 	stopLabel: string;
 	removeDisplayLabel: string;
+	resetButtonText: string;
 };
