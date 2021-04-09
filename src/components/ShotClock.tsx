@@ -145,11 +145,11 @@ type TimeDisplayProps = {
 };
 
 const TimeDisplay = styled.div<TimeDisplayProps>`
-	text-shadow: 0px 0px 10px #ff0000;
+	/* text-shadow: 0px 0px 10px #ff0000; */
 	font-family: 'DSEG14ClassicRegular';
 	font-weight: normal;
 	font-style: normal;
-	font-size: 60px;
+	font-size: 65px;
 	text-align: center;
 	border: 4px solid ${(props) => (props.isClockEnded ? '#C85036' : '#8993a3')};
 	color: ${(props) => (props.markSeconds ? '#ff0000' : 'white')};
@@ -171,8 +171,8 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 	}
 
 	@media ${'(max-width: 550px)'} {
-		width: 100px;
-		font-size: 35px;
+		width: 120px;
+		font-size: 40px;
 		margin-bottom: 20px;
 		padding: 15px;
 	}
@@ -183,7 +183,7 @@ const FakeDigitsDisplay = styled.div`
 	font-family: 'DSEG14ClassicRegular';
 	font-weight: normal;
 	font-style: normal;
-	font-size: 60px;
+	font-size: 65px;
 	text-align: center;
 	padding: 24px;
 	position: absolute;
@@ -191,14 +191,14 @@ const FakeDigitsDisplay = styled.div`
 	margin-bottom: 20px;
 	width: 200px;
 	opacity: 0.25;
-	text-shadow: none;
+	/* text-shadow: none; */
 	z-index: 1;
 	left: -4px;
 	top: 0;
 
 	@media ${'(max-width: 550px)'} {
-		width: 100px;
-		font-size: 35px;
+		width: 120px;
+		font-size: 40px;
 		margin-bottom: 20px;
 		padding: 15px;
 	}
