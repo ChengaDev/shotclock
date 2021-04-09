@@ -113,7 +113,7 @@ const ShotClock = () => {
 			<audio
 				loop={false}
 				ref={buzzerSoundElementRef}
-				src={process.env.PUBLIC_URL + '/BuzzerShort.mp3'}
+				src='https://react-assets-files.s3.eu-central-1.amazonaws.com/BuzzerShort.mp3'
 				style={{ display: 'none' }}
 			></audio>
 			<animated.div style={titleAnimationProps}>
@@ -145,7 +145,6 @@ type TimeDisplayProps = {
 };
 
 const TimeDisplay = styled.div<TimeDisplayProps>`
-	/* text-shadow: 0px 0px 10px #ff0000; */
 	font-family: 'DSEG14ClassicRegular';
 	font-weight: normal;
 	font-style: normal;
@@ -153,7 +152,6 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 	text-align: center;
 	border: 4px solid ${(props) => (props.isClockEnded ? '#C85036' : '#8993a3')};
 	color: ${(props) => (props.markSeconds ? '#ff0000' : 'white')};
-	font-weight: ${(props) => (props.markSeconds ? 'bold' : '400')};
 	padding: 24px;
 	background-color: #373b4a;
 	width: 200px;
@@ -191,7 +189,7 @@ const FakeDigitsDisplay = styled.div`
 	margin-bottom: 20px;
 	width: 200px;
 	opacity: 0.25;
-	/* text-shadow: none; */
+	text-shadow: none;
 	z-index: 1;
 	left: -4px;
 	top: 0;
