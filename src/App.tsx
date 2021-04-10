@@ -47,7 +47,7 @@ function App() {
 const Content = styled.div`
 	max-width: 700px;
 	margin: 0 auto;
-	background-color: rgba(3, 3, 3, 0.15);
+	background-color: ${(props) => props.theme.contentBackground};
 	border-radius: 10px;
 	padding: 20px;
 `;

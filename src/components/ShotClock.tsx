@@ -123,7 +123,7 @@ const ShotClock = () => {
 			<animated.div style={timeDisplayAnimationProps}>
 				<TimeDisplay isClockEnded={currentSeconds === 0} markSeconds={currentSeconds < 5}>
 					<FakeDigitsDisplay>88</FakeDigitsDisplay>
-					{isTimeDisplay ? timeDisplayText : '--'}
+					{isTimeDisplay ? timeDisplayText : ''}
 				</TimeDisplay>
 
 				<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
@@ -144,22 +144,32 @@ type TimeDisplayProps = {
 	isClockEnded: boolean;
 };
 
-const TimeDisplay = styled.div<TimeDisplayProps>`
+const BaseTimeDisplay = styled.div`
 	font-family: 'DSEG14ClassicRegular';
 	font-weight: normal;
 	font-style: normal;
 	font-size: 65px;
 	text-align: center;
-	border: 4px solid ${(props) => (props.isClockEnded ? '#C85036' : '#8993a3')};
-	color: ${(props) => (props.markSeconds ? '#ff0000' : 'white')};
-	padding: 24px;
-	background-color: #373b4a;
 	width: 200px;
+	height: 150px;
+	padding: 24px;
 	margin: 0 auto;
 	margin-bottom: 20px;
-	position: relative;
-	z-index: 2;
 
+	@media ${(props) => props.theme.mediaQueries.mobile} {
+		width: 120px;
+		font-size: 40px;
+		margin-bottom: 20px;
+		padding: 15px;
+		height: 95px;
+	}
+`;
+
+const TimeDisplay = styled(BaseTimeDisplay)<TimeDisplayProps>`
+	border: 4px solid ${(props) => (props.isClockEnded ? props.theme.colors.red : '#8993a3')};
+	color: ${(props) => (props.markSeconds ? props.theme.colors.red : props.theme.colors.white)};
+
+	position: relative;
 	background: transparent linear-gradient(134deg, #1d1b1b 0%, #383834 55%, #1d1d1b 55%, #1d1d1b 100%) 0% 0% no-repeat
 		padding-box;
 
@@ -167,39 +177,14 @@ const TimeDisplay = styled.div<TimeDisplayProps>`
 		margin-bottom: 30px;
 		margin-top: 30px;
 	}
-
-	@media ${'(max-width: 550px)'} {
-		width: 120px;
-		font-size: 40px;
-		margin-bottom: 20px;
-		padding: 15px;
-	}
 `;
 
-const FakeDigitsDisplay = styled.div`
-	color: gray;
-	font-family: 'DSEG14ClassicRegular';
-	font-weight: normal;
-	font-style: normal;
-	font-size: 65px;
-	text-align: center;
-	padding: 24px;
+const FakeDigitsDisplay = styled(BaseTimeDisplay)`
+	color: ${(props) => props.theme.colors.gray};
 	position: absolute;
-	margin: 0 auto;
-	margin-bottom: 20px;
-	width: 200px;
 	opacity: 0.25;
-	text-shadow: none;
-	z-index: 1;
 	left: -4px;
 	top: 0;
-
-	@media ${'(max-width: 550px)'} {
-		width: 120px;
-		font-size: 40px;
-		margin-bottom: 20px;
-		padding: 15px;
-	}
 `;
 
 const Title = styled.h1`
@@ -220,7 +205,7 @@ const Title = styled.h1`
 		font-size: 40px;
 	}
 
-	@media ${'(max-width: 550px)'} {
+	@media ${(props) => props.theme.mediaQueries.mobile} {
 		font-size: 20px;
 		margin-top: 20px;
 		margin-bottom: 20px;

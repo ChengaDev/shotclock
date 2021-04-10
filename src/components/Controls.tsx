@@ -39,7 +39,7 @@ const Container = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 
-	@media ${'(max-width: 550px)'} {
+	@media ${(props) => props.theme.mediaQueries.mobile} {
 		flex-direction: column;
 
 		#btnToggleDisplay {
@@ -53,12 +53,11 @@ const ClockButton = styled.button`
 	height: 100px;
 	min-width: 100px;
 	padding: 10px;
-	border: 4px solid #ffffff;
-	background: #fdcd27;
+	border: 4px solid ${(props) => props.theme.colors.white};
+	background: ${(props) => props.theme.defaulButtonBackground};
 	outline: none;
 	border-radius: 20px;
 	cursor: pointer;
-	color: #333;
 	font-weight: bold;
 
 	@media ${'(min-width: 1200px)'} {
@@ -66,7 +65,7 @@ const ClockButton = styled.button`
 		height: 130px;
 	}
 
-	@media ${'(max-width: 550px)'} {
+	@media ${(props) => props.theme.mediaQueries.mobile} {
 		font-size: 16px;
 		margin: 0 auto;
 		height: 80px;
@@ -79,18 +78,17 @@ type TimeToggleButtonProps = {
 };
 
 const TimeToggleButton = styled(ClockButton)<TimeToggleButtonProps>`
-	color: white;
-	background-color: ${(props) => (props.isCurrentlyTicking ? 'red' : 'green')};
+	color: ${(props) => props.theme.colors.white};
+	background-color: ${(props) => (props.isCurrentlyTicking ? props.theme.colors.red : 'green')};
 `;
 
 const ResetButton = styled(ClockButton)`
-	background: #fdcd27;
+	background: ${(props) => props.theme.defaulButtonBackground};
 	font-size: 18px;
 	text-align: center;
 	font-weight: bold;
-	color: #1d1d1b;
 
-	@media ${'(max-width: 550px)'} {
+	@media ${(props) => props.theme.mediaQueries.mobile} {
 		height: 80px;
 		font-size: 16px;
 	}
