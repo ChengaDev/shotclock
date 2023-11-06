@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+# Basketball 24 shot clock app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Check it out!](https://wwww.24shotclock.com)
 
-## Available Scripts
+## Background
 
-In the project directory, you can run:
+Sweet application that simulates a control panel of 24 basketball shot clock according to [FIBA](https://www.fiba.basketball/) rules, built in React.
+I originally created it to practice in off-season time, but it is very fun also if just a basketball fan.
 
-### `npm start`
+The best way to practice is to broadcast a game on your TV, and operate the shot clock according to occurrences in this game.
+The application is updated from time to time according to the rules updates of FIBA.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Operations
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. **Start** - starts and stops the clock.
+2. **Reset 14s** - Reset the clock to 14 seconds (for example on offensive rebound or a team gaining ball control on the front half court).
+3. **Reset 24s** - Reset the clock to 24 seconds when the team (for example when a team gaining ball control on the back half court, or 24 shot clock is over).
+4. **Clear** - Clears the seconds view display (usually used between periods and during free throws shooting).
+5. **Correction** - Fix the seconds display by increment / decrement seconds according to the referees decision after they have checked the monitor.
 
-### `npm test`
+## Supported view modes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Light mode (orange based)
+- Dark mode (black based)
 
-### `npm run build`
+## Supported languages
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- English
+- Hebrew
+- Italian
+- Spanish
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+More languages to be supported soon!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The most comfortable usage is in your cell phone since this is the closest experience to the actual remote usually exist in gyms, [check it out here](https://wwww.24shotclock.com).
