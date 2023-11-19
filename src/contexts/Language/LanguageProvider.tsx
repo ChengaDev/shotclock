@@ -19,7 +19,6 @@ const LanguageProvider: FC = ({ children }) => {
   )
 
   const changeLocale = (newLanguageCode: string) => {
-    console.log('inside')
     setLanguageCode(newLanguageCode)
   }
 

@@ -3,4 +3,5 @@ export default {
   Hebrew: 'he',
   Italian: 'it',
   Spanish: 'es',
+  French: 'fr',
 }

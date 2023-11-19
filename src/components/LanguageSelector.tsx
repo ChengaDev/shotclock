@@ -10,35 +10,38 @@ const LanguageSelector = () => {
     <Container>
       <FlagContainer
         onClick={() => {
-          console.log('hebrew')
-          changeLocale(LanguageCodes.Hebrew)
-        }}
-      >
-        <Flag height="20" code="IL" />
-      </FlagContainer>
-      <FlagContainer
-        onClick={() => {
-          console.log('italian')
           changeLocale(LanguageCodes.Italian)
         }}
       >
-        <Flag height="20" code="ITA" />
+        <Flag height="15" code="ITA" />
       </FlagContainer>
       <FlagContainer
         onClick={() => {
-          console.log('spanish')
           changeLocale(LanguageCodes.Spanish)
         }}
       >
-        <Flag height="20" code="ES" />
+        <Flag height="15" code="ES" />
       </FlagContainer>
       <FlagContainer
         onClick={() => {
-          console.log('spanish')
+          changeLocale(LanguageCodes.Hebrew)
+        }}
+      >
+        <Flag height="15" code="IL" />
+      </FlagContainer>
+      <FlagContainer
+        onClick={() => {
+          changeLocale(LanguageCodes.French)
+        }}
+      >
+        <Flag height="15" code="FR" />
+      </FlagContainer>
+      <FlagContainer
+        onClick={() => {
           changeLocale(LanguageCodes.English)
         }}
       >
-        <Flag height="20" code="US" />
+        <Flag height="15" code="US" />
       </FlagContainer>
     </Container>
   )
