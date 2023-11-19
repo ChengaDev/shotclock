@@ -1,12 +1,17 @@
-import React from 'react'
 import styled from 'styled-components'
 import DonateButton from './DonateButton'
+import LanguageSelector from './LanguageSelector'
 
 const Footer = () => {
   return (
     <Container>
+      <LanguageSelector />
       Created by{' '}
-      <a href="https://linkedin.com/in/chengazit" target="_blank">
+      <a
+        href="https://linkedin.com/in/chengazit"
+        target="_blank"
+        rel="noreferrer"
+      >
         Chen Gazit
       </a>{' '}
       (ChengaDev) - 2021
@@ -19,10 +24,6 @@ const Container = styled.div`
   color: ${(props) => props.theme.mainTextColor};
   margin-top: 20px;
   text-align: center;
-
-  a {
-    color: ${(props) => props.theme.mainTextColor};
-  }
 `
 
 export default Footer

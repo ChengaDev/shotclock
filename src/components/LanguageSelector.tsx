@@ -1,59 +1,61 @@
-import { useContext } from 'react';
-import styled from 'styled-components';
-
-import { useLocalization } from '../contexts/Language/LanguageProvider';
-import LanguageCodes from '../constants/LanguageCodes';
+import styled from 'styled-components'
+import Flag from 'react-world-flags'
+import { useLocalization } from '../contexts/Language/LanguageProvider'
+import LanguageCodes from '../constants/LanguageCodes'
 
 const LanguageSelector = () => {
-	const { languageCode, changeLocale } = useLocalization();
+  const { changeLocale } = useLocalization()
 
-	return (
-		<Container>
-			{Object.values(LanguageCodes).map((language) => {
-				return (
-					<LanguageDisplay
-						key={language}
-						onClick={() => changeLocale(language)}
-						isSelected={languageCode === language}
-					>
-						{language.toUpperCase()}
-					</LanguageDisplay>
-				);
-			})}
-		</Container>
-	);
-};
+  return (
+    <Container>
+      <FlagContainer
+        onClick={() => {
+          console.log('hebrew')
+          changeLocale(LanguageCodes.Hebrew)
+        }}
+      >
+        <Flag height="20" code="IL" />
+      </FlagContainer>
+      <FlagContainer
+        onClick={() => {
+          console.log('italian')
+          changeLocale(LanguageCodes.Italian)
+        }}
+      >
+        <Flag height="20" code="ITA" />
+      </FlagContainer>
+      <FlagContainer
+        onClick={() => {
+          console.log('spanish')
+          changeLocale(LanguageCodes.Spanish)
+        }}
+      >
+        <Flag height="20" code="ES" />
+      </FlagContainer>
+      <FlagContainer
+        onClick={() => {
+          console.log('spanish')
+          changeLocale(LanguageCodes.English)
+        }}
+      >
+        <Flag height="20" code="US" />
+      </FlagContainer>
+    </Container>
+  )
+}
 
 const Container = styled.div`
-	font-size: 15px;
-	display: flex;
-	text-align: center;
-	width: 100%;
-	justify-content: center;
-`;
+  font-size: 15px;
+  display: flex;
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+`
 
-type LanguageDisplayProps = {
-	isSelected: boolean;
-};
+const FlagContainer = styled.div`
+  padding: 7px;
+  cursor: pointer;
+`
 
-const LanguageDisplay = styled.div<LanguageDisplayProps>`
-	cursor: pointer;
-	margin-right: 10px;
-	color: ${(props) => props.theme.mainTextColor};
-
-	:last-child {
-		margin-right: 0;
-	}
-
-	:hover {
-		font-weight: bold;
-	}
-
-	${(props) =>
-		props.isSelected &&
-		`
-        font-weight: bold;
-    `}
-`;
-
-export default LanguageSelector;
+export default LanguageSelector
