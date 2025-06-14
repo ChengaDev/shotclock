@@ -38,6 +38,9 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	max-width: 65%;
+	margin: 0 auto;
+	margin-bottom: 50px;
 
 	@media ${(props) => props.theme.mediaQueries.mobile} {
 		flex-direction: column;

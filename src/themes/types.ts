@@ -8,12 +8,17 @@ type MediaQueries = {
 	mobile: string;
 };
 
-export type ThemeSchema = {
+export interface ThemeSchema {
 	mainBackgroundColor: string;
-	contentBackground: string;
 	mainTextColor: string;
+	contentBackground: string;
 	adjustIconColor: string;
 	defaulButtonBackground: string;
 	colors: Colors;
 	mediaQueries: MediaQueries;
-};
+	text: string;
+	titleColor: string;
+	primary: string;
+	navBackground: string;
+	cardBackground: string;
+}

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, FC } from 'react'
+import React, { useState, createContext, useContext, FC, PropsWithChildren } from 'react'
 import { LocalizationContextType } from './types'
 import Localization from '../../localization/locailzation'
 import LanguageCodes from '../../constants/LanguageCodes'
@@ -13,7 +13,7 @@ export const LocalizationContext = createContext<LocalizationContextType>(
   languageContextDefaultValues
 )
 
-const LanguageProvider: FC = ({ children }) => {
+const LanguageProvider: FC<PropsWithChildren> = ({ children }) => {
   const [languageCode, setLanguageCode] = useState<string>(
     LanguageCodes.English
   )
