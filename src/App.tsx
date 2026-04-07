@@ -120,9 +120,18 @@ const pageRoutes = (
   </>
 )
 
+const THEME_KEY = 'sc_theme'
+
 const App = () => {
-  const [selectedTheme, setSelectedTheme] = useState(Themes.Dark)
+  const [selectedTheme, setSelectedTheme] = useState<string>(
+    () => localStorage.getItem(THEME_KEY) ?? Themes.Dark
+  )
   const theme = selectedTheme === Themes.Light ? lightTheme : darkTheme
+
+  const handleSetTheme = (t: string) => {
+    localStorage.setItem(THEME_KEY, t)
+    setSelectedTheme(t)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -130,7 +139,7 @@ const App = () => {
         <LanguageProvider>
           <GlobalStyle />
           <AppContainer>
-            <Navigation currentTheme={selectedTheme} setTheme={setSelectedTheme} />
+            <Navigation currentTheme={selectedTheme} setTheme={handleSetTheme} />
             <PageWrapper>
               <MainContent>
                 <Suspense fallback={null}>
@@ -209,7 +218,7 @@ const MainContent = styled.main`
 `
 
 const ContentCard = styled.div`
-  background: ${props => props.theme.mainBackgroundColor};
+  background: ${props => props.theme.cardBackground};
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 2rem;
@@ -217,8 +226,7 @@ const ContentCard = styled.div`
   max-width: 1200px;
   width: 90%;
   backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid ${props => props.theme.cardBorder};
   transform: translateY(0);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 

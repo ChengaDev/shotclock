@@ -120,18 +120,18 @@ const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: ${props => props.theme.cardText};
 `
 
 const Title = styled.h1`
   font-size: 2rem;
-  color: #ffd700;
+  color: ${props => props.theme.titleColor};
   margin-bottom: 0.25rem;
   font-weight: 700;
 `
 
 const LastUpdated = styled.p`
-  color: rgba(255, 255, 255, 0.4);
+  color: ${props => props.theme.subtleText};
   font-size: 0.85rem;
   margin-bottom: 2.5rem;
 `
@@ -142,7 +142,7 @@ const Section = styled.section`
 
 const SectionTitle = styled.h2`
   font-size: 1.2rem;
-  color: #ffd700;
+  color: ${props => props.theme.titleColor};
   margin-bottom: 0.75rem;
   font-weight: 600;
 `
@@ -150,12 +150,12 @@ const SectionTitle = styled.h2`
 const P = styled.p`
   line-height: 1.7;
   margin-bottom: 0.75rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: ${props => props.theme.cardText};
   font-size: 0.95rem;
 `
 
 const A = styled.a`
-  color: #ffd700;
+  color: ${props => props.theme.accent};
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -163,7 +163,7 @@ const A = styled.a`
 `
 
 const InternalLink = styled(Link)`
-  color: #ffd700;
+  color: ${props => props.theme.accent};
   text-decoration: none;
   &:hover {
     text-decoration: underline;

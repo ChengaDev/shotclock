@@ -151,20 +151,20 @@ const ResourcesGrid = styled.div`
 `
 
 const ResourceArrow = styled.span`
-  color: #ffd700;
+  color: ${props => props.theme.accent};
   font-size: 1.5rem;
   transition: transform 0.3s ease;
 `
 
 const ResourceCard = styled.a`
-  background: rgba(0, 0, 0, 0.6);
+  background: ${props => props.theme.cardBackground};
   border-radius: 16px;
   padding: 2rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid ${props => props.theme.cardBorder};
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -173,29 +173,12 @@ const ResourceCard = styled.a`
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 215, 0, 0.3);
-    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-color: ${props => props.theme.accent};
 
     ${ResourceArrow} {
       transform: translateX(5px);
     }
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 107, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover::before {
-    opacity: 1;
   }
 `
 
@@ -209,20 +192,17 @@ const ResourceContent = styled.div`
 `
 
 const ResourceTitle = styled.h3`
-  color: #ffd700;
+  color: ${props => props.theme.titleColor};
   font-size: 1.3rem;
   margin: 0 0 0.5rem;
   font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
 `
 
 const ResourceDescription = styled.p`
-  color: rgba(255, 255, 255, 0.95);
+  color: ${props => props.theme.cardText};
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.5;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 `
 
 const AdditionalInfo = styled.div`
@@ -250,20 +230,19 @@ const InfoGrid = styled.div`
 `
 
 const InfoCard = styled.div`
-  background: rgba(0, 0, 0, 0.6);
+  background: ${props => props.theme.cardBackground};
   border-radius: 16px;
   padding: 2rem;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid ${props => props.theme.cardBorder};
   transition: all 0.3s ease;
   animation: ${fadeInUp} 0.6s ease-out forwards;
   opacity: 0;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 215, 0, 0.3);
-    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-color: ${props => props.theme.accent};
   }
 `
 
@@ -273,11 +252,10 @@ const InfoIcon = styled.div`
 `
 
 const InfoText = styled.p`
-  color: rgba(255, 255, 255, 0.95);
+  color: ${props => props.theme.cardText};
   margin: 0;
   line-height: 1.6;
   font-size: 1rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 `
 
 export default FIBAResources 

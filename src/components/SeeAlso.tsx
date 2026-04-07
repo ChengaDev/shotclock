@@ -35,28 +35,27 @@ const Container = styled.div`
   gap: 0.75rem;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid ${props => props.theme.cardBorder};
 `
 
 const Label = styled.span`
-  color: rgba(255, 255, 255, 0.4);
+  color: ${props => props.theme.subtleText};
   font-size: 0.85rem;
 `
 
 const InternalLink = styled(Link)`
-  color: #ffd700;
+  color: ${props => props.theme.accent};
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
   padding: 0.3rem 0.75rem;
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  border: 1px solid ${props => props.theme.accent}55;
   border-radius: 6px;
   transition: all 0.2s ease;
 
   &:hover {
-    background: rgba(255, 215, 0, 0.1);
-    border-color: #ffd700;
-    color: #ffd700;
+    background: ${props => props.theme.accent}18;
+    border-color: ${props => props.theme.accent};
   }
 `
 

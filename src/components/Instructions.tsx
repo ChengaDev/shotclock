@@ -126,10 +126,10 @@ const InstructionsGrid = styled.div`
 `
 
 const InstructionCard = styled.div`
-  background: rgba(0, 0, 0, 0.6);
+  background: ${props => props.theme.cardBackground};
   border-radius: 16px;
   padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid ${props => props.theme.cardBorder};
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   animation: ${fadeInUp} 0.6s ease-out forwards;
@@ -137,9 +137,8 @@ const InstructionCard = styled.div`
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 215, 0, 0.3);
-    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-color: ${props => props.theme.accent};
   }
 `
 
@@ -164,12 +163,10 @@ const CardNumber = styled.div`
 `
 
 const CardTitle = styled.h3`
-  color: #ffd700;
+  color: ${props => props.theme.titleColor};
   font-size: 1.3rem;
   margin: 0;
   font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
 `
 
 const StepList = styled.div`
@@ -185,8 +182,8 @@ const StepItem = styled.div`
 `
 
 const StepNumber = styled.div`
-  background: rgba(255, 215, 0, 0.1);
-  color: #ffd700;
+  background: ${props => props.theme.accent}22;
+  color: ${props => props.theme.accent};
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -198,11 +195,10 @@ const StepNumber = styled.div`
 `
 
 const StepText = styled.p`
-  color: rgba(255, 255, 255, 0.95);
+  color: ${props => props.theme.cardText};
   margin: 0;
   line-height: 1.6;
   font-size: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 `
 
 const TipsSection = styled.div`
@@ -216,20 +212,19 @@ const TipsGrid = styled.div`
 `
 
 const TipCard = styled.div`
-  background: rgba(0, 0, 0, 0.6);
+  background: ${props => props.theme.cardBackground};
   border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid ${props => props.theme.cardBorder};
   transition: all 0.3s ease;
   animation: ${fadeInUp} 0.6s ease-out forwards;
   opacity: 0;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 215, 0, 0.3);
-    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-color: ${props => props.theme.accent};
   }
 `
 
@@ -239,11 +234,10 @@ const TipIcon = styled.div`
 `
 
 const TipText = styled.p`
-  color: rgba(255, 255, 255, 0.95);
+  color: ${props => props.theme.cardText};
   margin: 0;
   line-height: 1.6;
   font-size: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 `
 
 export default Instructions 

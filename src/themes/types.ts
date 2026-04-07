@@ -21,4 +21,9 @@ export interface ThemeSchema {
 	primary: string;
 	navBackground: string;
 	cardBackground: string;
+	// Semantic tokens used across content cards
+	accent: string;       // interactive highlights: chevrons, arrows, link borders
+	cardBorder: string;   // card border colour
+	cardText: string;     // body text inside cards
+	subtleText: string;   // low-emphasis text (labels, captions)
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { Helmet } from 'react-helmet'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 import SEO from './SEO'
 import SeeAlso from './SeeAlso'
@@ -36,10 +35,8 @@ const FAQ = () => {
       <SEO
         title="FAQ | ShotClock Pro"
         description="Frequently asked questions about basketball shot clock rules, the 14-second reset, and how to use the ShotClock Pro training simulator."
+        schema={faqSchema}
       />
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
 
       <AnimatedTitle>{locals.faqTitle}</AnimatedTitle>
       <Description>{locals.faqDescription}</Description>
@@ -103,16 +100,16 @@ const FaqList = styled.div`
 `
 
 const FaqItem = styled.div`
-  background: rgba(0, 0, 0, 0.5);
+  background: ${props => props.theme.cardBackground};
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid ${props => props.theme.cardBorder};
   overflow: hidden;
   animation: ${fadeInUp} 0.5s ease-out forwards;
   opacity: 0;
   transition: border-color 0.2s ease;
 
   &:hover {
-    border-color: rgba(255, 215, 0, 0.3);
+    border-color: ${props => props.theme.accent};
   }
 `
 
@@ -143,7 +140,7 @@ const QuestionText = styled.span`
 `
 
 const Chevron = styled.span<{ isOpen: boolean }>`
-  color: #ffd700;
+  color: ${props => props.theme.accent};
   font-size: 1.3rem;
   flex-shrink: 0;
   transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
@@ -154,10 +151,10 @@ const Chevron = styled.span<{ isOpen: boolean }>`
 const Answer = styled.p`
   padding: 0 1.5rem 1.25rem;
   margin: 0;
-  color: rgba(255, 255, 255, 0.85);
+  color: ${props => props.theme.cardText};
   font-size: 1rem;
   line-height: 1.7;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid ${props => props.theme.cardBorder};
   padding-top: 1rem;
 `
 

@@ -1,10 +1,13 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import DonateButton from './DonateButton'
 import LanguageSelector from './LanguageSelector'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
+import AppRoutes from '../AppRoutes'
 
 const Footer = () => {
-  const { locals } = useLocalization()
+  const { locals, languageCode } = useLocalization()
+  const routes = AppRoutes(languageCode)
 
   return (
     <Container>
@@ -15,15 +18,15 @@ const Footer = () => {
             {locals.aboutContent[0]}
           </FooterText>
         </FooterSection>
-        
+
         <FooterSection>
           <FooterTitle>Quick Links</FooterTitle>
           <FooterLinks>
-            <FooterLink href="/instructions">{locals.instructions}</FooterLink>
-            <FooterLink href="/fiba-resources">{locals.fibaResources}</FooterLink>
-            <FooterLink href="/faq">{locals.faq}</FooterLink>
-            <FooterLink href="/about">{locals.about}</FooterLink>
-            <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
+            <FooterNavLink to={routes.Instructions}>{locals.instructions}</FooterNavLink>
+            <FooterNavLink to={routes.FIBAResources}>{locals.fibaResources}</FooterNavLink>
+            <FooterNavLink to={routes.FAQ}>{locals.faq}</FooterNavLink>
+            <FooterNavLink to={routes.About}>{locals.about}</FooterNavLink>
+            <FooterNavLink to="/privacy-policy">Privacy Policy</FooterNavLink>
           </FooterLinks>
         </FooterSection>
 
@@ -97,7 +100,7 @@ const FooterLinks = styled.div`
   gap: 0.5rem;
 `
 
-const FooterLink = styled.a`
+const footerLinkStyles = `
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   font-size: 0.9rem;
@@ -122,6 +125,14 @@ const FooterLink = styled.a`
       width: 100%;
     }
   }
+`
+
+const FooterNavLink = styled(Link)`
+  ${footerLinkStyles}
+`
+
+const FooterLink = styled.a`
+  ${footerLinkStyles}
 `
 
 const FooterBottom = styled.div`

@@ -51,7 +51,7 @@ const PageBlurb = styled.p`
   padding: 0 1.5rem;
   font-size: 0.85rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.35);
+  color: ${props => props.theme.subtleText};
 `
 
 export default ShotClockPage

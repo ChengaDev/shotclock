@@ -26,7 +26,11 @@ export const lightTheme: ThemeSchema = {
 	text: '#1D1D1B',
 	primary: '#f7ab41',
 	navBackground: 'rgba(255, 255, 255, 0.9)',
-	cardBackground: 'rgba(255, 255, 255, 0.8)'
+	cardBackground: 'rgba(255, 255, 255, 0.88)',
+	accent: '#b35c00',
+	cardBorder: 'rgba(0, 0, 0, 0.1)',
+	cardText: '#333333',
+	subtleText: 'rgba(0, 0, 0, 0.45)',
 };
 
 export const darkTheme: ThemeSchema = {
@@ -39,5 +43,9 @@ export const darkTheme: ThemeSchema = {
 	text: Colors.white,
 	primary: '#f7ab41',
 	navBackground: 'rgba(44, 44, 44, 0.9)',
-	cardBackground: 'rgba(44, 44, 44, 0.8)'
+	cardBackground: 'rgba(44, 44, 44, 0.8)',
+	accent: '#ffd700',
+	cardBorder: 'rgba(255, 255, 255, 0.1)',
+	cardText: 'rgba(255, 255, 255, 0.9)',
+	subtleText: 'rgba(255, 255, 255, 0.4)',
 };
