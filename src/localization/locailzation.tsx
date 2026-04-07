@@ -377,59 +377,59 @@ const AppLocalization: AppLocalizationType = {
     faqDescription: 'Todo lo que necesitas saber sobre las reglas del reloj de tiro y cómo usar ShotClock Pro.',
     faqItems: [
       {
-        question: '¿Cuál es la regla del reloj de tiro en el baloncesto FIBA?',
+        question: 'Cuál es la regla del reloj de tiro en el baloncesto FIBA?',
         answer: 'Según las reglas FIBA, el equipo en ataque debe intentar un tiro que toque el aro o entre a canasta dentro de los 24 segundos siguientes a obtener la posesión. Si no lo hace, el árbitro señala una violación del reloj de tiro y la posesión pasa al equipo contrario.',
       },
       {
-        question: '¿Cuándo se reinicia el reloj a 14 segundos en lugar de 24?',
+        question: 'Cuándo se reinicia el reloj a 14 segundos en lugar de 24?',
         answer: 'El reloj se reinicia a 14 segundos — no a 24 — cuando el equipo en ataque recupera el rebote de su propio intento de tiro (en el tablero o en el aro). Esta regla se aplica tanto si el balón permanece en el campo ofensivo como si regresa al campo defensivo. La FIBA introdujo esta norma para recompensar el rebote ofensivo y agilizar el juego.',
       },
       {
-        question: '¿Qué se considera un intento de tiro válido a efectos del reloj de tiro?',
+        question: 'Qué se considera un intento de tiro válido a efectos del reloj de tiro?',
         answer: 'El balón debe tocar visiblemente el aro o entrar a canasta. Un tiro que solo golpea el tablero sin tocar el aro no satisface el requisito del reloj de tiro. Un airball que no toca nada tampoco detiene el reloj.',
       },
       {
-        question: '¿Qué ocurre cuando expira el reloj de tiro?',
+        question: 'Qué ocurre cuando expira el reloj de tiro?',
         answer: 'Suena el buzzer del reloj de tiro y el árbitro señala una violación. La posesión se otorga al equipo defensor mediante un saque de banda. La única excepción es si el balón ya está en el aire en el momento en que suena el buzzer y luego toca el aro o entra a canasta — en ese caso el enceste es válido y no se sanciona ninguna violación.',
       },
       {
-        question: '¿Cuándo comienza el reloj de tiro al inicio de una posesión?',
+        question: 'Cuándo comienza el reloj de tiro al inicio de una posesión?',
         answer: 'El reloj de tiro comienza en el momento en que un jugador obtiene el control de un balón vivo. En un saque de banda, el reloj comienza cuando el balón es tocado legalmente por cualquier jugador en la cancha.',
       },
       {
-        question: '¿Se reinicia el reloj de tiro cuando la defensa comete una falta?',
+        question: 'Se reinicia el reloj de tiro cuando la defensa comete una falta?',
         answer: 'No siempre. Si el equipo en ataque conserva la posesión tras una falta defensiva mediante un saque de banda en el campo ofensivo, el reloj continúa desde donde se detuvo — salvo que queden menos de 14 segundos, en cuyo caso se reinicia a 14. Si el saque se realiza desde el campo defensivo, el reloj se reinicia a 24 segundos.',
       },
       {
-        question: '¿Qué ocurre con el reloj de tiro cuando el balón sale fuera?',
+        question: 'Qué ocurre con el reloj de tiro cuando el balón sale fuera?',
         answer: 'El reloj de tiro se detiene junto con el cronómetro de juego. Si el último equipo en tocar el balón antes de que saliera fue el defensor, el equipo atacante conserva la posesión y el reloj reanuda desde donde se detuvo (reiniciándose a 14 si quedan menos de 14 segundos). Si fue el equipo atacante el que causó la salida, la defensa recibe el balón con un nuevo reloj de 24 segundos.',
       },
       {
-        question: '¿Qué ocurre con el reloj de tiro tras una pelota al salto?',
+        question: 'Qué ocurre con el reloj de tiro tras una pelota al salto?',
         answer: 'Tras una pelota al salto en la que un equipo logra el control del balón, el reloj de tiro se reinicia a 24 segundos para ese equipo.',
       },
       {
-        question: '¿Sigue corriendo el reloj de tiro durante los tiros libres?',
+        question: 'Sigue corriendo el reloj de tiro durante los tiros libres?',
         answer: 'No. El reloj de tiro se detiene y el display se apaga durante todos los intentos de tiro libre. Tras el último tiro libre de una serie, si el equipo que lanza recoge el rebote del tiro fallado (que haya tocado el aro), se aplica la regla del reinicio a 14 segundos.',
       },
       {
-        question: '¿Qué ocurre si el tiempo restante del período es menor que el valor de reinicio del reloj?',
+        question: 'Qué ocurre si el tiempo restante del período es menor que el valor de reinicio del reloj?',
         answer: 'Cuando el tiempo restante en el período es menor que el valor de reinicio aplicable (14 o 24 segundos), el display del reloj de tiro se apaga. No es posible cometer una violación del reloj porque el final del período ya limita la posesión.',
       },
       {
-        question: '¿Cómo señalan los árbitros una violación del reloj de tiro?',
+        question: 'Cómo señalan los árbitros una violación del reloj de tiro?',
         answer: 'El operador del reloj hace sonar el buzzer al llegar a cero. El árbitro señala entonces la violación apuntando con un brazo hacia la canasta que atacaba el equipo infractor y girando el otro brazo sobre la cabeza para indicar el cambio de posesión.',
       },
       {
-        question: '¿Cuál es la diferencia entre el reloj de tiro y el cronómetro de juego en la FIBA?',
+        question: 'Cuál es la diferencia entre el reloj de tiro y el cronómetro de juego en la FIBA?',
         answer: 'El cronómetro de juego mide el tiempo restante en cada período — 10 minutos por período en la FIBA. El reloj de tiro limita cada posesión ofensiva a 24 segundos. Ambos funcionan simultáneamente durante el juego activo, y en un solo período puede haber numerosas posesiones, cada una sujeta a su propio reloj de tiro.',
       },
       {
-        question: '¿Cuánto duran los períodos FIBA en comparación con la NBA?',
+        question: 'Cuánto duran los períodos FIBA en comparación con la NBA?',
         answer: 'Los períodos FIBA duran 10 minutos cada uno (4 períodos = 40 minutos de tiempo reglamentario). La NBA utiliza períodos de 12 minutos (48 minutos en total). Ambas ligas aplican un reloj de tiro de 24 segundos para nuevas posesiones. La FIBA introdujo el reinicio a 14 segundos tras rebote ofensivo, regla que la NBA adoptó posteriormente.',
       },
       {
-        question: '¿Puede un equipo retrasar deliberadamente el saque para consumir tiempo del reloj rival?',
+        question: 'Puede un equipo retrasar deliberadamente el saque para consumir tiempo del reloj rival?',
         answer: 'No. En un saque de banda, el reloj de tiro comienza cuando el balón es tocado por un jugador en la cancha. Además, el jugador que realiza el saque dispone de 5 segundos para hacerlo, y el árbitro puede sancionar una conducta antideportiva si un equipo demora injustificadamente la puesta en juego.',
       },
     ],

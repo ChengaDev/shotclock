@@ -26,4 +26,5 @@ export interface ThemeSchema {
 	cardBorder: string;   // card border colour
 	cardText: string;     // body text inside cards
 	subtleText: string;   // low-emphasis text (labels, captions)
+	pageCard: string;     // outer ContentCard wrapper background
 }

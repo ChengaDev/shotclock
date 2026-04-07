@@ -17,20 +17,21 @@ const MediaQueries = {
 };
 
 export const lightTheme: ThemeSchema = {
-	titleColor: 'rgba(40,40,40,0.9)',
+	titleColor: '#3b2a1a',
 	mainBackgroundColor: '#f7ab41',
-	mainTextColor: '#1D1D1B',
+	mainTextColor: '#4d3b28',
 	...CommonStyling,
 	colors: Colors,
 	mediaQueries: MediaQueries,
-	text: '#1D1D1B',
+	text: '#4d3b28',
 	primary: '#f7ab41',
 	navBackground: 'rgba(255, 255, 255, 0.9)',
-	cardBackground: 'rgba(255, 255, 255, 0.88)',
+	cardBackground: 'rgba(248, 232, 205, 0.78)',
 	accent: '#b35c00',
-	cardBorder: 'rgba(0, 0, 0, 0.1)',
-	cardText: '#333333',
-	subtleText: 'rgba(0, 0, 0, 0.45)',
+	cardBorder: 'rgba(0, 0, 0, 0.08)',
+	cardText: '#4d3b28',
+	subtleText: 'rgba(77, 59, 40, 0.55)',
+	pageCard: 'rgba(255, 235, 180, 0.55)',
 };
 
 export const darkTheme: ThemeSchema = {
@@ -43,9 +44,10 @@ export const darkTheme: ThemeSchema = {
 	text: Colors.white,
 	primary: '#f7ab41',
 	navBackground: 'rgba(44, 44, 44, 0.9)',
-	cardBackground: 'rgba(44, 44, 44, 0.8)',
+	cardBackground: '#212121',
 	accent: '#ffd700',
-	cardBorder: 'rgba(255, 255, 255, 0.1)',
-	cardText: 'rgba(255, 255, 255, 0.9)',
+	cardBorder: 'rgba(255, 255, 255, 0.08)',
+	cardText: 'rgba(255, 255, 255, 0.85)',
 	subtleText: 'rgba(255, 255, 255, 0.4)',
+	pageCard: 'transparent',
 };

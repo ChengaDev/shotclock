@@ -106,10 +106,11 @@ const FaqItem = styled.div`
   overflow: hidden;
   animation: ${fadeInUp} 0.5s ease-out forwards;
   opacity: 0;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     border-color: ${props => props.theme.accent};
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   }
 `
 
