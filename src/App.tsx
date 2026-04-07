@@ -1,97 +1,140 @@
-import React, { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate, useParams, Outlet, useNavigate } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
-import LanguageProvider from './contexts/Language/LanguageProvider'
+import LanguageProvider, { useLocalization } from './contexts/Language/LanguageProvider'
 import Navigation from './components/Navigation'
-import ShotClockPage from './components/ShotClockPage'
-import AboutUs from './components/AboutUs'
-import Instructions from './components/Instructions'
-import FIBAResources from './components/FIBAResources'
 import ShareButtons from './components/ShareButtons'
 import Footer from './components/Footer'
 import { lightTheme, darkTheme } from './themes/themes'
 import { createGlobalStyle } from 'styled-components'
 import './assets/fonts/dseg14/dseg14.css'
 import { useSpring, animated } from 'react-spring'
-import SEO from './components/SEO'
 import Themes from './constants/Themes'
 
+const ShotClockPage = lazy(() => import('./components/ShotClockPage'))
+const AboutUs = lazy(() => import('./components/AboutUs'))
+const Instructions = lazy(() => import('./components/Instructions'))
+const FIBAResources = lazy(() => import('./components/FIBAResources'))
+
+const NON_ENGLISH_LANGS = ['it', 'es', 'fr']
+
 interface PageContentProps {
-  children: React.ReactNode;
-  title: string;
+  children: React.ReactNode
+  title: string
 }
 
 const PageContent: React.FC<PageContentProps> = ({ children, title }) => {
-  const location = useLocation();
-  const currentUrl = window.location.origin + location.pathname;
-  
+  const location = useLocation()
+  const currentUrl = window.location.origin + location.pathname
+
   return (
     <ContentCard>
       {children}
       <ShareButtons url={currentUrl} title={title} />
     </ContentCard>
-  );
-};
+  )
+}
+
+// Layout for English routes — no URL lang prefix
+const EnglishLayout = () => {
+  const { changeLocale } = useLocalization()
+  const fadeIn = useSpring({ from: { opacity: 0 }, to: { opacity: 1 }, config: { duration: 800 } })
+
+  useEffect(() => {
+    changeLocale('en')
+  }, [])
+
+  return <animated.div style={fadeIn}><Outlet /></animated.div>
+}
+
+// Layout for non-English language routes — reads /:lang from URL
+// Also handles /en/* by redirecting to the canonical English URL
+const LangLayout = () => {
+  const { lang } = useParams<{ lang: string }>()
+  const { changeLocale } = useLocalization()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const fadeIn = useSpring({ from: { opacity: 0 }, to: { opacity: 1 }, config: { duration: 800 } })
+
+  useEffect(() => {
+    if (lang === 'en') {
+      // Redirect /en/* → /* to keep English at canonical URLs
+      const pagePath = location.pathname.slice('/en'.length) || '/'
+      navigate(pagePath, { replace: true })
+    } else if (lang && NON_ENGLISH_LANGS.includes(lang)) {
+      changeLocale(lang)
+    } else {
+      navigate('/', { replace: true })
+    }
+  }, [lang])
+
+  return <animated.div style={fadeIn}><Outlet /></animated.div>
+}
+
+const pageRoutes = (
+  <>
+    <Route index element={
+      <>
+        <ShotClockPage />
+        <ShareButtons
+          url={window.location.href}
+          title="Check out this Basketball Shot Clock App!"
+          description="A professional basketball shot clock app for referees and players."
+        />
+      </>
+    } />
+    <Route path="about" element={
+      <PageContent title="About Us - Basketball Shot Clock App">
+        <AboutUs />
+      </PageContent>
+    } />
+    <Route path="instructions" element={
+      <PageContent title="Instructions - Basketball Shot Clock App">
+        <Instructions />
+      </PageContent>
+    } />
+    <Route path="fiba-resources" element={
+      <PageContent title="FIBA Resources - Basketball Shot Clock App">
+        <FIBAResources />
+      </PageContent>
+    } />
+  </>
+)
 
 const App = () => {
   const [selectedTheme, setSelectedTheme] = useState(Themes.Dark)
   const theme = selectedTheme === Themes.Light ? lightTheme : darkTheme
 
-  const fadeIn = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: { duration: 800 }
-  })
-
   return (
     <ThemeProvider theme={theme}>
-      <LanguageProvider>
-        <GlobalStyle />
-        <SEO />
-        <Router>
+      <Router>
+        <LanguageProvider>
+          <GlobalStyle />
           <AppContainer>
             <Navigation currentTheme={selectedTheme} setTheme={setSelectedTheme} />
             <PageWrapper>
               <MainContent>
+                <Suspense fallback={null}>
                 <Routes>
-                  <Route path="/" element={
-                    <animated.div style={fadeIn}>
-                      <ShotClockPage />
-                      <ShareButtons 
-                        url={window.location.href}
-                        title="Check out this Basketball Shot Clock App!"
-                        description="A professional basketball shot clock app for referees and players."
-                      />
-                    </animated.div>
-                  } />
-                  <Route path="/about" element={
-                    <animated.div style={fadeIn}>
-                      <PageContent title="About Us - Basketball Shot Clock App">
-                        <AboutUs />
-                      </PageContent>
-                    </animated.div>
-                  } />
-                  <Route path="/instructions" element={
-                    <animated.div style={fadeIn}>
-                      <PageContent title="Instructions - Basketball Shot Clock App">
-                        <Instructions />
-                      </PageContent>
-                    </animated.div>
-                  } />
-                  <Route path="/fiba-resources" element={
-                    <animated.div style={fadeIn}>
-                      <PageContent title="FIBA Resources - Basketball Shot Clock App">
-                        <FIBAResources />
-                      </PageContent>
-                    </animated.div>
-                  } />
+                  {/* English — canonical URLs without lang prefix */}
+                  <Route path="/" element={<EnglishLayout />}>
+                    {pageRoutes}
+                  </Route>
+
+                  {/* Non-English languages + /en/* redirect */}
+                  <Route path="/:lang" element={<LangLayout />}>
+                    {pageRoutes}
+                  </Route>
+
+                  <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
+                </Suspense>
               </MainContent>
               <Footer />
             </PageWrapper>
           </AppContainer>
-        </Router>
-      </LanguageProvider>
+        </LanguageProvider>
+      </Router>
     </ThemeProvider>
   )
 }
@@ -132,7 +175,7 @@ const PageWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 80px; // Height of the navigation
+  margin-top: 80px;
   min-height: calc(100vh - 80px);
 `
 

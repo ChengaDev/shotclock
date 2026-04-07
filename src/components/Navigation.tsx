@@ -1,7 +1,7 @@
 import { Nav, Navbar } from 'react-bootstrap'
 import styled from 'styled-components'
 import Themes from '../constants/Themes'
-import Routes from '../AppRoutes'
+import AppRoutes from '../AppRoutes'
 import { Link, useLocation } from 'react-router-dom'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 import { useState, useRef, useEffect } from 'react'
@@ -13,7 +13,8 @@ type NavigationProps = {
 
 const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
   const location = useLocation()
-  const { locals } = useLocalization()
+  const { locals, languageCode } = useLocalization()
+  const routes = AppRoutes(languageCode)
   const [expanded, setExpanded] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
 
@@ -43,36 +44,36 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
         expanded={expanded}
         onToggle={setExpanded}
       >
-        <Navbar.Brand as={Link} to={Routes.Home}>
+        <Navbar.Brand as={Link} to={routes.Home}>
           <BrandText>ShotClock Pro</BrandText>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <NavLink
-              to={Routes.Home}
-              active={location.pathname === Routes.Home}
+              to={routes.Home}
+              active={location.pathname === routes.Home}
               onClick={handleNavClick}
             >
               {locals.home}
             </NavLink>
             <NavLink
-              to={Routes.Instructions}
-              active={location.pathname === Routes.Instructions}
+              to={routes.Instructions}
+              active={location.pathname === routes.Instructions}
               onClick={handleNavClick}
             >
               {locals.instructions}
             </NavLink>
             <NavLink
-              to={Routes.FIBAResources}
-              active={location.pathname === Routes.FIBAResources}
+              to={routes.FIBAResources}
+              active={location.pathname === routes.FIBAResources}
               onClick={handleNavClick}
             >
               {locals.fibaResources}
             </NavLink>
             <NavLink
-              to={Routes.About}
-              active={location.pathname === Routes.About}
+              to={routes.About}
+              active={location.pathname === routes.About}
               onClick={handleNavClick}
             >
               {locals.about}

@@ -113,7 +113,7 @@ const ShotClock = () => {
 			<audio
 				loop={false}
 				ref={buzzerSoundElementRef}
-				src='https://react-assets-files.s3.eu-central-1.amazonaws.com/BuzzerShort.mp3'
+				src='/BuzzerShort.mp3'
 				style={{ display: 'none' }}
 			></audio>
 			<animated.div style={titleAnimationProps}>

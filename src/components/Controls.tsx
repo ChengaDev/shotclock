@@ -25,7 +25,7 @@ function Buttons(props: ControlsProps) {
 			</ResetButton>
 			<ResetButton id='btnReset24' onClick={props.on24SecondsClick}>
 				<div>{locals.resetButtonText}</div>
-				<div>Poss.</div>
+				<div>{locals.possessionLabel}</div>
 			</ResetButton>
 			<ClockButton id='btnToggleDisplay' onClick={props.toggleDisplay}>
 				{locals.removeDisplayLabel}

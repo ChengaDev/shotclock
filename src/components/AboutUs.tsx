@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
+import SEO from './SEO'
 
 const fadeInUp = keyframes`
   from {
@@ -18,6 +19,10 @@ const AboutUs = () => {
 
   return (
     <Container>
+      <SEO
+        title="About Us | ShotClock Pro"
+        description="Learn about ShotClock Pro – a free basketball shot clock training app built for referees, scorekeepers, and basketball enthusiasts who want to master FIBA shot clock rules."
+      />
       <AnimatedTitle>{locals.aboutTitle}</AnimatedTitle>
 
       <Content>
@@ -33,29 +38,13 @@ const AboutUs = () => {
       </Description>
 
       <Features>
-        <FeatureCard>
-          <FeatureIcon>🎯</FeatureIcon>
-          <FeatureTitle>Professional Training</FeatureTitle>
-          <FeatureText>
-            Master the art of shot clock operation with our comprehensive training platform.
-          </FeatureText>
-        </FeatureCard>
-
-        <FeatureCard>
-          <FeatureIcon>⚡</FeatureIcon>
-          <FeatureTitle>Real-time Practice</FeatureTitle>
-          <FeatureText>
-            Train with realistic game scenarios and improve your response time.
-          </FeatureText>
-        </FeatureCard>
-
-        <FeatureCard>
-          <FeatureIcon>📚</FeatureIcon>
-          <FeatureTitle>FIBA Resources</FeatureTitle>
-          <FeatureText>
-            Access official FIBA rules and resources to enhance your knowledge.
-          </FeatureText>
-        </FeatureCard>
+        {locals.featureCards.map((card, index) => (
+          <FeatureCard key={index}>
+            <FeatureIcon>{['🎯', '⚡', '📚'][index]}</FeatureIcon>
+            <FeatureTitle>{card.title}</FeatureTitle>
+            <FeatureText>{card.text}</FeatureText>
+          </FeatureCard>
+        ))}
       </Features>
     </Container>
   )

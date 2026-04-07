@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
+import SEO from './SEO'
 
 const fadeInUp = keyframes`
   from {
@@ -41,6 +42,10 @@ const FIBAResources = () => {
 
   return (
     <Container>
+      <SEO
+        title="FIBA Resources | ShotClock Pro"
+        description="Access official FIBA basketball rules, shot clock operation guidelines, referee training materials, and competition manuals to stay up to date with international basketball regulations."
+      />
       <AnimatedTitle>{locals.fibaResourcesTitle}</AnimatedTitle>
 
       <Description>

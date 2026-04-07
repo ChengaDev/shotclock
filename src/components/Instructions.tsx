@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
+import SEO from './SEO'
 
 const fadeInUp = keyframes`
   from {
@@ -16,41 +17,18 @@ const fadeInUp = keyframes`
 const Instructions = () => {
   const { locals } = useLocalization()
 
-  const instructions = [
-    {
-      title: 'Basic Operation',
-      steps: [
-        'Press the "Start" button to begin the shot clock',
-        'Use the "Reset" button to reset the clock to 24 seconds',
-        'Press "Stop" to pause the clock when needed'
-      ]
-    },
-    {
-      title: 'Advanced Features',
-      steps: [
-        'Use the "24/14" button to switch between shot clock durations',
-        'The "Display" button toggles the display mode',
-        'Use the "Buzzer" button to test the sound system'
-      ]
-    },
-    {
-      title: 'Training Mode',
-      steps: [
-        'Select different scenarios from the training menu',
-        'Practice with realistic game situations',
-        'Review your performance and improve your timing'
-      ]
-    }
-  ]
-
   return (
     <Container>
-      <AnimatedTitle>{locals.instructions}</AnimatedTitle>
+      <SEO
+        title="Shot Clock Instructions | ShotClock Pro"
+        description="Step-by-step instructions for operating a basketball shot clock. Learn the 24-second and 14-second reset rules, basic controls, and game situations per FIBA regulations."
+      />
+      <AnimatedTitle>{locals.instructionsTitle}</AnimatedTitle>
 
       <Description>{locals.instructionsDescription}</Description>
 
       <InstructionsGrid>
-        {instructions.map((section, index) => (
+        {locals.instructionsSections.map((section, index) => (
           <InstructionCard key={index} style={{ animationDelay: `${index * 0.2}s` }}>
             <CardHeader>
               <CardNumber>{index + 1}</CardNumber>
@@ -69,20 +47,14 @@ const Instructions = () => {
       </InstructionsGrid>
 
       <TipsSection>
-        <AnimatedTitle>Pro Tips</AnimatedTitle>
+        <AnimatedTitle>{locals.proTipsTitle}</AnimatedTitle>
         <TipsGrid>
-          <TipCard style={{ animationDelay: '0.6s' }}>
-            <TipIcon>🎯</TipIcon>
-            <TipText>Always keep your eyes on the game while operating the shot clock</TipText>
-          </TipCard>
-          <TipCard style={{ animationDelay: '0.8s' }}>
-            <TipIcon>⚡</TipIcon>
-            <TipText>Practice with different game scenarios to improve your reaction time</TipText>
-          </TipCard>
-          <TipCard style={{ animationDelay: '1s' }}>
-            <TipIcon>📚</TipIcon>
-            <TipText>Familiarize yourself with FIBA rules for shot clock operation</TipText>
-          </TipCard>
+          {locals.tips.map((tip, index) => (
+            <TipCard key={index} style={{ animationDelay: `${0.6 + index * 0.2}s` }}>
+              <TipIcon>{['🎯', '⚡', '📚'][index]}</TipIcon>
+              <TipText>{tip}</TipText>
+            </TipCard>
+          ))}
         </TipsGrid>
       </TipsSection>
     </Container>

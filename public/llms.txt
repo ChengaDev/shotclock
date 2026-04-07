@@ -1,0 +1,26 @@
+# ShotClock Pro
+
+> A free basketball shot clock training simulator for referees, scorekeepers, and players. Simulates the FIBA 24-second and 14-second possession reset rules with a real-time countdown and buzzer.
+
+## Pages
+
+- [Home](https://www.24shotclock.com/): Interactive shot clock simulator — start/stop, 24s and 14s resets, time correction, display toggle, and buzzer sound.
+- [Instructions](https://www.24shotclock.com/instructions): Step-by-step guide to operating the shot clock, including basic controls, time corrections, display modes, and FIBA reset rules.
+- [FIBA Resources](https://www.24shotclock.com/fiba-resources): Links to official FIBA basketball rules, shot clock guidelines, referee training materials, and competition manuals.
+- [About](https://www.24shotclock.com/about): Background on ShotClock Pro — its purpose, target users, and training philosophy.
+
+## Languages
+
+Available in English (default), Italian (/it), Spanish (/es), and French (/fr).
+
+## Key facts
+
+- The shot clock resets to 24 seconds at the start of each new possession.
+- It resets to 14 seconds (not 24) after an offensive rebound that stays in the frontcourt, per FIBA rules.
+- The clock display turns red when 4 or fewer seconds remain.
+- The buzzer sounds automatically when the clock reaches zero.
+- The app is free and requires no login or installation.
+
+## Author
+
+Built by Chen Gazit. Contact via https://www.24shotclock.com/about.

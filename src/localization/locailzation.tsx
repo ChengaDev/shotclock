@@ -5,67 +5,6 @@ type AppLocalizationType = {
 }
 
 const AppLocalization: AppLocalizationType = {
-  he: {
-    title: 'ניהול שעון זריקות בכדורסל',
-    subtitle: 'התאמן על יכולות תפעול שעון זריקות בכדורסל',
-    startLabel: 'התחל',
-    stopLabel: 'עצור',
-    removeDisplayLabel: 'תצוגה',
-    resetButtonText: 'איפוס',
-    // Navigation
-    home: 'בית',
-    instructions: 'הוראות',
-    fibaResources: 'משאבי פיב"א',
-    about: 'אודות',
-    // About Page
-    aboutTitle: 'אודות ShotClock Pro',
-    aboutContent: [
-      'ShotClock Pro הוא אפליקציית אימון מקצועית לניהול שעון זריקות בכדורסל, המיועדת לעזור לשופטים, רשמים וחובבי כדורסל לשלוט באמנות תפעול שעון הזריקות.',
-      'המשימה שלנו היא לספק פלטפורמת אימון מקיפה המשלבת את הפשטות של תפעול שעון זריקות בסיסי עם אימון מתקדם מבוסס תרחישים להתפתחות מקצועית.',
-      'בין אם אתה מתחיל הלומד את הבסיס או מקצוען המחפש לשפר את כישוריו, ShotClock Pro מציע את הכלים והמשאבים הדרושים לך להצטיין בניהול משחקי כדורסל.',
-    ],
-    aboutDescription: 'הצטרף אלינו בדרך להפוך למומחה שעון זריקות מקצועי',
-    // Instructions Page
-    instructionsTitle: 'הוראות שעון זריקות',
-    instructionsDescription:
-      'למד את הכללים הבסיסיים והמתקדמים של תפעול שעון הזריקות בכדורסל',
-    basicControls: 'בקרות בסיסיות',
-    gameSituations: 'מצבי משחק',
-    importantRules: 'חוקים חשובים',
-    // FIBA Resources Page
-    fibaResourcesTitle: 'משאבי פיב"א',
-    officialRules: 'חוקים רשמיים',
-    refereeEducation: 'הכשרת שופטים',
-    technicalOfficials: 'פקידים טכניים',
-    videoResources: 'משאבי וידאו',
-    fibaResourcesDescription:
-      'גש למשאבים והנחיות רשמיים של פיב"א כדי לשפר את מיומנויות תפעול שעון הזריקות שלך ולהישאר מעודכן בחוקי הכדורסל והתקנות העדכניים.',
-    fibaResourcesCards: {
-      rules: {
-        title: 'חוקי פיב"א רשמיים',
-        description: 'גישה למערכת המלאה של חוקי ותקנות הכדורסל של פיב"א',
-      },
-      shotClock: {
-        title: 'הנחיות שעון זריקות',
-        description: 'הנחיות מפורטות לתפעול שעון זריקות בתחרויות פיב"א',
-      },
-      training: {
-        title: 'חומרי הדרכה',
-        description: 'משאבי הדרכה רשמיים של פיב"א לשופטים ומפעילים',
-      },
-      competition: {
-        title: 'מדריך תחרויות',
-        description: 'מדריך מקיף לארגון תחרויות פיב"א',
-      },
-    },
-    additionalInfo: {
-      title: 'מידע נוסף',
-      worldGoverning:
-        'פיב"א היא הגוף העולמי המנהל את הכדורסל, האחראי על חוקי ותחרויות הספורט הבינלאומיים.',
-      tournaments:
-        'הארגון מפקח על טורנירים בינלאומיים גדולים כולל גביע העולם בכדורסל של פיב"א ותחרויות כדורסל אולימפיות.',
-    },
-  },
   en: {
     title: 'Basketball shot clock practice',
     subtitle: 'Practice your 24 shot clock operation skills',
@@ -73,6 +12,7 @@ const AppLocalization: AppLocalizationType = {
     stopLabel: 'Stop',
     removeDisplayLabel: 'Clear',
     resetButtonText: 'Reset',
+    possessionLabel: 'Poss.',
     // Navigation
     home: 'Home',
     instructions: 'Instructions',
@@ -87,6 +27,20 @@ const AppLocalization: AppLocalizationType = {
     ],
     aboutDescription:
       'Join us on the journey to becoming a professional shot clock expert',
+    featureCards: [
+      {
+        title: 'Professional Training',
+        text: 'Master the art of shot clock operation with our comprehensive training platform.',
+      },
+      {
+        title: 'Real-time Practice',
+        text: 'Simulate real game scenarios and sharpen your reaction time under pressure.',
+      },
+      {
+        title: 'FIBA Resources',
+        text: 'Access official FIBA rules and guidelines to stay up to date with international standards.',
+      },
+    ],
     // Instructions Page
     instructionsTitle: 'Shot Clock Instructions',
     instructionsDescription:
@@ -94,6 +48,40 @@ const AppLocalization: AppLocalizationType = {
     basicControls: 'Basic Controls',
     gameSituations: 'Game Situations',
     importantRules: 'Important Rules',
+    instructionsSections: [
+      {
+        title: 'Basic Controls',
+        steps: [
+          'Press "Start" to begin the shot clock countdown',
+          'Press "Stop" to pause the clock at any time',
+          'Use "Reset 24s" to reset to a full 24-second possession',
+          'Use "Reset 14s" to reset to 14 seconds after an offensive rebound',
+        ],
+      },
+      {
+        title: 'Time Correction',
+        steps: [
+          'Use the + button to add one second to the current time',
+          'Use the − button to subtract one second from the current time',
+          'Corrections can only be made while the clock is stopped',
+        ],
+      },
+      {
+        title: 'Display & Buzzer',
+        steps: [
+          'Press "Clear" to hide the time display — useful for blind-clock drills',
+          'Press "Clear" again to restore the display',
+          'The clock turns red when 4 seconds or fewer remain',
+          'The buzzer sounds automatically when the clock reaches zero',
+        ],
+      },
+    ],
+    proTipsTitle: 'Pro Tips',
+    tips: [
+      'Keep your eyes on the game — never stare at the clock',
+      'Practice 14-second resets quickly; a delayed reset can affect game flow',
+      'Study FIBA rules on when the 14-second reset applies (offensive rebound situations)',
+    ],
     // FIBA Resources Page
     fibaResourcesTitle: 'FIBA Resources',
     officialRules: 'Official Rules',
@@ -138,6 +126,7 @@ const AppLocalization: AppLocalizationType = {
     stopLabel: 'Fermare',
     removeDisplayLabel: 'Schermo',
     resetButtonText: 'Ripristina',
+    possessionLabel: 'Poss.',
     // Navigation
     home: 'Casa',
     instructions: 'Istruzioni',
@@ -152,6 +141,20 @@ const AppLocalization: AppLocalizationType = {
     ],
     aboutDescription:
       "Unisciti a noi nel percorso per diventare un esperto professionale dell'orologio dei tiri",
+    featureCards: [
+      {
+        title: 'Allenamento Professionale',
+        text: "Padroneggia l'arte del funzionamento del cronometro dei tiri con la nostra piattaforma di allenamento completa.",
+      },
+      {
+        title: 'Pratica in Tempo Reale',
+        text: 'Simula scenari di gioco reali e affina i tuoi tempi di reazione sotto pressione.',
+      },
+      {
+        title: 'Risorse FIBA',
+        text: 'Accedi alle regole ufficiali e alle linee guida FIBA per rimanere aggiornato sugli standard internazionali.',
+      },
+    ],
     // Instructions Page
     instructionsTitle: 'Istruzioni Orologio Tiri',
     instructionsDescription:
@@ -159,6 +162,40 @@ const AppLocalization: AppLocalizationType = {
     basicControls: 'Controlli Base',
     gameSituations: 'Situazioni di Gioco',
     importantRules: 'Regole Importanti',
+    instructionsSections: [
+      {
+        title: 'Comandi di Base',
+        steps: [
+          'Premi "Inizio" per avviare il conto alla rovescia del cronometro dei tiri',
+          'Premi "Fermare" per mettere in pausa il cronometro in qualsiasi momento',
+          'Usa "Reset 24s" per ripristinare un possesso completo di 24 secondi',
+          'Usa "Reset 14s" per ripristinare a 14 secondi dopo un rimbalzo offensivo',
+        ],
+      },
+      {
+        title: 'Correzione del Tempo',
+        steps: [
+          'Usa il pulsante + per aggiungere un secondo al tempo corrente',
+          'Usa il pulsante − per sottrarre un secondo dal tempo corrente',
+          'Le correzioni possono essere effettuate solo quando il cronometro è fermo',
+        ],
+      },
+      {
+        title: 'Display e Buzzer',
+        steps: [
+          'Premi "Schermo" per nascondere il display — utile per esercizi con cronometro cieco',
+          'Premi "Schermo" di nuovo per ripristinare il display',
+          'Il cronometro diventa rosso quando rimangono 4 secondi o meno',
+          'Il buzzer suona automaticamente quando il cronometro raggiunge zero',
+        ],
+      },
+    ],
+    proTipsTitle: 'Consigli Pro',
+    tips: [
+      'Mantieni gli occhi sul gioco — non fissare il cronometro',
+      'Pratica i reset di 14 secondi rapidamente; un reset ritardato può influire sul gioco',
+      'Studia le regole FIBA su quando si applica il reset di 14 secondi',
+    ],
     // FIBA Resources Page
     fibaResourcesTitle: 'Risorse FIBA',
     officialRules: 'Regole Ufficiali',
@@ -166,7 +203,7 @@ const AppLocalization: AppLocalizationType = {
     technicalOfficials: 'Ufficiali Tecnici',
     videoResources: 'Risorse Video',
     fibaResourcesDescription:
-      'Access official FIBA resources and guidelines to enhance your shot clock operation skills and stay up-to-date with the latest basketball rules and regulations.',
+      "Accedi alle risorse e alle linee guida ufficiali della FIBA per migliorare le tue competenze nell'operazione del cronometro dei tiri e rimanere aggiornato sulle ultime regole e normative del basket.",
     fibaResourcesCards: {
       rules: {
         title: 'Regole Ufficiali FIBA',
@@ -204,6 +241,7 @@ const AppLocalization: AppLocalizationType = {
     stopLabel: 'Detener',
     removeDisplayLabel: 'Mostrar',
     resetButtonText: 'Reiniciar',
+    possessionLabel: 'Pos.',
     // Navigation
     home: 'Inicio',
     instructions: 'Instrucciones',
@@ -218,6 +256,20 @@ const AppLocalization: AppLocalizationType = {
     ],
     aboutDescription:
       'Únete a nosotros en el camino para convertirte en un experto profesional del reloj de lanzamiento',
+    featureCards: [
+      {
+        title: 'Entrenamiento Profesional',
+        text: 'Domina el arte de la operación del reloj de tiro con nuestra plataforma de entrenamiento integral.',
+      },
+      {
+        title: 'Práctica en Tiempo Real',
+        text: 'Simula escenarios de juego reales y agudiza tu tiempo de reacción bajo presión.',
+      },
+      {
+        title: 'Recursos FIBA',
+        text: 'Accede a las reglas y directrices oficiales de la FIBA para mantenerte al día con los estándares internacionales.',
+      },
+    ],
     // Instructions Page
     instructionsTitle: 'Instrucciones del Reloj de Lanzamiento',
     instructionsDescription:
@@ -225,6 +277,40 @@ const AppLocalization: AppLocalizationType = {
     basicControls: 'Controles Básicos',
     gameSituations: 'Situaciones de Juego',
     importantRules: 'Reglas Importantes',
+    instructionsSections: [
+      {
+        title: 'Controles Básicos',
+        steps: [
+          'Presiona "Comienzo" para iniciar la cuenta regresiva del reloj de tiro',
+          'Presiona "Detener" para pausar el reloj en cualquier momento',
+          'Usa "Reset 24s" para reiniciar a una posesión completa de 24 segundos',
+          'Usa "Reset 14s" para reiniciar a 14 segundos después de un rebote ofensivo',
+        ],
+      },
+      {
+        title: 'Corrección de Tiempo',
+        steps: [
+          'Usa el botón + para agregar un segundo al tiempo actual',
+          'Usa el botón − para restar un segundo del tiempo actual',
+          'Las correcciones solo se pueden hacer mientras el reloj está detenido',
+        ],
+      },
+      {
+        title: 'Pantalla y Buzzer',
+        steps: [
+          'Presiona "Mostrar" para ocultar la pantalla — útil para ejercicios con reloj ciego',
+          'Presiona "Mostrar" de nuevo para restaurar la pantalla',
+          'El reloj se vuelve rojo cuando quedan 4 segundos o menos',
+          'El buzzer suena automáticamente cuando el reloj llega a cero',
+        ],
+      },
+    ],
+    proTipsTitle: 'Consejos Pro',
+    tips: [
+      'Mantén los ojos en el juego — nunca mires el reloj fijamente',
+      'Practica los reinicios de 14 segundos rápidamente; un reinicio tardío puede afectar el juego',
+      'Estudia las reglas FIBA sobre cuándo se aplica el reinicio de 14 segundos',
+    ],
     // FIBA Resources Page
     fibaResourcesTitle: 'Recursos FIBA',
     officialRules: 'Reglas Oficiales',
@@ -232,7 +318,7 @@ const AppLocalization: AppLocalizationType = {
     technicalOfficials: 'Oficiales Técnicos',
     videoResources: 'Recursos de Video',
     fibaResourcesDescription:
-      'Access official FIBA resources and guidelines to enhance your shot clock operation skills and stay up-to-date with the latest basketball rules and regulations.',
+      'Accede a los recursos y directrices oficiales de la FIBA para mejorar tus habilidades de operación del reloj de tiro y mantenerte al día con las últimas reglas y regulaciones del baloncesto.',
     fibaResourcesCards: {
       rules: {
         title: 'Reglas Oficiales FIBA',
@@ -268,7 +354,8 @@ const AppLocalization: AppLocalizationType = {
     startLabel: 'Commencer',
     stopLabel: 'Arrêt',
     removeDisplayLabel: 'Clair',
-    resetButtonText: 'Réinitialiser',
+    resetButtonText: 'Réinit.',
+    possessionLabel: 'Poss.',
     // Navigation
     home: 'Accueil',
     instructions: 'Instructions',
@@ -283,6 +370,20 @@ const AppLocalization: AppLocalizationType = {
     ],
     aboutDescription:
       'Rejoignez-nous dans le voyage pour devenir un expert professionnel du chronomètre des tirs',
+    featureCards: [
+      {
+        title: 'Entraînement Professionnel',
+        text: "Maîtrisez l'art du fonctionnement du chronomètre des tirs avec notre plateforme d'entraînement complète.",
+      },
+      {
+        title: 'Pratique en Temps Réel',
+        text: 'Simulez des scénarios de jeu réels et affûtez votre temps de réaction sous pression.',
+      },
+      {
+        title: 'Ressources FIBA',
+        text: 'Accédez aux règles et directives officielles de la FIBA pour rester informé des normes internationales.',
+      },
+    ],
     // Instructions Page
     instructionsTitle: 'Instructions du Chronomètre des Tirs',
     instructionsDescription:
@@ -290,6 +391,40 @@ const AppLocalization: AppLocalizationType = {
     basicControls: 'Contrôles de Base',
     gameSituations: 'Situations de Jeu',
     importantRules: 'Règles Importantes',
+    instructionsSections: [
+      {
+        title: 'Commandes de Base',
+        steps: [
+          'Appuyez sur "Commencer" pour démarrer le compte à rebours du chronomètre',
+          'Appuyez sur "Arrêt" pour mettre le chronomètre en pause à tout moment',
+          'Utilisez "Réinit. 24s" pour réinitialiser à une possession complète de 24 secondes',
+          'Utilisez "Réinit. 14s" pour réinitialiser à 14 secondes après un rebond offensif',
+        ],
+      },
+      {
+        title: 'Correction du Temps',
+        steps: [
+          'Utilisez le bouton + pour ajouter une seconde au temps actuel',
+          'Utilisez le bouton − pour soustraire une seconde au temps actuel',
+          'Les corrections ne peuvent être effectuées que lorsque le chronomètre est arrêté',
+        ],
+      },
+      {
+        title: 'Affichage et Buzzer',
+        steps: [
+          'Appuyez sur "Clair" pour masquer l\'affichage du temps — utile pour les exercices à chronomètre masqué',
+          'Appuyez à nouveau sur "Clair" pour restaurer l\'affichage',
+          'Le chronomètre devient rouge quand il reste 4 secondes ou moins',
+          'Le buzzer retentit automatiquement quand le chronomètre atteint zéro',
+        ],
+      },
+    ],
+    proTipsTitle: 'Conseils Pro',
+    tips: [
+      'Gardez les yeux sur le jeu — ne fixez jamais le chronomètre',
+      'Entraînez-vous à effectuer les réinitialisations de 14 secondes rapidement; un retard peut affecter le déroulement du jeu',
+      "Étudiez les règles FIBA sur quand s'applique la réinitialisation de 14 secondes",
+    ],
     // FIBA Resources Page
     fibaResourcesTitle: 'Ressources FIBA',
     officialRules: 'Règles Officielles',
@@ -297,7 +432,7 @@ const AppLocalization: AppLocalizationType = {
     technicalOfficials: 'Officiels Techniques',
     videoResources: 'Ressources Vidéo',
     fibaResourcesDescription:
-      'Access official FIBA resources and guidelines to enhance your shot clock operation skills and stay up-to-date with the latest basketball rules and regulations.',
+      "Accédez aux ressources et directives officielles de la FIBA pour améliorer vos compétences en matière de fonctionnement du chronomètre des tirs et rester informé des dernières règles et réglementations du basketball.",
     fibaResourcesCards: {
       rules: {
         title: 'Règles Officielles FIBA',
@@ -305,12 +440,12 @@ const AppLocalization: AppLocalizationType = {
           'Accès à toutes les règles et réglementations de basket-ball de FIBA',
       },
       shotClock: {
-        title: 'Lignes Directrices Orologio Tiri',
+        title: 'Directives du Chronomètre des Tirs',
         description:
-          "Lignes directrices détaillées pour l'opération de l'orologio dei tiri in compétitions FIBA",
+          "Directives détaillées pour l'opération du chronomètre des tirs dans les compétitions FIBA",
       },
       training: {
-        title: "Matériaux d'Entraînement",
+        title: "Matériels d'Entraînement",
         description:
           "Ressources d'Entraînement Officielles de FIBA pour arbitres et opérateurs",
       },

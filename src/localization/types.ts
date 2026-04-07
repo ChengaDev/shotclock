@@ -5,6 +5,7 @@ export type LocalizationType = {
 	stopLabel: string;
 	removeDisplayLabel: string;
 	resetButtonText: string;
+	possessionLabel: string;
 	// Navigation
 	home: string;
 	instructions: string;
@@ -14,9 +15,13 @@ export type LocalizationType = {
 	aboutTitle: string;
 	aboutContent: string[];
 	aboutDescription: string;
+	featureCards: Array<{ title: string; text: string }>;
 	// Instructions Page
 	instructionsTitle: string;
 	instructionsDescription: string;
+	instructionsSections: Array<{ title: string; steps: string[] }>;
+	proTipsTitle: string;
+	tips: string[];
 	basicControls: string;
 	gameSituations: string;
 	importantRules: string;

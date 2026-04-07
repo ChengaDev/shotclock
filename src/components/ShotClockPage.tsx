@@ -3,10 +3,15 @@ import ShotClock from '../components/ShotClock'
 import { createGlobalStyle } from 'styled-components'
 import background from '../assets/Group8.svg'
 import styled from 'styled-components'
+import SEO from './SEO'
 
 const ShotClockPage = () => {
   return (
     <PageContainer>
+      <SEO
+        title="ShotClock Pro – Basketball Shot Clock Simulator & Trainer"
+        description="Free basketball shot clock simulator for referees and scorekeepers. Practice 24-second and 14-second resets with real-time buzzer sound, following FIBA regulations."
+      />
       <GlobalStyle />
       <ShotClock />
     </PageContainer>
