@@ -44,6 +44,7 @@ const EnglishLayout = () => {
 
   useEffect(() => {
     changeLocale('en')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <animated.div style={fadeIn}><Outlet /></animated.div>
@@ -69,6 +70,7 @@ const LangLayout = () => {
     } else if (lang && NON_ENGLISH_LANGS.includes(lang)) {
       changeLocale(lang)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang])
 
   if (!isValidLang) return <NotFound />

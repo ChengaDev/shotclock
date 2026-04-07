@@ -29,12 +29,14 @@ const ShotClock = () => {
 		if (currentSeconds < ShotClockReset.BackCountPosition && !isTickingRef.current) {
 			setCurrentSeconds(currentSeconds + 1);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, currentSeconds]);
 
 	const decrementSecond = useCallback(() => {
 		if (currentSeconds > 0 && !isTickingRef.current) {
 			setCurrentSeconds(currentSeconds - 1);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, currentSeconds]);
 
 	const on14SecondsClick = useCallback(() => {
@@ -46,6 +48,7 @@ const ShotClock = () => {
 
 		setIsTimeDisplay(true);
 		setCurrentSeconds(ShotClockReset.FrontCountPosition);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, intervalRef.current]);
 
 	const on24SecondsClick = useCallback(() => {
@@ -57,6 +60,7 @@ const ShotClock = () => {
 
 		setIsTimeDisplay(true);
 		setCurrentSeconds(ShotClockReset.BackCountPosition);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, intervalRef.current]);
 
 	const onTickToggle = () => {

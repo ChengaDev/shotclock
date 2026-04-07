@@ -1,4 +1,3 @@
-import LanguageSelector from '../components/LanguageSelector'
 import ShotClock from '../components/ShotClock'
 import { createGlobalStyle } from 'styled-components'
 import background from '../assets/Group8.svg'
@@ -44,33 +43,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 0;
-    padding-bottom: 1rem;
-  }
-`
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 60px);
-  padding: 2rem 1rem;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    min-height: calc(100vh - 60px - 60px); // Subtract header and footer height
-    padding: 1rem;
-  }
-`
 
 const PageBlurb = styled.p`
   text-align: center;

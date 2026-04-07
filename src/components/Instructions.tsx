@@ -107,19 +107,6 @@ const AnimatedTitle = styled.h1`
   }
 `
 
-const TipsTitle = styled.h2`
-  color: ${props => props.theme.titleColor};
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: -0.5px;
-  animation: ${fadeInUp} 0.6s ease-out;
-  animation-delay: 0.6s;
-  opacity: 0;
-  animation-fill-mode: forwards;
-`
 
 const Description = styled.p`
   text-align: center;
