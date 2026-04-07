@@ -18,6 +18,68 @@ const AppLocalization: AppLocalizationType = {
     instructions: 'Instructions',
     fibaResources: 'FIBA Resources',
     about: 'About',
+    faq: 'FAQ',
+    // FAQ Page
+    faqTitle: 'Frequently Asked Questions',
+    faqDescription: 'Everything you need to know about basketball shot clock rules and how to use ShotClock Pro.',
+    faqItems: [
+      {
+        question: 'What is the shot clock rule in FIBA basketball?',
+        answer: 'Under FIBA rules, the offensive team must attempt a shot that hits the ring or enters the basket within 24 seconds of gaining possession. If they fail to do so, the referee calls a shot clock violation and possession is awarded to the opposing team.',
+      },
+      {
+        question: 'When does the shot clock reset to 14 seconds instead of 24?',
+        answer: 'The shot clock resets to 14 seconds — not 24 — when the offensive team recovers a rebound off the backboard or ring after their own shot attempt. This applies whether the ball stays in the frontcourt or returns to the backcourt. FIBA introduced this rule to reward offensive rebounding and speed up the game.',
+      },
+      {
+        question: 'What constitutes a valid shot attempt to satisfy the shot clock?',
+        answer: 'The ball must visibly touch the ring (rim) or enter the basket. A shot that only hits the backboard without touching the ring does not satisfy the shot clock requirement. An airball that misses everything also does not stop the shot clock.',
+      },
+      {
+        question: 'What happens when the shot clock expires?',
+        answer: 'The shot clock buzzer sounds and the referee signals a shot clock violation. Possession is awarded to the defensive team for a throw-in. The only exception is if the ball is already in the air at the moment the buzzer sounds and subsequently hits the ring or enters the basket — in that case the basket counts and no violation is called.',
+      },
+      {
+        question: 'When does the shot clock start at the beginning of a possession?',
+        answer: 'The shot clock starts as soon as a player gains control of a live ball. For a throw-in, the shot clock starts the moment the ball is legally touched by any player on the court.',
+      },
+      {
+        question: 'Does the shot clock reset when the defense commits a foul?',
+        answer: 'Not always. If the offensive team retains possession after a defensive foul via a throw-in in the frontcourt, the shot clock continues from where it stopped — unless fewer than 14 seconds remain, in which case it resets to 14 seconds. If the throw-in is from the backcourt, the shot clock resets to a full 24 seconds.',
+      },
+      {
+        question: 'What happens to the shot clock when the ball goes out of bounds?',
+        answer: 'The shot clock stops with the game clock. If the defensive team last touched the ball, the offensive team retains possession and the shot clock resumes from where it stopped (resetting to 14 if fewer than 14 seconds remain). If the offensive team caused the ball to go out, the defense receives the ball with a new 24-second shot clock.',
+      },
+      {
+        question: 'What happens to the shot clock after a jump ball?',
+        answer: 'After a jump ball that results in a controlled possession, the shot clock resets to a full 24 seconds for the team gaining possession.',
+      },
+      {
+        question: 'Is the shot clock running during free throws?',
+        answer: 'No. The shot clock is stopped and the display is blanked during all free throw attempts. After the last free throw in a sequence, if the shooting team gets an offensive rebound off the missed attempt (which touched the rim), the 14-second reset rule applies.',
+      },
+      {
+        question: 'What if there is less time on the game clock than the shot clock reset value?',
+        answer: 'When the remaining game clock time is less than the applicable shot clock reset (14 or 24 seconds), the shot clock display is switched off. No shot clock violation can occur because the end of the period itself limits the possession.',
+      },
+      {
+        question: 'How is a shot clock violation signalled by officials?',
+        answer: 'The shot clock operator sounds the buzzer when the clock reaches zero. The referee then signals a shot clock violation by pointing one arm toward the basket the offending team was attacking and rotating the other arm overhead to indicate a turnover.',
+      },
+      {
+        question: 'What is the difference between the shot clock and the game clock in FIBA?',
+        answer: 'The game clock tracks the time remaining in each quarter — 10 minutes per quarter in FIBA. The shot clock limits any single offensive possession to 24 seconds. Both run simultaneously during live play, and a single quarter can contain many individual possessions each subject to their own shot clock.',
+      },
+      {
+        question: 'How long are FIBA quarters compared to the NBA?',
+        answer: 'FIBA quarters are 10 minutes each (4 quarters = 40 minutes of regulation). The NBA uses 12-minute quarters (48 minutes total). Both leagues use a 24-second shot clock for new possessions. FIBA introduced the 14-second offensive rebound reset rule, which the NBA subsequently adopted.',
+      },
+      {
+        question: 'Can a team deliberately delay throwing in the ball to run time off the shot clock?',
+        answer: 'No. On a throw-in, the shot clock starts as soon as the ball is touched by a player on the court, but the referee can call an 8-second backcourt violation or unsportsmanlike conduct if a team unreasonably delays putting the ball in play. The throw-in itself must be completed within 5 seconds.',
+      },
+    ],
     // About Page
     aboutTitle: 'About ShotClock Pro',
     aboutContent: [
@@ -132,6 +194,68 @@ const AppLocalization: AppLocalizationType = {
     instructions: 'Istruzioni',
     fibaResources: 'Risorse FIBA',
     about: 'Chi siamo',
+    faq: 'FAQ',
+    // FAQ Page
+    faqTitle: 'Domande Frequenti',
+    faqDescription: 'Tutto quello che devi sapere sulle regole del cronometro dei tiri e su come usare ShotClock Pro.',
+    faqItems: [
+      {
+        question: 'Qual è la regola del cronometro dei tiri nel basket FIBA?',
+        answer: 'Secondo le regole FIBA, la squadra in attacco deve tentare un tiro che tocchi il ferro o entri a canestro entro 24 secondi dal momento in cui acquisisce il possesso. Se non lo fa, l\'arbitro sancisce una violazione del cronometro e il possesso passa agli avversari.',
+      },
+      {
+        question: 'Quando il cronometro si azzera a 14 secondi invece di 24?',
+        answer: 'Il cronometro si azzera a 14 secondi — non 24 — quando la squadra in attacco recupera il rimbalzo dopo il proprio tentativo di tiro (sul tabellone o sul ferro). Questa regola si applica sia se la palla rimane nel semicampo offensivo sia se torna nel semicampo difensivo. La FIBA ha introdotto questa norma per premiare il rimbalzo offensivo e velocizzare il gioco.',
+      },
+      {
+        question: 'Cos\'è considerato un tentativo di tiro valido ai fini del cronometro?',
+        answer: 'La palla deve toccare visibilmente il ferro (canestro) o entrare nel cesto. Un tiro che colpisce solo il tabellone senza toccare il ferro non soddisfa il requisito del cronometro. Anche un airball che non tocca nulla non ferma il cronometro.',
+      },
+      {
+        question: 'Cosa succede quando il cronometro dei tiri scade?',
+        answer: 'Il buzzer suona e l\'arbitro segnala una violazione del cronometro. Il possesso viene assegnato alla squadra in difesa per una rimessa. L\'unica eccezione è se la palla è già in volo nel momento in cui il buzzer suona e successivamente tocca il ferro o entra a canestro — in quel caso il canestro è valido e non viene sanzionata alcuna violazione.',
+      },
+      {
+        question: 'Da quando parte il cronometro all\'inizio di un possesso?',
+        answer: 'Il cronometro parte non appena un giocatore acquisisce il controllo di una palla viva. In caso di rimessa laterale, il cronometro parte nel momento in cui la palla viene toccata legalmente da qualsiasi giocatore in campo.',
+      },
+      {
+        question: 'Il cronometro si azzera quando la difesa commette un fallo?',
+        answer: 'Non sempre. Se la squadra in attacco mantiene il possesso dopo un fallo difensivo tramite una rimessa nel semicampo offensivo, il cronometro riprende da dove si era fermato — a meno che non rimangano meno di 14 secondi, nel qual caso si azzera a 14. Se la rimessa avviene dal semicampo difensivo, il cronometro riparte da 24 secondi.',
+      },
+      {
+        question: 'Cosa succede al cronometro quando la palla esce dal campo?',
+        answer: 'Il cronometro si ferma insieme al cronometro di gara. Se l\'ultima squadra a toccare la palla prima che uscisse era quella in difesa, la squadra in attacco mantiene il possesso e il cronometro riprende da dove si era fermato (azzerandosi a 14 se mancano meno di 14 secondi). Se a causare l\'uscita è stata la squadra in attacco, la difesa riceve il possesso con un nuovo cronometro da 24 secondi.',
+      },
+      {
+        question: 'Cosa succede al cronometro dopo una palla a due?',
+        answer: 'Dopo una palla a due in cui una squadra guadagna il controllo del pallone, il cronometro dei tiri riparte da 24 secondi per quella squadra.',
+      },
+      {
+        question: 'Il cronometro gira durante i tiri liberi?',
+        answer: 'No. Il cronometro è fermo e il display è spento durante tutti i tentativi di tiro libero. Dopo l\'ultimo tiro libero di una serie, se la squadra che tira recupera il rimbalzo del tiro mancato (che abbia toccato il ferro), si applica la regola del reset a 14 secondi.',
+      },
+      {
+        question: 'Cosa succede se il tempo rimanente del quarto è inferiore al valore di reset del cronometro?',
+        answer: 'Quando il tempo rimasto nel quarto è inferiore al valore di reset applicabile (14 o 24 secondi), il display del cronometro viene spento. Non è possibile commettere una violazione del cronometro perché il termine del quarto stesso limita il possesso.',
+      },
+      {
+        question: 'Come viene segnalata una violazione del cronometro dagli ufficiali?',
+        answer: 'L\'operatore del cronometro fa suonare il buzzer quando il conteggio raggiunge zero. L\'arbitro segnala poi la violazione indicando con un braccio il canestro verso cui stava attaccando la squadra in violazione e ruotando l\'altro braccio sopra la testa per indicare il cambio di possesso.',
+      },
+      {
+        question: 'Qual è la differenza tra il cronometro dei tiri e il cronometro di gara nella FIBA?',
+        answer: 'Il cronometro di gara misura il tempo rimanente in ogni quarto — 10 minuti a quarto nel basket FIBA. Il cronometro dei tiri limita ogni singolo possesso offensivo a 24 secondi. Entrambi scorrono contemporaneamente durante il gioco attivo, e in un singolo quarto possono svolgersi numerosi possessi, ciascuno soggetto al proprio cronometro.',
+      },
+      {
+        question: 'Quanto durano i quarti FIBA rispetto all\'NBA?',
+        answer: 'I quarti FIBA durano 10 minuti ciascuno (4 quarti = 40 minuti di tempo regolamentare). L\'NBA usa quarti da 12 minuti (48 minuti totali). Entrambe le leghe usano un cronometro da 24 secondi per i nuovi possessi. La FIBA ha introdotto il reset a 14 secondi dopo rimbalzo offensivo, regola poi adottata anche dall\'NBA.',
+      },
+      {
+        question: 'Una squadra può deliberatamente ritardare la rimessa per far scorrere il cronometro degli avversari?',
+        answer: 'No. In caso di rimessa, il cronometro parte nel momento in cui la palla viene toccata da un giocatore in campo. Tuttavia, il giocatore che effettua la rimessa deve farlo entro 5 secondi, e l\'arbitro può sanzionare comportamenti antisportivi se una squadra ritarda irragionevolmente la messa in gioco.',
+      },
+    ],
     // About Page
     aboutTitle: 'Chi siamo ShotClock Pro',
     aboutContent: [
@@ -247,6 +371,68 @@ const AppLocalization: AppLocalizationType = {
     instructions: 'Instrucciones',
     fibaResources: 'Recursos FIBA',
     about: 'Acerca de',
+    faq: 'FAQ',
+    // FAQ Page
+    faqTitle: 'Preguntas Frecuentes',
+    faqDescription: 'Todo lo que necesitas saber sobre las reglas del reloj de tiro y cómo usar ShotClock Pro.',
+    faqItems: [
+      {
+        question: '¿Cuál es la regla del reloj de tiro en el baloncesto FIBA?',
+        answer: 'Según las reglas FIBA, el equipo en ataque debe intentar un tiro que toque el aro o entre a canasta dentro de los 24 segundos siguientes a obtener la posesión. Si no lo hace, el árbitro señala una violación del reloj de tiro y la posesión pasa al equipo contrario.',
+      },
+      {
+        question: '¿Cuándo se reinicia el reloj a 14 segundos en lugar de 24?',
+        answer: 'El reloj se reinicia a 14 segundos — no a 24 — cuando el equipo en ataque recupera el rebote de su propio intento de tiro (en el tablero o en el aro). Esta regla se aplica tanto si el balón permanece en el campo ofensivo como si regresa al campo defensivo. La FIBA introdujo esta norma para recompensar el rebote ofensivo y agilizar el juego.',
+      },
+      {
+        question: '¿Qué se considera un intento de tiro válido a efectos del reloj de tiro?',
+        answer: 'El balón debe tocar visiblemente el aro o entrar a canasta. Un tiro que solo golpea el tablero sin tocar el aro no satisface el requisito del reloj de tiro. Un airball que no toca nada tampoco detiene el reloj.',
+      },
+      {
+        question: '¿Qué ocurre cuando expira el reloj de tiro?',
+        answer: 'Suena el buzzer del reloj de tiro y el árbitro señala una violación. La posesión se otorga al equipo defensor mediante un saque de banda. La única excepción es si el balón ya está en el aire en el momento en que suena el buzzer y luego toca el aro o entra a canasta — en ese caso el enceste es válido y no se sanciona ninguna violación.',
+      },
+      {
+        question: '¿Cuándo comienza el reloj de tiro al inicio de una posesión?',
+        answer: 'El reloj de tiro comienza en el momento en que un jugador obtiene el control de un balón vivo. En un saque de banda, el reloj comienza cuando el balón es tocado legalmente por cualquier jugador en la cancha.',
+      },
+      {
+        question: '¿Se reinicia el reloj de tiro cuando la defensa comete una falta?',
+        answer: 'No siempre. Si el equipo en ataque conserva la posesión tras una falta defensiva mediante un saque de banda en el campo ofensivo, el reloj continúa desde donde se detuvo — salvo que queden menos de 14 segundos, en cuyo caso se reinicia a 14. Si el saque se realiza desde el campo defensivo, el reloj se reinicia a 24 segundos.',
+      },
+      {
+        question: '¿Qué ocurre con el reloj de tiro cuando el balón sale fuera?',
+        answer: 'El reloj de tiro se detiene junto con el cronómetro de juego. Si el último equipo en tocar el balón antes de que saliera fue el defensor, el equipo atacante conserva la posesión y el reloj reanuda desde donde se detuvo (reiniciándose a 14 si quedan menos de 14 segundos). Si fue el equipo atacante el que causó la salida, la defensa recibe el balón con un nuevo reloj de 24 segundos.',
+      },
+      {
+        question: '¿Qué ocurre con el reloj de tiro tras una pelota al salto?',
+        answer: 'Tras una pelota al salto en la que un equipo logra el control del balón, el reloj de tiro se reinicia a 24 segundos para ese equipo.',
+      },
+      {
+        question: '¿Sigue corriendo el reloj de tiro durante los tiros libres?',
+        answer: 'No. El reloj de tiro se detiene y el display se apaga durante todos los intentos de tiro libre. Tras el último tiro libre de una serie, si el equipo que lanza recoge el rebote del tiro fallado (que haya tocado el aro), se aplica la regla del reinicio a 14 segundos.',
+      },
+      {
+        question: '¿Qué ocurre si el tiempo restante del período es menor que el valor de reinicio del reloj?',
+        answer: 'Cuando el tiempo restante en el período es menor que el valor de reinicio aplicable (14 o 24 segundos), el display del reloj de tiro se apaga. No es posible cometer una violación del reloj porque el final del período ya limita la posesión.',
+      },
+      {
+        question: '¿Cómo señalan los árbitros una violación del reloj de tiro?',
+        answer: 'El operador del reloj hace sonar el buzzer al llegar a cero. El árbitro señala entonces la violación apuntando con un brazo hacia la canasta que atacaba el equipo infractor y girando el otro brazo sobre la cabeza para indicar el cambio de posesión.',
+      },
+      {
+        question: '¿Cuál es la diferencia entre el reloj de tiro y el cronómetro de juego en la FIBA?',
+        answer: 'El cronómetro de juego mide el tiempo restante en cada período — 10 minutos por período en la FIBA. El reloj de tiro limita cada posesión ofensiva a 24 segundos. Ambos funcionan simultáneamente durante el juego activo, y en un solo período puede haber numerosas posesiones, cada una sujeta a su propio reloj de tiro.',
+      },
+      {
+        question: '¿Cuánto duran los períodos FIBA en comparación con la NBA?',
+        answer: 'Los períodos FIBA duran 10 minutos cada uno (4 períodos = 40 minutos de tiempo reglamentario). La NBA utiliza períodos de 12 minutos (48 minutos en total). Ambas ligas aplican un reloj de tiro de 24 segundos para nuevas posesiones. La FIBA introdujo el reinicio a 14 segundos tras rebote ofensivo, regla que la NBA adoptó posteriormente.',
+      },
+      {
+        question: '¿Puede un equipo retrasar deliberadamente el saque para consumir tiempo del reloj rival?',
+        answer: 'No. En un saque de banda, el reloj de tiro comienza cuando el balón es tocado por un jugador en la cancha. Además, el jugador que realiza el saque dispone de 5 segundos para hacerlo, y el árbitro puede sancionar una conducta antideportiva si un equipo demora injustificadamente la puesta en juego.',
+      },
+    ],
     // About Page
     aboutTitle: 'Acerca de ShotClock Pro',
     aboutContent: [
@@ -361,6 +547,68 @@ const AppLocalization: AppLocalizationType = {
     instructions: 'Instructions',
     fibaResources: 'Ressources FIBA',
     about: 'À propos',
+    faq: 'FAQ',
+    // FAQ Page
+    faqTitle: 'Questions Fréquentes',
+    faqDescription: 'Tout ce que vous devez savoir sur les règles du chronomètre des tirs et comment utiliser ShotClock Pro.',
+    faqItems: [
+      {
+        question: 'Quelle est la règle du chronomètre des tirs dans le basketball FIBA ?',
+        answer: "Selon les règles FIBA, l'équipe en attaque doit tenter un tir touchant l'anneau ou entrant dans le panier dans les 24 secondes suivant l'obtention de la possession. En cas d'échec, l'arbitre siffle une violation du chronomètre et la possession est accordée à l'équipe adverse.",
+      },
+      {
+        question: 'Quand le chronomètre se réinitialise-t-il à 14 secondes plutôt qu\'à 24 ?',
+        answer: "Le chronomètre se réinitialise à 14 secondes — et non à 24 — lorsque l'équipe en attaque récupère le rebond de sa propre tentative de tir (sur le panneau ou l'anneau). Cette règle s'applique que le ballon reste dans le demi-terrain offensif ou revienne en demi-terrain défensif. La FIBA a introduit cette règle pour récompenser le rebond offensif et accélérer le jeu.",
+      },
+      {
+        question: "Qu'est-ce qu'une tentative de tir valable au regard du chronomètre ?",
+        answer: "Le ballon doit toucher visiblement l'anneau (le cercle) ou entrer dans le panier. Un tir ne touchant que le panneau sans toucher l'anneau ne satisfait pas à l'exigence du chronomètre. Un airball qui ne touche rien n'arrête pas non plus le chronomètre.",
+      },
+      {
+        question: "Que se passe-t-il lorsque le chronomètre des tirs expire ?",
+        answer: "Le buzzer du chronomètre retentit et l'arbitre signale une violation. La possession est accordée à l'équipe en défense via une remise en jeu. La seule exception est si le ballon est déjà en l'air au moment où le buzzer sonne et qu'il touche ensuite l'anneau ou entre dans le panier — dans ce cas le panier est valable et aucune violation n'est sifflée.",
+      },
+      {
+        question: "Quand le chronomètre commence-t-il au début d'une possession ?",
+        answer: "Le chronomètre démarre dès qu'un joueur prend le contrôle d'un ballon vivant. Pour une remise en jeu, il démarre au moment où le ballon est légalement touché par n'importe quel joueur sur le terrain.",
+      },
+      {
+        question: "Le chronomètre se réinitialise-t-il lorsque la défense commet une faute ?",
+        answer: "Pas toujours. Si l'équipe en attaque conserve la possession après une faute défensive via une remise en jeu en demi-terrain offensif, le chronomètre reprend là où il s'était arrêté — sauf s'il reste moins de 14 secondes, auquel cas il se réinitialise à 14. Si la remise en jeu a lieu depuis le demi-terrain défensif, le chronomètre repart à 24 secondes.",
+      },
+      {
+        question: "Que se passe-t-il avec le chronomètre lorsque le ballon sort des limites ?",
+        answer: "Le chronomètre s'arrête en même temps que le chronomètre de jeu. Si la dernière équipe à avoir touché le ballon avant la sortie était l'équipe en défense, l'équipe en attaque conserve la possession et le chronomètre reprend là où il s'était arrêté (se réinitialisant à 14 s'il reste moins de 14 secondes). Si c'est l'équipe en attaque qui a causé la sortie, la défense reçoit le ballon avec un nouveau chronomètre de 24 secondes.",
+      },
+      {
+        question: "Que se passe-t-il avec le chronomètre après une entre-deux ?",
+        answer: "Après un entre-deux dont une équipe prend le contrôle, le chronomètre repart à 24 secondes pour cette équipe.",
+      },
+      {
+        question: "Le chronomètre tourne-t-il pendant les lancers francs ?",
+        answer: "Non. Le chronomètre est arrêté et l'affichage est éteint pendant tous les lancers francs. Après le dernier lancer franc d'une série, si l'équipe qui a tiré récupère le rebond du lancer manqué (ayant touché l'anneau), la règle du reset à 14 secondes s'applique.",
+      },
+      {
+        question: "Que se passe-t-il si le temps restant de la période est inférieur à la valeur de réinitialisation du chronomètre ?",
+        answer: "Lorsque le temps restant dans la période est inférieur à la valeur de réinitialisation applicable (14 ou 24 secondes), l'affichage du chronomètre des tirs s'éteint. Aucune violation du chronomètre n'est possible car la fin de la période limite elle-même la possession.",
+      },
+      {
+        question: "Comment les arbitres signalent-ils une violation du chronomètre des tirs ?",
+        answer: "L'opérateur du chronomètre fait retentir le buzzer quand le compte atteint zéro. L'arbitre signale ensuite la violation en pointant un bras vers le panier que l'équipe fautive attaquait et en faisant tourner l'autre bras au-dessus de la tête pour indiquer le changement de possession.",
+      },
+      {
+        question: "Quelle est la différence entre le chronomètre des tirs et le chronomètre de jeu en FIBA ?",
+        answer: "Le chronomètre de jeu mesure le temps restant dans chaque quart-temps — 10 minutes par quart-temps en FIBA. Le chronomètre des tirs limite chaque possession offensive à 24 secondes. Les deux fonctionnent simultanément pendant le jeu actif, et un seul quart-temps peut contenir de nombreuses possessions, chacune soumise à son propre chronomètre.",
+      },
+      {
+        question: "Quelle est la durée des quarts-temps FIBA par rapport à la NBA ?",
+        answer: "Les quarts-temps FIBA durent 10 minutes chacun (4 quarts-temps = 40 minutes de temps réglementaire). La NBA utilise des quarts-temps de 12 minutes (48 minutes au total). Les deux ligues appliquent un chronomètre des tirs de 24 secondes pour les nouvelles possessions. La FIBA a introduit la règle du reset à 14 secondes après un rebond offensif, règle que la NBA a ensuite adoptée.",
+      },
+      {
+        question: "Une équipe peut-elle délibérément retarder la remise en jeu pour faire couler le chronomètre adverse ?",
+        answer: "Non. Lors d'une remise en jeu, le chronomètre des tirs démarre dès que le ballon est touché par un joueur sur le terrain. De plus, le joueur qui effectue la remise dispose de 5 secondes pour le faire, et l'arbitre peut sanctionner un comportement antisportif si une équipe retarde injustement la mise en jeu.",
+      },
+    ],
     // About Page
     aboutTitle: 'À propos de ShotClock Pro',
     aboutContent: [
