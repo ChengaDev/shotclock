@@ -1,5 +1,4 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import styled, { keyframes } from 'styled-components'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 import SEO from './SEO'
@@ -40,12 +39,8 @@ const Instructions = () => {
       <SEO
         title="Shot Clock Instructions | ShotClock Pro"
         description="Step-by-step instructions for operating a basketball shot clock. Learn the 24-second and 14-second reset rules, basic controls, and game situations per FIBA regulations."
+        schema={howToSchema}
       />
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(howToSchema)}
-        </script>
-      </Helmet>
       <AnimatedTitle>{locals.instructionsTitle}</AnimatedTitle>
 
       <Description>{locals.instructionsDescription}</Description>

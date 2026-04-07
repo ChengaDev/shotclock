@@ -9,9 +9,10 @@ const ALL_LANGS = ['en', 'it', 'es', 'fr'];
 interface SEOProps {
   title: string;
   description: string;
+  schema?: object;
 }
 
-const SEO: React.FC<SEOProps> = ({ title, description }) => {
+const SEO: React.FC<SEOProps> = ({ title, description, schema }) => {
   const { languageCode } = useLocalization();
   const location = useLocation();
 
@@ -123,6 +124,11 @@ const SEO: React.FC<SEOProps> = ({ title, description }) => {
       {!isHome && breadcrumbSchema && (
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbSchema)}
+        </script>
+      )}
+      {schema && (
+        <script type="application/ld+json">
+          {JSON.stringify(schema)}
         </script>
       )}
     </Helmet>
