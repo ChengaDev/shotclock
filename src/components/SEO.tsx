@@ -28,13 +28,17 @@ const SEO: React.FC<SEOProps> = ({ title, description }) => {
     return `${BASE_URL}/${lang}${pagePath === '/' ? '' : pagePath}`;
   };
 
-  const structuredData = {
+  const isHome = pagePath === '/';
+
+  const webAppSchema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     "name": "ShotClock Pro",
+    "url": "https://www.24shotclock.com",
     "applicationCategory": "SportsApplication",
-    "operatingSystem": "Web",
-    "description": "Professional basketball shot clock training application for referees, scorekeepers, and basketball enthusiasts.",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "description": "Free online basketball shot clock — start, stop, reset, and practice with a real buzzer. Works on any device, no installation needed.",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -46,10 +50,11 @@ const SEO: React.FC<SEOProps> = ({ title, description }) => {
     },
     "featureList": [
       "24-second shot clock simulation",
-      "14-second reset functionality",
+      "14-second offensive rebound reset",
       "Real-time operation practice",
-      "Multiple language support",
-      "FIBA rules compliance"
+      "Real-time buzzer sound",
+      "Blind-clock training mode",
+      "Multiple language support"
     ]
   };
 
@@ -68,9 +73,11 @@ const SEO: React.FC<SEOProps> = ({ title, description }) => {
         <link key={lang} rel="alternate" hrefLang={lang} href={getLangUrl(lang)} />
       ))}
       <link rel="alternate" hrefLang="x-default" href={getLangUrl('en')} />
-      <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </script>
+      {isHome && (
+        <script type="application/ld+json">
+          {JSON.stringify(webAppSchema)}
+        </script>
+      )}
     </Helmet>
   );
 };

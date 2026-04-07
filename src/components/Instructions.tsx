@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import styled, { keyframes } from 'styled-components'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 import SEO from './SEO'
@@ -17,12 +18,33 @@ const fadeInUp = keyframes`
 const Instructions = () => {
   const { locals } = useLocalization()
 
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Operate an Online Basketball Shot Clock",
+    "description": "Step-by-step guide to using a basketball shot clock online, including 24-second and 14-second resets per FIBA rules.",
+    "step": locals.instructionsSections.map((section) => ({
+      "@type": "HowToSection",
+      "name": section.title,
+      "itemListElement": section.steps.map((step, i) => ({
+        "@type": "HowToStep",
+        "position": i + 1,
+        "text": step,
+      })),
+    })),
+  }
+
   return (
     <Container>
       <SEO
         title="Shot Clock Instructions | ShotClock Pro"
         description="Step-by-step instructions for operating a basketball shot clock. Learn the 24-second and 14-second reset rules, basic controls, and game situations per FIBA regulations."
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(howToSchema)}
+        </script>
+      </Helmet>
       <AnimatedTitle>{locals.instructionsTitle}</AnimatedTitle>
 
       <Description>{locals.instructionsDescription}</Description>
