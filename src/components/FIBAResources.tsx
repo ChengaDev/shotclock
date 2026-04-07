@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 import SEO from './SEO'
+import SeeAlso from './SeeAlso'
 
 const fadeInUp = keyframes`
   from {
@@ -88,6 +89,7 @@ const FIBAResources = () => {
           </InfoCard>
         </InfoGrid>
       </AdditionalInfo>
+      <SeeAlso exclude={['fiba-resources']} />
     </Container>
   )
 }

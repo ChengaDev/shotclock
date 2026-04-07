@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation, Navigate, useParams, Outlet, useNavigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Outlet, useNavigate } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import LanguageProvider, { useLocalization } from './contexts/Language/LanguageProvider'
 import Navigation from './components/Navigation'
@@ -15,6 +15,8 @@ const ShotClockPage = lazy(() => import('./components/ShotClockPage'))
 const AboutUs = lazy(() => import('./components/AboutUs'))
 const Instructions = lazy(() => import('./components/Instructions'))
 const FIBAResources = lazy(() => import('./components/FIBAResources'))
+const FAQ = lazy(() => import('./components/FAQ'))
+const NotFound = lazy(() => import('./components/NotFound'))
 
 const NON_ENGLISH_LANGS = ['it', 'es', 'fr']
 
@@ -56,17 +58,20 @@ const LangLayout = () => {
   const location = useLocation()
   const fadeIn = useSpring({ from: { opacity: 0 }, to: { opacity: 1 }, config: { duration: 800 } })
 
+  const isValidLang = lang === 'en' || (!!lang && NON_ENGLISH_LANGS.includes(lang))
+
   useEffect(() => {
+    if (!isValidLang) return
     if (lang === 'en') {
       // Redirect /en/* → /* to keep English at canonical URLs
       const pagePath = location.pathname.slice('/en'.length) || '/'
       navigate(pagePath, { replace: true })
     } else if (lang && NON_ENGLISH_LANGS.includes(lang)) {
       changeLocale(lang)
-    } else {
-      navigate('/', { replace: true })
     }
   }, [lang])
+
+  if (!isValidLang) return <NotFound />
 
   return <animated.div style={fadeIn}><Outlet /></animated.div>
 }
@@ -98,6 +103,11 @@ const pageRoutes = (
         <FIBAResources />
       </PageContent>
     } />
+    <Route path="faq" element={
+      <PageContent title="FAQ - Basketball Shot Clock App">
+        <FAQ />
+      </PageContent>
+    } />
   </>
 )
 
@@ -126,7 +136,7 @@ const App = () => {
                     {pageRoutes}
                   </Route>
 
-                  <Route path="*" element={<Navigate to="/" replace />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
                 </Suspense>
               </MainContent>

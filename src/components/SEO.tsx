@@ -111,14 +111,14 @@ const SEO: React.FC<SEOProps> = ({ title, description }) => {
       ))}
       <link rel="alternate" hrefLang="x-default" href={getLangUrl('en')} />
       {isHome && (
-        <>
-          <script type="application/ld+json">
-            {JSON.stringify(webSiteSchema)}
-          </script>
-          <script type="application/ld+json">
-            {JSON.stringify(webAppSchema)}
-          </script>
-        </>
+        <script type="application/ld+json">
+          {JSON.stringify(webSiteSchema)}
+        </script>
+      )}
+      {isHome && (
+        <script type="application/ld+json">
+          {JSON.stringify(webAppSchema)}
+        </script>
       )}
       {!isHome && breadcrumbSchema && (
         <script type="application/ld+json">

@@ -16,7 +16,7 @@ function Buttons(props: ControlsProps) {
 
 	return (
 		<Container>
-			<TimeToggleButton id='btnStart' onClick={props.onTickToggle} isCurrentlyTicking={props.isTicking}>
+			<TimeToggleButton id='btnStart' onClick={props.onTickToggle} $isCurrentlyTicking={props.isTicking}>
 				{props.isTicking ? locals.stopLabel : locals.startLabel}
 			</TimeToggleButton>
 			<ResetButton id='btnReset14' onClick={props.on14SecondsClick}>
@@ -77,12 +77,12 @@ const ClockButton = styled.button`
 `;
 
 type TimeToggleButtonProps = {
-	isCurrentlyTicking: boolean;
+	$isCurrentlyTicking: boolean;
 };
 
 const TimeToggleButton = styled(ClockButton)<TimeToggleButtonProps>`
 	color: ${(props) => props.theme.colors.white};
-	background-color: ${(props) => (props.isCurrentlyTicking ? props.theme.colors.red : 'green')};
+	background-color: ${(props) => (props.$isCurrentlyTicking ? props.theme.colors.red : 'green')};
 `;
 
 const ResetButton = styled(ClockButton)`
