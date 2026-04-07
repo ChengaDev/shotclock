@@ -21,7 +21,9 @@ const Footer = () => {
           <FooterLinks>
             <FooterLink href="/instructions">{locals.instructions}</FooterLink>
             <FooterLink href="/fiba-resources">{locals.fibaResources}</FooterLink>
+            <FooterLink href="/faq">{locals.faq}</FooterLink>
             <FooterLink href="/about">{locals.about}</FooterLink>
+            <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
           </FooterLinks>
         </FooterSection>
 

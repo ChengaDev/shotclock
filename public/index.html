@@ -28,6 +28,19 @@
 		<meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
 		<meta property="twitter:image:alt" content="ShotClock Pro — free online basketball shot clock" />
 
+		<!-- Google Consent Mode v2 — default denied until user accepts the cookie banner -->
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('consent', 'default', {
+				'analytics_storage': 'denied',
+				'ad_storage': 'denied',
+				'ad_user_data': 'denied',
+				'ad_personalization': 'denied',
+				'wait_for_update': 500
+			});
+		</script>
+
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-PB7M6KHZ9Z"></script>
 		<script>

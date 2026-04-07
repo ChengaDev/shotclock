@@ -9,6 +9,7 @@
 - [FIBA Resources](https://www.24shotclock.com/fiba-resources): Links to official FIBA basketball rules, shot clock guidelines, referee training materials, and competition manuals.
 - [FAQ](https://www.24shotclock.com/faq): Answers to common questions about shot clock rules, the 14-second reset, blind-clock drills, and how to use the app.
 - [About](https://www.24shotclock.com/about): Background on ShotClock Pro — its purpose, target users, and training philosophy.
+- [Privacy Policy](https://www.24shotclock.com/privacy-policy): Information about data collection, cookies, Google Analytics, and Google AdSense usage.
 
 ## Languages
 

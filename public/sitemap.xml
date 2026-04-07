@@ -60,6 +60,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/faq"/>
   </url>
 
+  <!-- Privacy Policy (English only, no lang variants) -->
+  <url>
+    <loc>https://www.24shotclock.com/privacy-policy</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
   <!-- Italian -->
   <url>
     <loc>https://www.24shotclock.com/it</loc>

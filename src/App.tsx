@@ -5,6 +5,7 @@ import LanguageProvider, { useLocalization } from './contexts/Language/LanguageP
 import Navigation from './components/Navigation'
 import ShareButtons from './components/ShareButtons'
 import Footer from './components/Footer'
+import CookieBanner from './components/CookieBanner'
 import { lightTheme, darkTheme } from './themes/themes'
 import { createGlobalStyle } from 'styled-components'
 import './assets/fonts/dseg14/dseg14.css'
@@ -16,6 +17,7 @@ const AboutUs = lazy(() => import('./components/AboutUs'))
 const Instructions = lazy(() => import('./components/Instructions'))
 const FIBAResources = lazy(() => import('./components/FIBAResources'))
 const FAQ = lazy(() => import('./components/FAQ'))
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
 const NotFound = lazy(() => import('./components/NotFound'))
 
 const NON_ENGLISH_LANGS = ['it', 'es', 'fr']
@@ -110,6 +112,11 @@ const pageRoutes = (
         <FAQ />
       </PageContent>
     } />
+    <Route path="privacy-policy" element={
+      <PageContent title="Privacy Policy - ShotClock Pro">
+        <PrivacyPolicy />
+      </PageContent>
+    } />
   </>
 )
 
@@ -144,6 +151,7 @@ const App = () => {
               </MainContent>
               <Footer />
             </PageWrapper>
+            <CookieBanner />
           </AppContainer>
         </LanguageProvider>
       </Router>

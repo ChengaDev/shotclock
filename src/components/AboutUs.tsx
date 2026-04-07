@@ -46,6 +46,27 @@ const AboutUs = () => {
           </FeatureCard>
         ))}
       </Features>
+
+      <ContactSection>
+        <ContactTitle>Get in Touch</ContactTitle>
+        <ContactText>
+          Questions, feedback, or just want to say hi? Reach out through any of the channels below.
+        </ContactText>
+        <ContactLinks>
+          <ContactLink href="https://www.linkedin.com/in/chengazit/" target="_blank" rel="noreferrer noopener">
+            <i className="fab fa-linkedin" />
+            LinkedIn
+          </ContactLink>
+          <ContactLink href="https://github.com/ChengaDev/" target="_blank" rel="noreferrer noopener">
+            <i className="fab fa-github" />
+            GitHub
+          </ContactLink>
+          <ContactLink href="https://chengazit.com/" target="_blank" rel="noreferrer noopener">
+            <i className="fas fa-globe" />
+            chengazit.com
+          </ContactLink>
+        </ContactLinks>
+      </ContactSection>
     </Container>
   )
 }
@@ -153,6 +174,50 @@ const FeatureText = styled.p`
   line-height: 1.6;
   font-size: 1rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+`
+
+const ContactSection = styled.div`
+  margin-top: 4rem;
+  text-align: center;
+`
+
+const ContactTitle = styled.h2`
+  font-size: 1.8rem;
+  color: #ffd700;
+  margin-bottom: 1rem;
+  font-weight: 700;
+`
+
+const ContactText = styled.p`
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+`
+
+const ContactLinks = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+`
+
+const ContactLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  color: #ffd700;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: #ffd700;
+  }
 `
 
 export default AboutUs 
