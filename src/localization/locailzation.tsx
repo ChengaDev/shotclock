@@ -6,7 +6,7 @@ type AppLocalizationType = {
 
 const AppLocalization: AppLocalizationType = {
   en: {
-    title: 'Basketball shot clock practice',
+    title: 'Free Online Basketball Shot Clock',
     subtitle: 'Practice your 24 shot clock operation skills',
     startLabel: 'Start',
     stopLabel: 'Stop',

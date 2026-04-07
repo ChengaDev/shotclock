@@ -9,11 +9,16 @@ const ShotClockPage = () => {
   return (
     <PageContainer>
       <SEO
-        title="ShotClock Pro – Basketball Shot Clock Simulator & Trainer"
-        description="Free basketball shot clock simulator for referees and scorekeepers. Practice 24-second and 14-second resets with real-time buzzer sound, following FIBA regulations."
+        title="ShotClock Pro – Free Online Basketball Shot Clock"
+        description="Free online basketball shot clock — start, stop, and reset in seconds. Practice on any device, no installation needed."
       />
       <GlobalStyle />
       <ShotClock />
+      <PageBlurb>
+        ShotClock Pro is a free online basketball shot clock you can use directly in your browser.
+        Start the 24-second countdown, apply the 14-second reset after an offensive rebound,
+        and hear the buzzer when time runs out — just like a real game.
+      </PageBlurb>
     </PageContainer>
   )
 }
@@ -65,6 +70,16 @@ const Container = styled.div`
     min-height: calc(100vh - 60px - 60px); // Subtract header and footer height
     padding: 1rem;
   }
+`
+
+const PageBlurb = styled.p`
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.35);
 `
 
 export default ShotClockPage

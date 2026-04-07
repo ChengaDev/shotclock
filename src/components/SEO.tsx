@@ -30,6 +30,43 @@ const SEO: React.FC<SEOProps> = ({ title, description }) => {
 
   const isHome = pagePath === '/';
 
+  const breadcrumbSchema = !isHome ? {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.24shotclock.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": title,
+        "item": canonical
+      }
+    ]
+  } : null;
+
+  const webSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ShotClock Pro",
+    "url": "https://www.24shotclock.com",
+    "description": "Free online basketball shot clock for referees, scorekeepers, and players.",
+    "author": {
+      "@type": "Person",
+      "name": "Chen Gazit",
+      "url": "https://chengazit.com/",
+      "sameAs": [
+        "https://chengazit.com/",
+        "https://github.com/ChengaDev/",
+        "https://www.linkedin.com/in/chengazit/"
+      ]
+    }
+  };
+
   const webAppSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -74,8 +111,18 @@ const SEO: React.FC<SEOProps> = ({ title, description }) => {
       ))}
       <link rel="alternate" hrefLang="x-default" href={getLangUrl('en')} />
       {isHome && (
+        <>
+          <script type="application/ld+json">
+            {JSON.stringify(webSiteSchema)}
+          </script>
+          <script type="application/ld+json">
+            {JSON.stringify(webAppSchema)}
+          </script>
+        </>
+      )}
+      {!isHome && breadcrumbSchema && (
         <script type="application/ld+json">
-          {JSON.stringify(webAppSchema)}
+          {JSON.stringify(breadcrumbSchema)}
         </script>
       )}
     </Helmet>
