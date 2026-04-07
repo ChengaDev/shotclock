@@ -2,6 +2,7 @@
 User-agent: *
 Allow: /
 Sitemap: https://www.24shotclock.com/sitemap.xml
+LLMs: https://www.24shotclock.com/llms.txt
 
 # AI crawlers
 User-agent: GPTBot

@@ -11,6 +11,11 @@ export type LocalizationType = {
 	instructions: string;
 	fibaResources: string;
 	about: string;
+	faq: string;
+	// FAQ Page
+	faqTitle: string;
+	faqDescription: string;
+	faqItems: Array<{ question: string; answer: string }>;
 	// About Page
 	aboutTitle: string;
 	aboutContent: string[];

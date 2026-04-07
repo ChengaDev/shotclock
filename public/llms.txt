@@ -7,6 +7,7 @@
 - [Home](https://www.24shotclock.com/): Interactive shot clock simulator — start/stop, 24s and 14s resets, time correction, display toggle, and buzzer sound.
 - [Instructions](https://www.24shotclock.com/instructions): Step-by-step guide to operating the shot clock, including basic controls, time corrections, display modes, and FIBA reset rules.
 - [FIBA Resources](https://www.24shotclock.com/fiba-resources): Links to official FIBA basketball rules, shot clock guidelines, referee training materials, and competition manuals.
+- [FAQ](https://www.24shotclock.com/faq): Answers to common questions about shot clock rules, the 14-second reset, blind-clock drills, and how to use the app.
 - [About](https://www.24shotclock.com/about): Background on ShotClock Pro — its purpose, target users, and training philosophy.
 
 ## Languages

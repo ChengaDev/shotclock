@@ -78,6 +78,13 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
             >
               {locals.about}
             </NavLink>
+            <NavLink
+              to={routes.FAQ}
+              active={location.pathname === routes.FAQ}
+              onClick={handleNavClick}
+            >
+              {locals.faq}
+            </NavLink>
             <ThemeToggle>
               <ThemeButton
                 active={currentTheme === Themes.Light}
