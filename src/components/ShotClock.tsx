@@ -125,7 +125,7 @@ const ShotClock = () => {
 				<SubTitle>{locals.subtitle}</SubTitle>
 			</animated.div>
 			<animated.div style={timeDisplayAnimationProps}>
-				<TimeDisplay isClockEnded={currentSeconds === 0} markSeconds={currentSeconds < 5}>
+				<TimeDisplay $isClockEnded={currentSeconds === 0} $markSeconds={currentSeconds < 5}>
 					<FakeDigitsDisplay>88</FakeDigitsDisplay>
 					{isTimeDisplay ? timeDisplayText : ''}
 				</TimeDisplay>
@@ -144,8 +144,8 @@ const ShotClock = () => {
 };
 
 type TimeDisplayProps = {
-	markSeconds: boolean;
-	isClockEnded: boolean;
+	$markSeconds: boolean;
+	$isClockEnded: boolean;
 };
 
 const BaseTimeDisplay = styled.div`
@@ -170,8 +170,8 @@ const BaseTimeDisplay = styled.div`
 `;
 
 const TimeDisplay = styled(BaseTimeDisplay)<TimeDisplayProps>`
-	border: 4px solid ${(props) => (props.isClockEnded ? props.theme.colors.red : '#8993a3')};
-	color: ${(props) => (props.markSeconds ? props.theme.colors.red : props.theme.colors.white)};
+	border: 4px solid ${(props) => (props.$isClockEnded ? props.theme.colors.red : '#8993a3')};
+	color: ${(props) => (props.$markSeconds ? props.theme.colors.red : props.theme.colors.white)};
 
 	position: relative;
 	background: transparent linear-gradient(134deg, #1d1b1b 0%, #383834 55%, #1d1d1b 55%, #1d1d1b 100%) 0% 0% no-repeat

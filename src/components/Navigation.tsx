@@ -52,49 +52,49 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
           <Nav className="ml-auto">
             <NavLink
               to={routes.Home}
-              active={location.pathname === routes.Home}
+              $active={location.pathname === routes.Home}
               onClick={handleNavClick}
             >
               {locals.home}
             </NavLink>
             <NavLink
               to={routes.Instructions}
-              active={location.pathname === routes.Instructions}
+              $active={location.pathname === routes.Instructions}
               onClick={handleNavClick}
             >
               {locals.instructions}
             </NavLink>
             <NavLink
               to={routes.FIBAResources}
-              active={location.pathname === routes.FIBAResources}
+              $active={location.pathname === routes.FIBAResources}
               onClick={handleNavClick}
             >
               {locals.fibaResources}
             </NavLink>
             <NavLink
               to={routes.About}
-              active={location.pathname === routes.About}
+              $active={location.pathname === routes.About}
               onClick={handleNavClick}
             >
               {locals.about}
             </NavLink>
             <NavLink
               to={routes.FAQ}
-              active={location.pathname === routes.FAQ}
+              $active={location.pathname === routes.FAQ}
               onClick={handleNavClick}
             >
               {locals.faq}
             </NavLink>
             <ThemeToggle>
               <ThemeButton
-                active={currentTheme === Themes.Light}
+                $active={currentTheme === Themes.Light}
                 onClick={() => setTheme(Themes.Light)}
               >
                 light
               </ThemeButton>
               <ThemeDivider>|</ThemeDivider>
               <ThemeButton
-                active={currentTheme === Themes.Dark}
+                $active={currentTheme === Themes.Dark}
                 onClick={() => setTheme(Themes.Dark)}
               >
                 dark
@@ -176,7 +176,7 @@ const BrandText = styled.span`
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `
 
-const NavLink = styled(Link)<{ active: boolean }>`
+const NavLink = styled(Link)<{ $active: boolean }>`
   color: #ffffff !important;
   margin: 0 1rem;
   text-decoration: none;
@@ -190,7 +190,7 @@ const NavLink = styled(Link)<{ active: boolean }>`
   &:after {
     content: '';
     position: absolute;
-    width: ${(props) => (props.active ? '100%' : '0')};
+    width: ${(props) => (props.$active ? '100%' : '0')};
     height: 2px;
     bottom: 0;
     left: 0;
@@ -210,7 +210,7 @@ const NavLink = styled(Link)<{ active: boolean }>`
     padding: 0.5rem 1rem;
     border-radius: 8px;
     background: ${(props) =>
-      props.active ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
+      props.$active ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
 
     &:after {
       display: none;
@@ -236,14 +236,14 @@ const ThemeToggle = styled.div`
   }
 `
 
-const ThemeButton = styled.button<{ active: boolean }>`
+const ThemeButton = styled.button<{ $active: boolean }>`
   background: none;
   border: none;
-  color: ${(props) => (props.active ? '#ffd700' : '#ffffff')};
+  color: ${(props) => (props.$active ? '#ffd700' : '#ffffff')};
   padding: 0.25rem 0.5rem;
   cursor: pointer;
   font-size: 0.9rem;
-  font-weight: ${(props) => (props.active ? '600' : '400')};
+  font-weight: ${(props) => (props.$active ? '600' : '400')};
   transition: all 0.3s ease;
 
   &:hover {
