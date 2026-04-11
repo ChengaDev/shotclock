@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Link } from 'react-router-dom'
 
-type ConsentValue = 'granted' | 'denied' | null
-
 const STORAGE_KEY = 'cookie_consent'
 
 function updateGoogleConsent(value: 'granted' | 'denied') {
@@ -18,11 +16,10 @@ function updateGoogleConsent(value: 'granted' | 'denied') {
 }
 
 const CookieBanner = () => {
-  const [consent, setConsent] = useState<ConsentValue>(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as ConsentValue
+    const stored = localStorage.getItem(STORAGE_KEY) as 'granted' | 'denied' | null
     if (stored === 'granted' || stored === 'denied') {
       // Re-apply saved choice on every page load so Consent Mode is always in sync
       updateGoogleConsent(stored)
@@ -36,14 +33,12 @@ const CookieBanner = () => {
   const handleAccept = () => {
     localStorage.setItem(STORAGE_KEY, 'granted')
     updateGoogleConsent('granted')
-    setConsent('granted')
     setVisible(false)
   }
 
   const handleDecline = () => {
     localStorage.setItem(STORAGE_KEY, 'denied')
     updateGoogleConsent('denied')
-    setConsent('denied')
     setVisible(false)
   }
 
