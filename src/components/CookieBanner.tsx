@@ -23,7 +23,6 @@ const CookieBanner = () => {
     if (stored === 'granted' || stored === 'denied') {
       // Re-apply saved choice on every page load so Consent Mode is always in sync
       updateGoogleConsent(stored)
-      setConsent(stored)
     } else {
       // No prior choice — show banner
       setVisible(true)
