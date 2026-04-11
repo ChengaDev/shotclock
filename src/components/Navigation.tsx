@@ -108,8 +108,6 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
 }
 
 const Container = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-
   nav {
     background: rgba(0, 0, 0, 0.8) !important;
     backdrop-filter: blur(10px);
