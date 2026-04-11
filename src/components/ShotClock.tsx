@@ -153,7 +153,9 @@ const BaseTimeDisplay = styled.div`
 	font-weight: normal;
 	font-style: normal;
 	font-size: 65px;
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 200px;
 	height: 150px;
 	padding: 24px;

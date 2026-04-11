@@ -1,5 +1,4 @@
-import { Nav, Navbar } from 'react-bootstrap'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Themes from '../constants/Themes'
 import AppRoutes from '../AppRoutes'
 import { Link, useLocation } from 'react-router-dom'
@@ -36,132 +35,118 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
   }
 
   return (
-    <Container ref={navRef}>
-      <Navbar
-        variant={currentTheme === Themes.Light ? 'light' : 'dark'}
-        expand="lg"
-        fixed="top"
-        expanded={expanded}
-        onToggle={setExpanded}
+    <NavBar ref={navRef}>
+      <Brand to={routes.Home}>
+        <BrandText>ShotClock Pro</BrandText>
+      </Brand>
+      <Hamburger
+        onClick={() => setExpanded(!expanded)}
+        aria-label="Toggle navigation"
+        aria-expanded={expanded}
+        aria-controls="nav-menu"
       >
-        <Navbar.Brand as={Link} to={routes.Home}>
-          <BrandText>ShotClock Pro</BrandText>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            <NavLink
-              to={routes.Home}
-              $active={location.pathname === routes.Home}
-              onClick={handleNavClick}
+        <HamburgerLine />
+        <HamburgerLine />
+        <HamburgerLine />
+      </Hamburger>
+      <NavCollapse id="nav-menu" $expanded={expanded}>
+        <NavItems>
+          <NavLink
+            to={routes.Home}
+            $active={location.pathname === routes.Home}
+            onClick={handleNavClick}
+          >
+            {locals.home}
+          </NavLink>
+          <NavLink
+            to={routes.Instructions}
+            $active={location.pathname === routes.Instructions}
+            onClick={handleNavClick}
+          >
+            {locals.instructions}
+          </NavLink>
+          <NavLink
+            to={routes.FIBAResources}
+            $active={location.pathname === routes.FIBAResources}
+            onClick={handleNavClick}
+          >
+            {locals.fibaResources}
+          </NavLink>
+          <NavLink
+            to={routes.About}
+            $active={location.pathname === routes.About}
+            onClick={handleNavClick}
+          >
+            {locals.about}
+          </NavLink>
+          <NavLink
+            to={routes.FAQ}
+            $active={location.pathname === routes.FAQ}
+            onClick={handleNavClick}
+          >
+            {locals.faq}
+          </NavLink>
+          <ThemeToggle>
+            <ThemeButton
+              $active={currentTheme === Themes.Light}
+              onClick={() => setTheme(Themes.Light)}
             >
-              {locals.home}
-            </NavLink>
-            <NavLink
-              to={routes.Instructions}
-              $active={location.pathname === routes.Instructions}
-              onClick={handleNavClick}
+              light
+            </ThemeButton>
+            <ThemeDivider>|</ThemeDivider>
+            <ThemeButton
+              $active={currentTheme === Themes.Dark}
+              onClick={() => setTheme(Themes.Dark)}
             >
-              {locals.instructions}
-            </NavLink>
-            <NavLink
-              to={routes.FIBAResources}
-              $active={location.pathname === routes.FIBAResources}
-              onClick={handleNavClick}
-            >
-              {locals.fibaResources}
-            </NavLink>
-            <NavLink
-              to={routes.About}
-              $active={location.pathname === routes.About}
-              onClick={handleNavClick}
-            >
-              {locals.about}
-            </NavLink>
-            <NavLink
-              to={routes.FAQ}
-              $active={location.pathname === routes.FAQ}
-              onClick={handleNavClick}
-            >
-              {locals.faq}
-            </NavLink>
-            <ThemeToggle>
-              <ThemeButton
-                $active={currentTheme === Themes.Light}
-                onClick={() => setTheme(Themes.Light)}
-              >
-                light
-              </ThemeButton>
-              <ThemeDivider>|</ThemeDivider>
-              <ThemeButton
-                $active={currentTheme === Themes.Dark}
-                onClick={() => setTheme(Themes.Dark)}
-              >
-                dark
-              </ThemeButton>
-            </ThemeToggle>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    </Container>
+              dark
+            </ThemeButton>
+          </ThemeToggle>
+        </NavItems>
+      </NavCollapse>
+    </NavBar>
   )
 }
 
-const Container = styled.div`
-  nav {
-    background: rgba(0, 0, 0, 0.8) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.5rem 1rem;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    font-family: 'Poppins', sans-serif;
-    z-index: 1000;
+const slideDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
   }
-
-  .navbar-brand {
-    font-size: 1.8rem;
-    line-height: 1.5;
-    color: ${(props) => props.theme.primary} !important;
-    transition: transform 0.2s ease-in-out;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-
-    &:hover {
-      transform: scale(1.05);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+`
 
-  .navbar-toggler {
-    border: none;
-    padding: 0.5rem;
-    &:focus {
-      outline: none;
-      box-shadow: none;
-    }
-  }
+const NavBar = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  min-height: 70px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+`
 
-  .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-  }
+const Brand = styled(Link)`
+  font-size: 1.8rem;
+  line-height: 1.5;
+  text-decoration: none;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
 
-  @media (max-width: 768px) {
-    nav {
-      margin: 0;
-      border-radius: 0;
-    }
-
-    .navbar-collapse {
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 0 0 1rem 1rem;
-      padding: 1rem;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-    }
+  &:hover {
+    transform: scale(1.05);
   }
 `
 
@@ -171,11 +156,70 @@ const BrandText = styled.span`
   background: linear-gradient(45deg, #ffd700, #ff6b6b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+`
+
+const Hamburger = styled.button`
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  margin-left: auto;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`
+
+const HamburgerLine = styled.span`
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+`
+
+const NavCollapse = styled.div<{ $expanded: boolean }>`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    display: ${(props) => (props.$expanded ? 'flex' : 'none')};
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    animation: ${slideDown} 0.35s ease-out;
+  }
+`
+
+const NavItems = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `
 
 const NavLink = styled(Link)<{ $active: boolean }>`
-  color: #ffffff !important;
+  color: #ffffff;
   margin: 0 1rem;
   text-decoration: none;
   font-weight: 500;
@@ -197,7 +241,7 @@ const NavLink = styled(Link)<{ $active: boolean }>`
   }
 
   &:hover {
-    color: #ffd700 !important;
+    color: #ffd700;
     &:after {
       width: 100%;
     }
@@ -207,8 +251,8 @@ const NavLink = styled(Link)<{ $active: boolean }>`
     margin: 0.5rem 0;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    background: ${(props) =>
-      props.$active ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
+    width: 100%;
+    background: ${(props) => (props.$active ? 'rgba(255, 255, 255, 0.1)' : 'transparent')};
 
     &:after {
       display: none;
@@ -231,6 +275,7 @@ const ThemeToggle = styled.div`
   @media (max-width: 768px) {
     margin: 0.5rem 0;
     justify-content: center;
+    width: 100%;
   }
 `
 

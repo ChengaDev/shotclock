@@ -180,8 +180,49 @@ const GlobalStyle = createGlobalStyle`
     background: ${props => props.theme.mainBackgroundColor};
   }
 
-  * {
+  *, *::before, *::after {
     box-sizing: border-box;
+  }
+
+  /* Bootstrap base reset */
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  hr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 `
 
