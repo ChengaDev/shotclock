@@ -8,7 +8,6 @@ import Footer from './components/Footer'
 import CookieBanner from './components/CookieBanner'
 import { lightTheme, darkTheme } from './themes/themes'
 import { createGlobalStyle } from 'styled-components'
-import './assets/fonts/dseg14/dseg14.css'
 import { useSpring, animated } from 'react-spring'
 import Themes from './constants/Themes'
 
@@ -169,13 +168,6 @@ const App = () => {
 }
 
 const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'DSEG14ClassicRegular';
-    src: url('./assets/fonts/dseg14/DSEG14ClassicRegular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-
   body {
     margin: 0;
     padding: 0;
