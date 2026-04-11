@@ -22,19 +22,19 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title, description }) 
     <ShareContainer>
       <ShareText>Share this page:</ShareText>
       <ButtonsWrapper>
-        <FacebookShareButton url={url} hashtag="#basketball">
+        <FacebookShareButton url={url} hashtag="#basketball" aria-label="Share on Facebook">
           <FacebookIcon size={32} round />
         </FacebookShareButton>
 
-        <TwitterShareButton url={url} title={title} hashtags={['basketball']}>
+        <TwitterShareButton url={url} title={title} hashtags={['basketball']} aria-label="Share on Twitter">
           <TwitterIcon size={32} round />
         </TwitterShareButton>
 
-        <LinkedinShareButton url={url} title={title} summary={description}>
+        <LinkedinShareButton url={url} title={title} summary={description} aria-label="Share on LinkedIn">
           <LinkedinIcon size={32} round />
         </LinkedinShareButton>
 
-        <WhatsappShareButton url={url} title={title} separator=" - ">
+        <WhatsappShareButton url={url} title={title} separator=" - " aria-label="Share on WhatsApp">
           <WhatsappIcon size={32} round />
         </WhatsappShareButton>
       </ButtonsWrapper>
