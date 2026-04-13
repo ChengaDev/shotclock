@@ -10,9 +10,10 @@ interface SEOProps {
   title: string;
   description: string;
   schema?: object;
+  canonical?: string;
 }
 
-const SEO: React.FC<SEOProps> = ({ title, description, schema }) => {
+const SEO: React.FC<SEOProps> = ({ title, description, schema, canonical: canonicalOverride }) => {
   const { languageCode } = useLocalization();
   const location = useLocation();
 
@@ -22,7 +23,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, schema }) => {
     ? location.pathname
     : (location.pathname.slice(`/${languageCode}`.length) || '/');
 
-  const canonical = `${BASE_URL}${location.pathname}`;
+  const canonical = canonicalOverride ?? `${BASE_URL}${location.pathname}`;
 
   const getLangUrl = (lang: string) => {
     if (lang === 'en') return `${BASE_URL}${pagePath}`;

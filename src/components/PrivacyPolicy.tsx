@@ -9,6 +9,7 @@ const PrivacyPolicy = () => {
       <SEO
         title="Privacy Policy | ShotClock Pro"
         description="Privacy policy for ShotClock Pro — free online basketball shot clock. Learn how we use cookies and third-party services like Google Analytics and Google AdSense."
+        canonical="https://www.24shotclock.com/privacy-policy"
       />
       <Title>Privacy Policy</Title>
       <LastUpdated>Last updated: April 7, 2026</LastUpdated>
