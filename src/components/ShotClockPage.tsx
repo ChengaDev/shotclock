@@ -3,8 +3,11 @@ import { createGlobalStyle } from 'styled-components'
 import background from '../assets/Group8.svg'
 import styled from 'styled-components'
 import SEO from './SEO'
+import { useLocalization } from '../contexts/Language/LanguageProvider'
 
 const ShotClockPage = () => {
+  const { locals } = useLocalization()
+
   return (
     <PageContainer>
       <SEO
@@ -13,11 +16,7 @@ const ShotClockPage = () => {
       />
       <GlobalStyle />
       <ShotClock />
-      <PageBlurb>
-        ShotClock Pro is a free online basketball shot clock you can use directly in your browser.
-        Start the 24-second countdown, apply the 14-second reset after an offensive rebound,
-        and hear the buzzer when time runs out — just like a real game.
-      </PageBlurb>
+      <PageBlurb>{locals.pageBlurb}</PageBlurb>
     </PageContainer>
   )
 }

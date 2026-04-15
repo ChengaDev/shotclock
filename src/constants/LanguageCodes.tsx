@@ -3,6 +3,7 @@ const LanguageCodes = {
   Italian: 'it',
   Spanish: 'es',
   French: 'fr',
+  Greek: 'el',
 }
 
 export default LanguageCodes

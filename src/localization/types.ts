@@ -60,4 +60,13 @@ export type LocalizationType = {
 		worldGoverning: string;
 		tournaments: string;
 	};
+	// Shared UI
+	lightMode: string;
+	darkMode: string;
+	shareThisPage: string;
+	pageBlurb: string;
+	quickLinks: string;
+	language: string;
+	getInTouch: string;
+	getInTouchText: string;
 };

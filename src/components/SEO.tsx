@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useLocalization } from '../contexts/Language/LanguageProvider';
 
 const BASE_URL = 'https://www.24shotclock.com';
-const ALL_LANGS = ['en', 'it', 'es', 'fr'];
+const ALL_LANGS = ['en', 'it', 'es', 'fr', 'el'];
 
 interface SEOProps {
   title: string;

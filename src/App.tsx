@@ -19,7 +19,7 @@ const FAQ = lazy(() => import('./components/FAQ'))
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
 const NotFound = lazy(() => import('./components/NotFound'))
 
-const NON_ENGLISH_LANGS = ['it', 'es', 'fr']
+const NON_ENGLISH_LANGS = ['it', 'es', 'fr', 'el']
 
 interface PageContentProps {
   children: React.ReactNode

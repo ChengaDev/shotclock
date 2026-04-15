@@ -91,14 +91,14 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
               $active={currentTheme === Themes.Light}
               onClick={() => setTheme(Themes.Light)}
             >
-              light
+              {locals.lightMode}
             </ThemeButton>
             <ThemeDivider>|</ThemeDivider>
             <ThemeButton
               $active={currentTheme === Themes.Dark}
               onClick={() => setTheme(Themes.Dark)}
             >
-              dark
+              {locals.darkMode}
             </ThemeButton>
           </ThemeToggle>
         </NavItems>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLocalization } from '../contexts/Language/LanguageProvider';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -18,9 +19,11 @@ interface ShareButtonsProps {
 }
 
 const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title, description }) => {
+  const { locals } = useLocalization()
+
   return (
     <ShareContainer>
-      <ShareText>Share this page:</ShareText>
+      <ShareText>{locals.shareThisPage}</ShareText>
       <ButtonsWrapper>
         <FacebookShareButton url={url} hashtag="#basketball" aria-label="Share on Facebook">
           <FacebookIcon size={32} round />

@@ -5,58 +5,62 @@
   <!-- English (canonical — no lang prefix) -->
   <url>
     <loc>https://www.24shotclock.com/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://www.24shotclock.com/"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://www.24shotclock.com/it"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://www.24shotclock.com/es"/>
     <xhtml:link rel="alternate" hreflang="fr"        href="https://www.24shotclock.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="el"        href="https://www.24shotclock.com/el"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/"/>
   </url>
   <url>
     <loc>https://www.24shotclock.com/instructions</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://www.24shotclock.com/instructions"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://www.24shotclock.com/it/instructions"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://www.24shotclock.com/es/instructions"/>
     <xhtml:link rel="alternate" hreflang="fr"        href="https://www.24shotclock.com/fr/instructions"/>
+    <xhtml:link rel="alternate" hreflang="el"        href="https://www.24shotclock.com/el/instructions"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/instructions"/>
   </url>
   <url>
     <loc>https://www.24shotclock.com/fiba-resources</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://www.24shotclock.com/fiba-resources"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://www.24shotclock.com/it/fiba-resources"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://www.24shotclock.com/es/fiba-resources"/>
     <xhtml:link rel="alternate" hreflang="fr"        href="https://www.24shotclock.com/fr/fiba-resources"/>
+    <xhtml:link rel="alternate" hreflang="el"        href="https://www.24shotclock.com/el/fiba-resources"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/fiba-resources"/>
   </url>
   <url>
     <loc>https://www.24shotclock.com/about</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://www.24shotclock.com/about"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://www.24shotclock.com/it/about"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://www.24shotclock.com/es/about"/>
     <xhtml:link rel="alternate" hreflang="fr"        href="https://www.24shotclock.com/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="el"        href="https://www.24shotclock.com/el/about"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/about"/>
   </url>
-
   <url>
     <loc>https://www.24shotclock.com/faq</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://www.24shotclock.com/faq"/>
     <xhtml:link rel="alternate" hreflang="it"        href="https://www.24shotclock.com/it/faq"/>
     <xhtml:link rel="alternate" hreflang="es"        href="https://www.24shotclock.com/es/faq"/>
     <xhtml:link rel="alternate" hreflang="fr"        href="https://www.24shotclock.com/fr/faq"/>
+    <xhtml:link rel="alternate" hreflang="el"        href="https://www.24shotclock.com/el/faq"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/faq"/>
   </url>
 
@@ -93,7 +97,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-
   <url>
     <loc>https://www.24shotclock.com/it/faq</loc>
     <lastmod>2026-04-07</lastmod>
@@ -126,7 +129,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-
   <url>
     <loc>https://www.24shotclock.com/es/faq</loc>
     <lastmod>2026-04-07</lastmod>
@@ -159,10 +161,41 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-
   <url>
     <loc>https://www.24shotclock.com/fr/faq</loc>
     <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Greek -->
+  <url>
+    <loc>https://www.24shotclock.com/el</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.24shotclock.com/el/instructions</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.24shotclock.com/el/fiba-resources</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.24shotclock.com/el/about</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.24shotclock.com/el/faq</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

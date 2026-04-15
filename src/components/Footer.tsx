@@ -20,7 +20,7 @@ const Footer = () => {
         </FooterSection>
 
         <FooterSection>
-          <FooterTitle>Quick Links</FooterTitle>
+          <FooterTitle>{locals.quickLinks}</FooterTitle>
           <FooterLinks>
             <FooterNavLink to={routes.Instructions}>{locals.instructions}</FooterNavLink>
             <FooterNavLink to={routes.FIBAResources}>{locals.fibaResources}</FooterNavLink>
@@ -31,7 +31,7 @@ const Footer = () => {
         </FooterSection>
 
         <FooterSection>
-          <FooterTitle>Language</FooterTitle>
+          <FooterTitle>{locals.language}</FooterTitle>
           <LanguageSelector />
         </FooterSection>
       </FooterContent>

@@ -34,6 +34,9 @@ const LanguageSelector = () => {
       <FlagContainer onClick={() => handleLanguageChange(LanguageCodes.French)} aria-label="Switch to French">
         <Flag height="15" width="22" code="FR" />
       </FlagContainer>
+      <FlagContainer onClick={() => handleLanguageChange(LanguageCodes.Greek)} aria-label="Switch to Greek">
+        <Flag height="15" width="22" code="GR" />
+      </FlagContainer>
       <FlagContainer onClick={() => handleLanguageChange(LanguageCodes.English)} aria-label="Switch to English">
         <Flag height="15" width="22" code="US" />
       </FlagContainer>
