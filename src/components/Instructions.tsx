@@ -37,8 +37,8 @@ const Instructions = () => {
   return (
     <Container>
       <SEO
-        title="Shot Clock Instructions | ShotClock Pro"
-        description="Step-by-step instructions for operating a basketball shot clock. Learn the 24-second and 14-second reset rules, basic controls, and game situations per FIBA regulations."
+        title={`${locals.instructionsTitle} | ShotClock Pro`}
+        description={locals.instructionsDescription}
         schema={howToSchema}
       />
       <AnimatedTitle>{locals.instructionsTitle}</AnimatedTitle>

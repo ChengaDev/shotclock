@@ -38,13 +38,22 @@ const PageContent: React.FC<PageContentProps> = ({ children, title }) => {
   )
 }
 
+const LANG_KEY = 'sc_lang'
+
 // Layout for English routes — no URL lang prefix
 const EnglishLayout = () => {
   const { changeLocale } = useLocalization()
+  const navigate = useNavigate()
+  const location = useLocation()
   const fadeIn = useSpring({ from: { opacity: 0 }, to: { opacity: 1 }, config: { duration: 800 } })
 
   useEffect(() => {
-    changeLocale('en')
+    const savedLang = localStorage.getItem(LANG_KEY)
+    if (savedLang && savedLang !== 'en' && NON_ENGLISH_LANGS.includes(savedLang) && location.pathname === '/') {
+      navigate(`/${savedLang}`, { replace: true })
+    } else {
+      changeLocale('en')
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

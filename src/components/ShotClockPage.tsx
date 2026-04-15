@@ -11,8 +11,8 @@ const ShotClockPage = () => {
   return (
     <PageContainer>
       <SEO
-        title="ShotClock Pro – Free Online Basketball Shot Clock"
-        description="Free online basketball shot clock — start, stop, and reset in seconds. Practice on any device, no installation needed."
+        title={locals.title}
+        description={locals.pageBlurb}
       />
       <GlobalStyle />
       <ShotClock />

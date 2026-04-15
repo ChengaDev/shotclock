@@ -33,8 +33,8 @@ const FAQ = () => {
   return (
     <Container>
       <SEO
-        title="FAQ | ShotClock Pro"
-        description="Frequently asked questions about basketball shot clock rules, the 14-second reset, and how to use the ShotClock Pro training simulator."
+        title={`${locals.faqTitle} | ShotClock Pro`}
+        description={locals.faqDescription}
         schema={faqSchema}
       />
 

@@ -20,8 +20,8 @@ const AboutUs = () => {
   return (
     <Container>
       <SEO
-        title="About Us | ShotClock Pro"
-        description="Learn about ShotClock Pro – a free basketball shot clock training app built for referees, scorekeepers, and basketball enthusiasts who want to master FIBA shot clock rules."
+        title={`${locals.aboutTitle} | ShotClock Pro`}
+        description={locals.aboutContent[0]}
       />
       <AnimatedTitle>{locals.aboutTitle}</AnimatedTitle>
 

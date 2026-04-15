@@ -44,8 +44,8 @@ const FIBAResources = () => {
   return (
     <Container>
       <SEO
-        title="FIBA Resources | ShotClock Pro"
-        description="Access official FIBA basketball rules, shot clock operation guidelines, referee training materials, and competition manuals to stay up to date with international basketball regulations."
+        title={`${locals.fibaResourcesTitle} | ShotClock Pro`}
+        description={locals.fibaResourcesDescription}
       />
       <AnimatedTitle>{locals.fibaResourcesTitle}</AnimatedTitle>
 
