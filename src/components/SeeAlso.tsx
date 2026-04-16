@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 import AppRoutes from '../AppRoutes'
+import featureFlags from '../featureFlags'
 
 interface SeeAlsoProps {
-  exclude?: ('instructions' | 'faq' | 'fiba-resources')[]
+  exclude?: ('instructions' | 'faq' | 'fiba-resources' | 'reaction-training')[]
 }
 
 const SeeAlso: React.FC<SeeAlsoProps> = ({ exclude = [] }) => {
@@ -16,6 +17,9 @@ const SeeAlso: React.FC<SeeAlsoProps> = ({ exclude = [] }) => {
     { key: 'instructions', label: locals.instructions, to: routes.Instructions },
     { key: 'faq', label: locals.faq, to: routes.FAQ },
     { key: 'fiba-resources', label: locals.fibaResources, to: routes.FIBAResources },
+    ...(featureFlags.reactionTraining
+      ? [{ key: 'reaction-training', label: locals.reactionTraining, to: routes.ReactionTraining }]
+      : []),
   ].filter(l => !exclude.includes(l.key as any))
 
   return (

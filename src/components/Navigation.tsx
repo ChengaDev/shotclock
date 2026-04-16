@@ -4,6 +4,7 @@ import AppRoutes from '../AppRoutes'
 import { Link, useLocation } from 'react-router-dom'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 import { useState, useRef, useEffect } from 'react'
+import featureFlags from '../featureFlags'
 
 type NavigationProps = {
   currentTheme: string
@@ -86,6 +87,15 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
           >
             {locals.faq}
           </NavLink>
+          {featureFlags.reactionTraining && (
+            <NavLink
+              to={routes.ReactionTraining}
+              $active={location.pathname === routes.ReactionTraining}
+              onClick={handleNavClick}
+            >
+              {locals.reactionTraining}
+            </NavLink>
+          )}
           <ThemeToggle>
             <ThemeButton
               $active={currentTheme === Themes.Light}

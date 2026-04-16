@@ -4,6 +4,7 @@ import DonateButton from './DonateButton'
 import LanguageSelector from './LanguageSelector'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 import AppRoutes from '../AppRoutes'
+import featureFlags from '../featureFlags'
 
 const Footer = () => {
   const { locals, languageCode } = useLocalization()
@@ -26,6 +27,9 @@ const Footer = () => {
             <FooterNavLink to={routes.FIBAResources}>{locals.fibaResources}</FooterNavLink>
             <FooterNavLink to={routes.FAQ}>{locals.faq}</FooterNavLink>
             <FooterNavLink to={routes.About}>{locals.about}</FooterNavLink>
+            {featureFlags.reactionTraining && (
+              <FooterNavLink to={routes.ReactionTraining}>{locals.reactionTraining}</FooterNavLink>
+            )}
             <FooterNavLink to="/privacy-policy">Privacy Policy</FooterNavLink>
           </FooterLinks>
         </FooterSection>

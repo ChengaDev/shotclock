@@ -1,4 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react'
+import featureFlags from './featureFlags'
 import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Outlet, useNavigate } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import LanguageProvider, { useLocalization } from './contexts/Language/LanguageProvider'
@@ -18,6 +19,7 @@ const FIBAResources = lazy(() => import('./components/FIBAResources'))
 const FAQ = lazy(() => import('./components/FAQ'))
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
 const NotFound = lazy(() => import('./components/NotFound'))
+const ReactionTrainingPage = lazy(() => import('./components/training/ReactionTrainingPage'))
 
 const NON_ENGLISH_LANGS = ['it', 'es', 'fr', 'el']
 
@@ -125,6 +127,13 @@ const pageRoutes = (
         <PrivacyPolicy />
       </PageContent>
     } />
+    {featureFlags.reactionTraining && (
+      <Route path="reaction-training" element={
+        <PageContent title="Reaction Training - ShotClock Pro">
+          <ReactionTrainingPage />
+        </PageContent>
+      } />
+    )}
   </>
 )
 
