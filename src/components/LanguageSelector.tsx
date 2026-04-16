@@ -7,7 +7,7 @@ import { useLocalization } from '../contexts/Language/LanguageProvider'
 const LanguageSelector = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { languageCode } = useLocalization()
+  const { languageCode, changeLocale } = useLocalization()
 
   const handleLanguageChange = (newLang: string) => {
     // Use languageCode from context (always correct) rather than useParams,
@@ -15,6 +15,10 @@ const LanguageSelector = () => {
     const pagePath = languageCode === 'en'
       ? location.pathname
       : (location.pathname.slice(`/${languageCode}`.length) || '/')
+
+    // Update localStorage BEFORE navigating so EnglishLayout's useEffect
+    // reads the correct language and doesn't redirect back.
+    changeLocale(newLang)
 
     if (newLang === 'en') {
       navigate(pagePath)
