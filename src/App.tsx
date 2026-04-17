@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Outlet,
 import styled, { ThemeProvider } from 'styled-components'
 import LanguageProvider, { useLocalization } from './contexts/Language/LanguageProvider'
 import Navigation from './components/Navigation'
+import BasketballLoader from './components/BasketballLoader'
 import ShareButtons from './components/ShareButtons'
 import Footer from './components/Footer'
 import CookieBanner from './components/CookieBanner'
@@ -24,6 +25,30 @@ const ReactionTrainingPage = lazy(() => import('./components/training/ReactionTr
 const PlayPage = lazy(() => import('./components/PlayPage'))
 
 const NON_ENGLISH_LANGS = ['it', 'es', 'fr', 'el']
+
+const ScrollToTop: React.FC = () => {
+  const location = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+  return null
+}
+
+const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation()
+  const [loading, setLoading] = useState(false)
+  const prevPath = React.useRef(location.pathname)
+
+  useEffect(() => {
+    if (location.pathname === prevPath.current) return
+    prevPath.current = location.pathname
+    setLoading(true)
+    const id = setTimeout(() => setLoading(false), 1000)
+    return () => clearTimeout(id)
+  }, [location.pathname])
+
+  return loading ? <BasketballLoader /> : <>{children}</>
+}
 
 interface PageContentProps {
   children: React.ReactNode
@@ -163,20 +188,23 @@ const App = () => {
             <Navigation currentTheme={selectedTheme} setTheme={handleSetTheme} />
             <PageWrapper>
               <MainContent>
-                <Suspense fallback={null}>
-                <Routes>
-                  {/* English — canonical URLs without lang prefix */}
-                  <Route path="/" element={<EnglishLayout />}>
-                    {pageRoutes}
-                  </Route>
+                <Suspense fallback={<BasketballLoader />}>
+                  <ScrollToTop />
+                  <PageTransition>
+                    <Routes>
+                      {/* English — canonical URLs without lang prefix */}
+                      <Route path="/" element={<EnglishLayout />}>
+                        {pageRoutes}
+                      </Route>
 
-                  {/* Non-English languages + /en/* redirect */}
-                  <Route path="/:lang" element={<LangLayout />}>
-                    {pageRoutes}
-                  </Route>
+                      {/* Non-English languages + /en/* redirect */}
+                      <Route path="/:lang" element={<LangLayout />}>
+                        {pageRoutes}
+                      </Route>
 
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </PageTransition>
                 </Suspense>
               </MainContent>
               <Footer />

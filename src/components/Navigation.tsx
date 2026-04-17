@@ -181,7 +181,7 @@ const Hamburger = styled.button`
     box-shadow: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px), (max-height: 500px) {
     display: flex;
   }
 `
@@ -198,7 +198,7 @@ const NavCollapse = styled.div<{ $expanded: boolean }>`
   display: flex;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px), (max-height: 500px) {
     display: ${(props) => (props.$expanded ? 'flex' : 'none')};
     flex-direction: column;
     width: 100%;
@@ -220,7 +220,7 @@ const NavItems = styled.div`
   display: flex;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px), (max-height: 500px) {
     flex-direction: column;
     width: 100%;
   }
@@ -255,7 +255,7 @@ const NavLink = styled(Link)<{ $active: boolean }>`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px), (max-height: 500px) {
     margin: 0.5rem 0;
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -280,7 +280,7 @@ const ThemeToggle = styled.div`
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px), (max-height: 500px) {
     margin: 0.5rem 0;
     justify-content: center;
     width: 100%;

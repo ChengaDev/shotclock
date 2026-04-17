@@ -125,22 +125,13 @@ const LandingPage: React.FC = () => {
   const currentUrl = window.location.origin + location.pathname
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  // Defer video load until after the page is interactive so it never
-  // competes with LCP text / JS bundle on the critical path.
+  // React 18 handles muted correctly as a JSX prop, but we also set it
+  // imperatively on mount as a belt-and-suspenders for Safari.
   useEffect(() => {
-    const id = setTimeout(() => {
-      const v = videoRef.current
-      if (!v) return
-      // React doesn't reliably set the muted/loop DOM attributes via props —
-      // set them imperatively so the browser allows autoplay.
-      v.muted = true
-      v.loop = true
-      v.playsInline = true
-      v.src = '/arena.mp4'
-      v.load()
-      v.play().catch(() => {/* autoplay blocked — video stays hidden */})
-    }, 500)
-    return () => clearTimeout(id)
+    const v = videoRef.current
+    if (!v) return
+    v.muted = true
+    v.play().catch(() => {})
   }, [])
 
   return (
@@ -153,7 +144,9 @@ const LandingPage: React.FC = () => {
       <PageWrapper>
         {/* ── HERO ── */}
         <HeroSection>
-          <ArenaVideo ref={videoRef} aria-hidden="true" />
+          <ArenaVideo ref={videoRef} autoPlay muted loop playsInline preload="auto" aria-hidden="true">
+            <source src="/arena.mp4" type="video/mp4" />
+          </ArenaVideo>
           <ArenaOverlay />
 
           <HeroTitle>{locals.landingHeroTitle}</HeroTitle>

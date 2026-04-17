@@ -4,15 +4,33 @@ import { useLocalization } from '../contexts/Language/LanguageProvider'
 import SEO from './SEO'
 import SeeAlso from './SeeAlso'
 
-const fadeInUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ── Tip icons ── */
+const IconTarget = ({ color }: { color: string }) => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+  </svg>
+)
+const IconZap = ({ color }: { color: string }) => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill={`${color}22`} />
+  </svg>
+)
+const IconBook = ({ color }: { color: string }) => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+  </svg>
+)
+
+const TIP_ICONS = [
+  (c: string) => <IconTarget color={c} />,
+  (c: string) => <IconZap color={c} />,
+  (c: string) => <IconBook color={c} />,
+]
+const TIP_ACCENTS = ['#E8761A', '#818cf8', '#34d399']
+
+const slideUp = keyframes`
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 `
 
 const Instructions = () => {
@@ -41,21 +59,21 @@ const Instructions = () => {
         description={locals.instructionsDescription}
         schema={howToSchema}
       />
-      <AnimatedTitle>{locals.instructionsTitle}</AnimatedTitle>
 
-      <Description>{locals.instructionsDescription}</Description>
+      <PageHeader>
+        <PageTitle>{locals.instructionsTitle}</PageTitle>
+        <PageSubtitle>{locals.instructionsDescription}</PageSubtitle>
+      </PageHeader>
 
       <InstructionsGrid>
         {locals.instructionsSections.map((section, index) => (
-          <InstructionCard key={index} style={{ animationDelay: `${index * 0.2}s` }}>
-            <CardHeader>
-              <CardNumber>{index + 1}</CardNumber>
-              <CardTitle>{section.title}</CardTitle>
-            </CardHeader>
+          <InstructionCard key={index} $delay={0.08 + index * 0.1}>
+            <CardNumber $index={index}>{index + 1}</CardNumber>
+            <CardTitle>{section.title}</CardTitle>
             <StepList>
               {section.steps.map((step, stepIndex) => (
                 <StepItem key={stepIndex}>
-                  <StepNumber>{stepIndex + 1}</StepNumber>
+                  <StepDot />
                   <StepText>{step}</StepText>
                 </StepItem>
               ))}
@@ -65,179 +83,183 @@ const Instructions = () => {
       </InstructionsGrid>
 
       <TipsSection>
-        <AnimatedTitle>{locals.proTipsTitle}</AnimatedTitle>
+        <SectionLabel>· {locals.proTipsTitle} ·</SectionLabel>
         <TipsGrid>
           {locals.tips.map((tip, index) => (
-            <TipCard key={index} style={{ animationDelay: `${0.6 + index * 0.2}s` }}>
-              <TipIcon>{['🎯', '⚡', '📚'][index]}</TipIcon>
+            <TipCard key={index} $accent={TIP_ACCENTS[index]} $delay={0.1 + index * 0.1}>
+              <TipIconWrap $accent={TIP_ACCENTS[index]}>
+                {TIP_ICONS[index](TIP_ACCENTS[index])}
+              </TipIconWrap>
               <TipText>{tip}</TipText>
             </TipCard>
           ))}
         </TipsGrid>
       </TipsSection>
+
       <SeeAlso exclude={['instructions']} />
     </Container>
   )
 }
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
+  padding: 0.5rem 0 2rem;
 `
 
-const AnimatedTitle = styled.h1`
-  font-size: 2.5rem;
-  color: ${props => props.theme.titleColor};
-  margin-bottom: 2rem;
+const PageHeader = styled.div`
   text-align: center;
-  font-weight: 700;
+  margin-bottom: 2.5rem;
+  animation: ${slideUp} 0.5s ease-out both;
+`
+
+const PageTitle = styled.h1`
   font-family: 'Poppins', sans-serif;
-  letter-spacing: -0.5px;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(135deg, ${props => props.theme.titleColor} 20%, ${props => props.theme.accent});
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 `
 
-
-const Description = styled.p`
-  text-align: center;
-  color: ${props => props.theme.text};
-  font-size: 1.1rem;
+const PageSubtitle = styled.p`
+  color: ${props => props.theme.subtleText};
+  font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 3rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  animation: ${fadeInUp} 0.6s ease-out;
-  animation-delay: 0.2s;
-  opacity: 0;
-  animation-fill-mode: forwards;
+  margin: 0 auto;
+  max-width: 680px;
 `
 
 const InstructionsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 3.5rem;
 `
 
-const InstructionCard = styled.div`
+const InstructionCard = styled.div<{ $delay: number }>`
   background: ${props => props.theme.cardBackground};
-  border-radius: 16px;
+  border-radius: 22px;
   padding: 2rem;
   border: 1px solid ${props => props.theme.cardBorder};
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  animation: ${fadeInUp} 0.6s ease-out forwards;
-  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  animation: ${slideUp} 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${props => props.$delay}s both;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    border-color: ${props => props.theme.accent};
+    transform: translateY(-6px);
+    border-color: ${props => props.theme.accent}44;
+    box-shadow: 0 8px 32px ${props => props.theme.accent}18;
   }
 `
 
-const CardHeader = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  gap: 1rem;
-`
-
-const CardNumber = styled.div`
-  background: linear-gradient(45deg, #ffd700, #ff6b6b);
-  color: white;
+const CardNumber = styled.div<{ $index: number }>`
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  background: linear-gradient(135deg, #E8761A, #f59e0b);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
 `
 
 const CardTitle = styled.h3`
+  font-family: 'Poppins', sans-serif;
   color: ${props => props.theme.titleColor};
-  font-size: 1.3rem;
-  margin: 0;
-  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 0 1.25rem;
+  font-weight: 700;
 `
 
 const StepList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.85rem;
 `
 
 const StepItem = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.85rem;
   align-items: flex-start;
 `
 
-const StepNumber = styled.div`
-  background: ${props => props.theme.accent}22;
-  color: ${props => props.theme.accent};
-  width: 24px;
-  height: 24px;
+const StepDot = styled.div`
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
+  background: ${props => props.theme.accent};
   flex-shrink: 0;
+  margin-top: 6px;
+  opacity: 0.7;
 `
 
 const StepText = styled.p`
   color: ${props => props.theme.cardText};
   margin: 0;
-  line-height: 1.6;
-  font-size: 1rem;
+  line-height: 1.65;
+  font-size: 0.925rem;
 `
 
 const TipsSection = styled.div`
-  margin-top: 4rem;
+  margin-bottom: 2rem;
+`
+
+const SectionLabel = styled.p`
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: ${props => props.theme.accent};
+  opacity: 0.75;
+  text-align: center;
+  margin: 0 0 1.5rem;
 `
 
 const TipsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.4rem;
 `
 
-const TipCard = styled.div`
+const TipCard = styled.div<{ $accent: string; $delay: number }>`
   background: ${props => props.theme.cardBackground};
-  border-radius: 16px;
-  padding: 1.5rem;
+  border-radius: 22px;
+  padding: 1.75rem;
   text-align: center;
-  border: 1px solid ${props => props.theme.cardBorder};
-  transition: all 0.3s ease;
-  animation: ${fadeInUp} 0.6s ease-out forwards;
-  opacity: 0;
+  border: 1px solid ${props => props.$accent}28;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  animation: ${slideUp} 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${props => props.$delay}s both;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    border-color: ${props => props.theme.accent};
+    transform: translateY(-6px);
+    border-color: ${props => props.$accent}55;
+    box-shadow: 0 8px 32px ${props => props.$accent}22;
   }
 `
 
-const TipIcon = styled.div`
-  font-size: 2rem;
-  margin-bottom: 1rem;
+const TipIconWrap = styled.div<{ $accent: string }>`
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: ${props => props.$accent}18;
+  border: 1px solid ${props => props.$accent}30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
 `
 
 const TipText = styled.p`
   color: ${props => props.theme.cardText};
   margin: 0;
-  line-height: 1.6;
-  font-size: 1rem;
+  line-height: 1.65;
+  font-size: 0.925rem;
 `
 
-export default Instructions 
+export default Instructions

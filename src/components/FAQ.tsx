@@ -4,8 +4,8 @@ import { useLocalization } from '../contexts/Language/LanguageProvider'
 import SEO from './SEO'
 import SeeAlso from './SeeAlso'
 
-const fadeInUp = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
+const slideUp = keyframes`
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 `
 
@@ -23,10 +23,7 @@ const FAQ = () => {
     mainEntity: locals.faqItems.map(item => ({
       '@type': 'Question',
       name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
     })),
   }
 
@@ -38,15 +35,21 @@ const FAQ = () => {
         schema={faqSchema}
       />
 
-      <AnimatedTitle>{locals.faqTitle}</AnimatedTitle>
-      <Description>{locals.faqDescription}</Description>
+      <PageHeader>
+        <PageTitle>{locals.faqTitle}</PageTitle>
+        <PageSubtitle>{locals.faqDescription}</PageSubtitle>
+      </PageHeader>
 
       <FaqList>
         {locals.faqItems.map((item, index) => (
-          <FaqItem key={index} style={{ animationDelay: `${index * 0.05}s` }}>
-            <Question onClick={() => toggle(index)} isOpen={openIndex === index}>
+          <FaqItem key={index} $delay={0.05 + index * 0.04} $open={openIndex === index}>
+            <Question onClick={() => toggle(index)} $open={openIndex === index}>
               <QuestionText>{item.question}</QuestionText>
-              <Chevron isOpen={openIndex === index}>▾</Chevron>
+              <ChevronIcon $open={openIndex === index}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </ChevronIcon>
             </Question>
             {openIndex === index && (
               <Answer>{item.answer}</Answer>
@@ -54,109 +57,103 @@ const FAQ = () => {
           </FaqItem>
         ))}
       </FaqList>
+
       <SeeAlso exclude={['faq']} />
     </Container>
   )
 }
 
 const Container = styled.div`
-  max-width: 860px;
+  max-width: 820px;
   margin: 0 auto;
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
+  padding: 0.5rem 0 2rem;
 `
 
-const AnimatedTitle = styled.h1`
-  font-size: 2.5rem;
-  color: ${props => props.theme.titleColor};
-  margin-bottom: 1rem;
+const PageHeader = styled.div`
   text-align: center;
-  font-weight: 700;
+  margin-bottom: 2.5rem;
+  animation: ${slideUp} 0.5s ease-out both;
+`
+
+const PageTitle = styled.h1`
   font-family: 'Poppins', sans-serif;
-  letter-spacing: -0.5px;
-  animation: ${fadeInUp} 0.6s ease-out forwards;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(135deg, ${props => props.theme.titleColor} 20%, ${props => props.theme.accent});
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 `
 
-const Description = styled.p`
-  text-align: center;
-  color: ${props => props.theme.text};
-  font-size: 1.1rem;
+const PageSubtitle = styled.p`
+  color: ${props => props.theme.subtleText};
+  font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 3rem;
-  animation: ${fadeInUp} 0.6s ease-out 0.1s forwards;
-  opacity: 0;
-  animation-fill-mode: forwards;
+  margin: 0;
 `
 
 const FaqList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.85rem;
 `
 
-const FaqItem = styled.div`
+const FaqItem = styled.div<{ $delay: number; $open: boolean }>`
   background: ${props => props.theme.cardBackground};
-  border-radius: 12px;
-  border: 1px solid ${props => props.theme.cardBorder};
+  border-radius: 16px;
+  border: 1px solid ${props => props.$open ? `${props.theme.accent}55` : props.theme.cardBorder};
   overflow: hidden;
-  animation: ${fadeInUp} 0.5s ease-out forwards;
-  opacity: 0;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  animation: ${slideUp} 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${props => props.$delay}s both;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: ${props => props.$open ? `0 4px 20px ${props.theme.accent}14` : 'none'};
 
   &:hover {
-    border-color: ${props => props.theme.accent};
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-color: ${props => props.$open ? `${props.theme.accent}55` : `${props.theme.accent}33`};
   }
 `
 
-const Question = styled.button<{ isOpen: boolean }>`
+const Question = styled.button<{ $open: boolean }>`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 1.5rem;
-  background: none;
+  background: ${props => props.$open ? `${props.theme.accent}0a` : 'transparent'};
   border: none;
   cursor: pointer;
   text-align: left;
   gap: 1rem;
-  background: ${props => props.isOpen ? 'rgba(255, 215, 0, 0.08)' : 'transparent'};
   transition: background 0.2s ease;
 
-  &:focus {
-    outline: none;
-  }
+  &:focus { outline: none; }
 `
 
 const QuestionText = styled.span`
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: ${props => props.theme.mainTextColor};
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: ${props => props.theme.titleColor};
   line-height: 1.4;
 `
 
-const Chevron = styled.span<{ isOpen: boolean }>`
+const ChevronIcon = styled.span<{ $open: boolean }>`
   color: ${props => props.theme.accent};
-  font-size: 1.3rem;
   flex-shrink: 0;
-  transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+  display: flex;
+  align-items: center;
+  transform: ${props => props.$open ? 'rotate(180deg)' : 'rotate(0)'};
   transition: transform 0.25s ease;
-  display: inline-block;
 `
 
 const Answer = styled.p`
   padding: 0 1.5rem 1.25rem;
+  padding-top: 0.75rem;
   margin: 0;
   color: ${props => props.theme.cardText};
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 0.95rem;
+  line-height: 1.75;
   border-top: 1px solid ${props => props.theme.cardBorder};
-  padding-top: 1rem;
 `
 
 export default FAQ
