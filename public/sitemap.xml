@@ -64,6 +64,34 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/faq"/>
   </url>
 
+  <!-- Play page -->
+  <url>
+    <loc>https://www.24shotclock.com/play</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://www.24shotclock.com/play"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://www.24shotclock.com/it/play"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://www.24shotclock.com/es/play"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://www.24shotclock.com/fr/play"/>
+    <xhtml:link rel="alternate" hreflang="el"        href="https://www.24shotclock.com/el/play"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/play"/>
+  </url>
+
+  <!-- Clock page -->
+  <url>
+    <loc>https://www.24shotclock.com/clock</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://www.24shotclock.com/clock"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://www.24shotclock.com/it/clock"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://www.24shotclock.com/es/clock"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://www.24shotclock.com/fr/clock"/>
+    <xhtml:link rel="alternate" hreflang="el"        href="https://www.24shotclock.com/el/clock"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.24shotclock.com/clock"/>
+  </url>
+
   <!-- Privacy Policy (English only, no lang variants) -->
   <url>
     <loc>https://www.24shotclock.com/privacy-policy</loc>
@@ -73,6 +101,18 @@
   </url>
 
   <!-- Italian -->
+  <url>
+    <loc>https://www.24shotclock.com/it/play</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.24shotclock.com/it/clock</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://www.24shotclock.com/it</loc>
     <lastmod>2026-04-07</lastmod>
@@ -106,6 +146,18 @@
 
   <!-- Spanish -->
   <url>
+    <loc>https://www.24shotclock.com/es/play</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.24shotclock.com/es/clock</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.24shotclock.com/es</loc>
     <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -138,6 +190,18 @@
 
   <!-- French -->
   <url>
+    <loc>https://www.24shotclock.com/fr/play</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.24shotclock.com/fr/clock</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.24shotclock.com/fr</loc>
     <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -169,6 +233,18 @@
   </url>
 
   <!-- Greek -->
+  <url>
+    <loc>https://www.24shotclock.com/el/play</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.24shotclock.com/el/clock</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://www.24shotclock.com/el</loc>
     <lastmod>2026-04-15</lastmod>

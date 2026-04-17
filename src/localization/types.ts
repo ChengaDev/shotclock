@@ -60,6 +60,36 @@ export type LocalizationType = {
 		worldGoverning: string;
 		tournaments: string;
 	};
+	// Navigation extras
+	play: string;
+	clock: string;
+	playNow: string;
+	playPageTitle: string;
+	playPageDescription: string;
+	// Clock page
+	clockPageTitle: string;
+	clockPageDescription: string;
+	// Landing page
+	launchClock: string;
+	comingSoon: string;
+	landingHeroTitle: string;
+	landingHeroSubtitle: string;
+	landingModesTitle: string;
+	landingModeClockTitle: string;
+	landingModeClockDesc: string;
+	landingModeTrainingTitle: string;
+	landingModeTrainingDesc: string;
+	landingModeYoutubeTitle: string;
+	landingModeYoutubeDesc: string;
+	landingFeaturesTitle: string;
+	landingFeature1Label: string;
+	landingFeature1Sub: string;
+	landingFeature2Label: string;
+	landingFeature2Sub: string;
+	landingFeature3Label: string;
+	landingFeature3Sub: string;
+	landingFeature4Label: string;
+	landingFeature4Sub: string;
 	// Shared UI
 	lightMode: string;
 	darkMode: string;

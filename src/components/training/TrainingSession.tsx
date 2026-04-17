@@ -39,6 +39,7 @@ const TrainingSession: React.FC<TrainingSessionProps> = ({ difficulty, onExit })
   const [sessionTimeLeftMs, setSessionTimeLeftMs] = useState(SESSION_MS)
   const [sessionEnded, setSessionEnded] = useState(false)
   const sessionTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const hintTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const personalBestRef = useRef(hallOfFameService.getPersonalBest())
 
   // 1-minute session countdown
@@ -58,6 +59,7 @@ const TrainingSession: React.FC<TrainingSessionProps> = ({ difficulty, onExit })
 
     return () => {
       if (sessionTimerRef.current) clearInterval(sessionTimerRef.current)
+      if (hintTimeoutRef.current) clearTimeout(hintTimeoutRef.current)
     }
   }, [])
 
@@ -87,10 +89,6 @@ const TrainingSession: React.FC<TrainingSessionProps> = ({ difficulty, onExit })
       ? computeScenarioScore(grade, reactionMs, difficulty, streak)
       : 0
 
-    if (!correct) {
-      setHintAction(scenario.correctAction)
-    }
-
     const result: ScenarioResult = {
       scenarioId: scenario.id,
       correct,
@@ -103,7 +101,17 @@ const TrainingSession: React.FC<TrainingSessionProps> = ({ difficulty, onExit })
     setLastResult(result)
     setScore(prev => prev + scenarioScore)
     setStreak(newStreak)
-    setPhase('feedback')
+
+    if (!correct) {
+      // Show the correct button highlighted for 900ms before moving to feedback
+      setHintAction(scenario.correctAction)
+      hintTimeoutRef.current = setTimeout(() => {
+        setPhase('feedback')
+        setHintAction(null)
+      }, 900)
+    } else {
+      setPhase('feedback')
+    }
   }
 
   const handleTimeout = () => {

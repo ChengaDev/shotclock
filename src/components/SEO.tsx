@@ -6,14 +6,19 @@ import { useLocalization } from '../contexts/Language/LanguageProvider';
 const BASE_URL = 'https://www.24shotclock.com';
 const ALL_LANGS = ['en', 'it', 'es', 'fr', 'el'];
 
+const DEFAULT_OG_IMAGE = 'https://www.24shotclock.com/og-image.png';
+const DEFAULT_OG_IMAGE_ALT = 'ShotClock Pro — free online basketball shot clock';
+
 interface SEOProps {
   title: string;
   description: string;
   schema?: object;
   canonical?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
-const SEO: React.FC<SEOProps> = ({ title, description, schema, canonical: canonicalOverride }) => {
+const SEO: React.FC<SEOProps> = ({ title, description, schema, canonical: canonicalOverride, ogImage = DEFAULT_OG_IMAGE, ogImageAlt = DEFAULT_OG_IMAGE_ALT }) => {
   const { languageCode } = useLocalization();
   const location = useLocation();
 
@@ -56,6 +61,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, schema, canonical: canoni
     "@type": "WebSite",
     "name": "ShotClock Pro",
     "url": "https://www.24shotclock.com",
+    "inLanguage": languageCode,
     "description": "Free online basketball shot clock for referees, scorekeepers, and players.",
     "author": {
       "@type": "Person",
@@ -74,6 +80,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, schema, canonical: canoni
     "@type": "WebApplication",
     "name": "ShotClock Pro",
     "url": "https://www.24shotclock.com",
+    "inLanguage": languageCode,
     "applicationCategory": "SportsApplication",
     "operatingSystem": "Any",
     "browserRequirements": "Requires JavaScript",
@@ -102,12 +109,18 @@ const SEO: React.FC<SEOProps> = ({ title, description, schema, canonical: canoni
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
+      <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:alt" content={ogImageAlt} />
+      <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:url" content={canonical} />
+      <meta property="twitter:image" content={ogImage} />
+      <meta property="twitter:image:alt" content={ogImageAlt} />
       {ALL_LANGS.map(lang => (
         <link key={lang} rel="alternate" hrefLang={lang} href={getLangUrl(lang)} />
       ))}

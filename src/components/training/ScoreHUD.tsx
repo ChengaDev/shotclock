@@ -85,11 +85,12 @@ const HUDBar = styled.div`
   border-radius: 12px;
   padding: 0.75rem 1.5rem;
   margin-bottom: 1.5rem;
-  flex-wrap: wrap;
   gap: 0.75rem;
 
   @media (${props => props.theme.mediaQueries.mobile}) {
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 0.9rem;
+    gap: 0.5rem;
+    border-radius: 10px;
   }
 `
 
@@ -116,6 +117,10 @@ const HUDValue = styled.span`
   font-size: 1.5rem;
   font-weight: 700;
   color: ${props => props.theme.titleColor};
+
+  @media (${props => props.theme.mediaQueries.mobile}) {
+    font-size: 1.2rem;
+  }
 `
 
 const TimerValue = styled.span<{ $urgent: boolean }>`
@@ -123,6 +128,10 @@ const TimerValue = styled.span<{ $urgent: boolean }>`
   font-weight: 700;
   color: ${props => props.$urgent ? '#ff6b6b' : props.theme.titleColor};
   animation: ${props => props.$urgent ? pulse : 'none'} 0.8s ease-in-out infinite;
+
+  @media (${props => props.theme.mediaQueries.mobile}) {
+    font-size: 1.2rem;
+  }
 `
 
 const StreakBadge = styled.div`

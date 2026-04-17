@@ -47,8 +47,10 @@ const ReactionTrainingPage: React.FC = () => {
 const Container = styled.div`
   max-width: 860px;
   margin: 0 auto;
+  padding: 1.5rem 1rem;
+
   @media (min-width: 768px) {
-    padding: 2rem;
+    padding: 2rem 2rem;
   }
 `
 

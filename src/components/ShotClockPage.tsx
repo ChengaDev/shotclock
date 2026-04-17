@@ -11,8 +11,8 @@ const ShotClockPage = () => {
   return (
     <PageContainer>
       <SEO
-        title={`ShotClock Pro – ${locals.title}`}
-        description={locals.pageBlurb}
+        title={`${locals.clockPageTitle} | ShotClock Pro`}
+        description={locals.clockPageDescription}
       />
       <GlobalStyle />
       <ShotClock />

@@ -17,21 +17,21 @@ const MediaQueries = {
 };
 
 export const lightTheme: ThemeSchema = {
-	titleColor: '#3b2a1a',
-	mainBackgroundColor: '#f7ab41',
-	mainTextColor: '#4d3b28',
+	titleColor: '#110C05',
+	mainBackgroundColor: '#FEF0DB',
+	mainTextColor: '#110C05',
 	...CommonStyling,
 	colors: Colors,
 	mediaQueries: MediaQueries,
-	text: '#4d3b28',
-	primary: '#f7ab41',
-	navBackground: 'rgba(255, 255, 255, 0.9)',
-	cardBackground: 'rgba(248, 232, 205, 0.78)',
-	accent: '#b35c00',
-	cardBorder: 'rgba(0, 0, 0, 0.08)',
-	cardText: '#4d3b28',
-	subtleText: 'rgba(77, 59, 40, 0.55)',
-	pageCard: 'rgba(255, 235, 180, 0.55)',
+	text: '#251608',
+	primary: '#E8761A',
+	navBackground: 'rgba(17, 12, 5, 0.97)',
+	cardBackground: '#FFFFFF',
+	accent: '#E8761A',
+	cardBorder: 'rgba(232, 118, 26, 0.28)',
+	cardText: '#3D2810',
+	subtleText: 'rgba(17, 12, 5, 0.5)',
+	pageCard: 'rgba(255, 248, 238, 0.95)',
 };
 
 export const darkTheme: ThemeSchema = {

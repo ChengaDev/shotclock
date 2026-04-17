@@ -13,6 +13,7 @@ import { useSpring, animated } from 'react-spring'
 import Themes from './constants/Themes'
 
 const ShotClockPage = lazy(() => import('./components/ShotClockPage'))
+const LandingPage = lazy(() => import('./components/LandingPage'))
 const AboutUs = lazy(() => import('./components/AboutUs'))
 const Instructions = lazy(() => import('./components/Instructions'))
 const FIBAResources = lazy(() => import('./components/FIBAResources'))
@@ -20,6 +21,7 @@ const FAQ = lazy(() => import('./components/FAQ'))
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
 const NotFound = lazy(() => import('./components/NotFound'))
 const ReactionTrainingPage = lazy(() => import('./components/training/ReactionTrainingPage'))
+const PlayPage = lazy(() => import('./components/PlayPage'))
 
 const NON_ENGLISH_LANGS = ['it', 'es', 'fr', 'el']
 
@@ -92,7 +94,9 @@ const LangLayout = () => {
 
 const pageRoutes = (
   <>
-    <Route index element={
+    <Route index element={<LandingPage />} />
+    <Route path="play" element={<PlayPage />} />
+    <Route path="clock" element={
       <>
         <ShotClockPage />
         <ShareButtons

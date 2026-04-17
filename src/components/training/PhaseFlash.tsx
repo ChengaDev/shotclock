@@ -24,6 +24,7 @@ const PhaseFlash: React.FC<PhaseFlashProps> = ({
   const startTimeRef = useRef<number>(performance.now())
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [progress, setProgress] = useState(100)
+  const [answered, setAnswered] = useState(false)
   const timeoutMs = TIMEOUT_MS[difficulty]
 
   // Flash entrance spring
@@ -59,6 +60,8 @@ const PhaseFlash: React.FC<PhaseFlashProps> = ({
   }, [])
 
   const handleAction = (action: CorrectAction) => {
+    if (answered) return
+    setAnswered(true)
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     const reactionMs = Math.round(performance.now() - startTimeRef.current)
     onAnswer(action, reactionMs)
@@ -89,21 +92,27 @@ const PhaseFlash: React.FC<PhaseFlashProps> = ({
         <ActionButton
           $variant="startstop"
           $hint={hintAction === 'startstop'}
+          $dimmed={answered && hintAction !== 'startstop'}
           onClick={() => handleAction('startstop')}
+          disabled={answered}
         >
           {locals.startStopLabel}
         </ActionButton>
         <ActionButton
           $variant="reset14"
           $hint={hintAction === 'reset14'}
+          $dimmed={answered && hintAction !== 'reset14'}
           onClick={() => handleAction('reset14')}
+          disabled={answered}
         >
           {locals.reset14Label}
         </ActionButton>
         <ActionButton
           $variant="reset24"
           $hint={hintAction === 'reset24'}
+          $dimmed={answered && hintAction !== 'reset24'}
           onClick={() => handleAction('reset24')}
+          disabled={answered}
         >
           {locals.reset24Label}
         </ActionButton>
@@ -203,26 +212,28 @@ const variantColors: Record<string, string> = {
   reset24: '#2196F3',
 }
 
-const ActionButton = styled.button<{ $variant: string; $hint: boolean }>`
+const ActionButton = styled.button<{ $variant: string; $hint: boolean; $dimmed: boolean }>`
   padding: 0.9rem 2rem;
   font-size: 1rem;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
   border: 2px solid ${props => variantColors[props.$variant] || props.theme.accent};
   border-radius: 12px;
-  cursor: pointer;
+  cursor: ${props => props.$dimmed ? 'default' : 'pointer'};
   transition: all 0.15s ease;
   min-width: 140px;
+  opacity: ${props => props.$dimmed ? 0.3 : 1};
   color: ${props => props.$hint ? '#1a1a1a' : variantColors[props.$variant] || props.theme.accent};
   background: ${props => props.$hint
     ? variantColors[props.$variant] || props.theme.accent
     : 'transparent'};
 
   ${props => props.$hint && css`
-    animation: ${hintPulse} 0.6s ease-in-out 2;
+    animation: ${hintPulse} 0.5s ease-in-out 3;
+    box-shadow: 0 0 20px ${variantColors[props.$variant] || props.theme.accent}55;
   `}
 
-  &:hover {
+  &:not(:disabled):hover {
     background: ${props => variantColors[props.$variant] || props.theme.accent};
     color: #1a1a1a;
     transform: translateY(-2px);
@@ -235,6 +246,9 @@ const ActionButton = styled.button<{ $variant: string; $hint: boolean }>`
 
   @media (${props => props.theme.mediaQueries.mobile}) {
     width: 100%;
+    min-width: unset;
+    padding: 1rem 1.5rem;
+    font-size: 1.05rem;
   }
 `
 

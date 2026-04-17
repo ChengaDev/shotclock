@@ -60,6 +60,13 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
             {locals.home}
           </NavLink>
           <NavLink
+            to={routes.Play}
+            $active={location.pathname === routes.Play}
+            onClick={handleNavClick}
+          >
+            {locals.play}
+          </NavLink>
+          <NavLink
             to={routes.Instructions}
             $active={location.pathname === routes.Instructions}
             onClick={handleNavClick}
@@ -87,15 +94,6 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
           >
             {locals.faq}
           </NavLink>
-          {featureFlags.reactionTraining && (
-            <NavLink
-              to={routes.ReactionTraining}
-              $active={location.pathname === routes.ReactionTraining}
-              onClick={handleNavClick}
-            >
-              {locals.reactionTraining}
-            </NavLink>
-          )}
           <ThemeToggle>
             <ThemeButton
               $active={currentTheme === Themes.Light}
