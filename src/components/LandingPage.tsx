@@ -131,6 +131,11 @@ const LandingPage: React.FC = () => {
     const id = setTimeout(() => {
       const v = videoRef.current
       if (!v) return
+      // React doesn't reliably set the muted/loop DOM attributes via props —
+      // set them imperatively so the browser allows autoplay.
+      v.muted = true
+      v.loop = true
+      v.playsInline = true
       v.src = '/arena.mp4'
       v.load()
       v.play().catch(() => {/* autoplay blocked — video stays hidden */})
@@ -148,7 +153,7 @@ const LandingPage: React.FC = () => {
       <PageWrapper>
         {/* ── HERO ── */}
         <HeroSection>
-          <ArenaVideo ref={videoRef} muted loop playsInline aria-hidden="true" />
+          <ArenaVideo ref={videoRef} aria-hidden="true" />
           <ArenaOverlay />
 
           <HeroTitle>{locals.landingHeroTitle}</HeroTitle>
