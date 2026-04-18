@@ -32,6 +32,7 @@ export const lightTheme: ThemeSchema = {
 	cardText: '#3D2810',
 	subtleText: 'rgba(17, 12, 5, 0.5)',
 	pageCard: 'rgba(255, 248, 238, 0.95)',
+	courtFilter: 'invert(1)',
 };
 
 export const darkTheme: ThemeSchema = {
@@ -50,4 +51,5 @@ export const darkTheme: ThemeSchema = {
 	cardText: 'rgba(255, 255, 255, 0.85)',
 	subtleText: 'rgba(255, 255, 255, 0.4)',
 	pageCard: 'transparent',
+	courtFilter: 'none',
 };

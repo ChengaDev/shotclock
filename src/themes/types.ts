@@ -27,4 +27,5 @@ export interface ThemeSchema {
 	cardText: string;     // body text inside cards
 	subtleText: string;   // low-emphasis text (labels, captions)
 	pageCard: string;     // outer ContentCard wrapper background
+	courtFilter: string;  // CSS filter applied to the court background image
 }

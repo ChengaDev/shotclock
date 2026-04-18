@@ -63,6 +63,10 @@ const ShotClock = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, intervalRef.current]);
 
+	const onHornClick = useCallback(() => {
+		buzzerSoundElementRef.current?.play();
+	}, []);
+
 	const onTickToggle = () => {
 		if (!isTickingRef.current) {
 			if (!intervalRef.current) {
@@ -125,19 +129,75 @@ const ShotClock = () => {
 				<SubTitle>{locals.subtitle}</SubTitle>
 			</animated.div>
 			<animated.div style={timeDisplayAnimationProps}>
-				<TimeDisplay $isClockEnded={currentSeconds === 0} $markSeconds={currentSeconds < 5}>
-					<FakeDigitsDisplay>88</FakeDigitsDisplay>
-					{isTimeDisplay ? timeDisplayText : ''}
-				</TimeDisplay>
+				<LayoutGrid>
+					{/* display spans cols 1-2 */}
+					<DisplayCell>
+						<TimeDisplay $isClockEnded={currentSeconds === 0} $markSeconds={currentSeconds < 5}>
+							<FakeDigitsDisplay>88</FakeDigitsDisplay>
+							{isTimeDisplay ? timeDisplayText : ''}
+						</TimeDisplay>
+					</DisplayCell>
 
-				<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
-				<Controls
-					isTicking={isTicking}
-					on14SecondsClick={on14SecondsClick}
-					on24SecondsClick={on24SecondsClick}
-					onTickToggle={onTickToggle}
-					toggleDisplay={toggleDisplay}
-				/>
+					{/* clear: col 3, row 1 — directly above reset poss */}
+					<ClearCell>
+						<Controls
+							isTicking={isTicking}
+							on14SecondsClick={on14SecondsClick}
+							on24SecondsClick={on24SecondsClick}
+							onTickToggle={onTickToggle}
+							toggleDisplay={toggleDisplay}
+							layout="clearOnly"
+						/>
+					</ClearCell>
+
+					{/* horn: col 1, row 2 — directly above start */}
+					<HornCell>
+						<HornButton onClick={onHornClick}>
+							<HornIcon />
+						</HornButton>
+					</HornCell>
+
+					{/* correction: col 2, row 2 */}
+					<CorrCell>
+						<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
+					</CorrCell>
+
+					{/* start: col 1, row 3 */}
+					<StartCell>
+						<Controls
+							isTicking={isTicking}
+							on14SecondsClick={on14SecondsClick}
+							on24SecondsClick={on24SecondsClick}
+							onTickToggle={onTickToggle}
+							toggleDisplay={toggleDisplay}
+							layout="startOnly"
+						/>
+					</StartCell>
+
+					{/* reset 14s: col 2, row 3 */}
+					<Reset14Cell>
+						<Controls
+							isTicking={isTicking}
+							on14SecondsClick={on14SecondsClick}
+							on24SecondsClick={on24SecondsClick}
+							onTickToggle={onTickToggle}
+							toggleDisplay={toggleDisplay}
+							layout="reset14Only"
+						/>
+					</Reset14Cell>
+
+					{/* reset poss: col 3, row 3 — directly below clear */}
+					<Reset24Cell>
+						<Controls
+							isTicking={isTicking}
+							on14SecondsClick={on14SecondsClick}
+							on24SecondsClick={on24SecondsClick}
+							onTickToggle={onTickToggle}
+							toggleDisplay={toggleDisplay}
+							layout="reset24Only"
+						/>
+					</Reset24Cell>
+				</LayoutGrid>
 			</animated.div>
 		</>
 	);
@@ -152,22 +212,36 @@ const BaseTimeDisplay = styled.div`
 	font-family: 'DSEG14ClassicRegular';
 	font-weight: normal;
 	font-style: normal;
-	font-size: 65px;
+	font-size: 42px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 200px;
-	height: 150px;
-	padding: 24px;
+	width: 130px;
+	height: 95px;
+	padding: 14px;
 	margin: 0 auto;
 	margin-bottom: 20px;
 
-	@media ${(props) => props.theme.mediaQueries.mobile} {
-		width: 120px;
-		font-size: 40px;
-		margin-bottom: 20px;
+	@media ${'(min-width: 768px)'} {
+		font-size: 46px;
+		width: 140px;
+		height: 103px;
 		padding: 15px;
-		height: 95px;
+	}
+
+	@media ${'(min-width: 1200px)'} {
+		font-size: 58px;
+		width: 180px;
+		height: 130px;
+		padding: 20px;
+	}
+
+	@media ${(props) => props.theme.mediaQueries.mobile} {
+		font-size: 30px;
+		width: 90px;
+		height: 70px;
+		padding: 10px;
+		margin-bottom: 20px;
 	}
 `;
 
@@ -189,8 +263,10 @@ const FakeDigitsDisplay = styled(BaseTimeDisplay)`
 	color: ${(props) => props.theme.colors.gray};
 	position: absolute;
 	opacity: 0.25;
-	left: -4px;
-	top: 0;
+	inset: 0;
+	width: auto;
+	height: auto;
+	margin: 0;
 `;
 
 const Title = styled.h1`
@@ -226,5 +302,117 @@ const SubTitle = styled.h2`
 	height: 0;
 	visibility: hidden;
 `;
+
+const LayoutGrid = styled.div`
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-areas:
+		"horn   display  clear"
+		".      corr     ."
+		"start  reset14  reset24";
+	column-gap: 120px;
+	row-gap: 40px;
+	justify-content: center;
+	align-items: center;
+
+	@media ${'(max-width: 1199px)'} {
+		row-gap: 20px;
+	}
+
+	@media ${(props) => props.theme.mediaQueries.mobile} {
+		row-gap: 12px;
+		column-gap: 16px;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-areas:
+			"horn    display  clear"
+			"corr    corr     corr"
+			"start   reset14  reset24";
+	}
+`;
+
+const DisplayCell  = styled.div`
+	grid-area: display;
+	& > * { margin-bottom: 0 !important; margin-top: 0 !important; }
+`;
+const ClearCell    = styled.div`
+	grid-area: clear;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+const CorrCell     = styled.div`
+	grid-area: corr;
+	display: flex;
+	justify-content: center;
+	& > * { margin-bottom: 0 !important; margin-top: 0 !important; }
+
+	@media ${(props) => props.theme.mediaQueries.mobile} {
+		margin-top: 20px;
+	}
+`;
+const HornCell     = styled.div`
+	grid-area: horn;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+const StartCell    = styled.div`
+	grid-area: start;
+	@media ${(props) => props.theme.mediaQueries.mobile} { margin-top: 20px; }
+`;
+const Reset14Cell  = styled.div`
+	grid-area: reset14;
+	@media ${(props) => props.theme.mediaQueries.mobile} { margin-top: 20px; }
+`;
+const Reset24Cell  = styled.div`
+	grid-area: reset24;
+	@media ${(props) => props.theme.mediaQueries.mobile} { margin-top: 20px; }
+`;
+
+const HornButton = styled.button`
+	font-size: 14px;
+	height: 80px;
+	width: 80px;
+	padding: 10px;
+	border: 4px solid ${(props) => props.theme.colors.white};
+	background: ${(props) => props.theme.defaulButtonBackground};
+	outline: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.08s ease, box-shadow 0.08s ease;
+
+	&:active {
+		transform: scale(0.92) translateY(2px);
+		box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.35);
+	}
+
+	@media ${'(min-width: 768px)'} {
+		height: 100px;
+		width: 100px;
+	}
+
+	@media ${'(min-width: 1200px)'} {
+		height: 130px;
+		width: 130px;
+	}
+
+	@media ${(props) => props.theme.mediaQueries.mobile} {
+		margin: 0 auto;
+		height: 70px;
+		width: 70px;
+	}
+`;
+
+const HornIcon = () => (
+	<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+		<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+		<path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+		<path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+	</svg>
+);
 
 export default ShotClock;
