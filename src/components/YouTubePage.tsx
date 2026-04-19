@@ -21,19 +21,21 @@ function saveToHistory(id: string) {
   localStorage.setItem(HISTORY_KEY, JSON.stringify(updated))
 }
 
+const VIDEO_ID_RE = /^[a-zA-Z0-9_-]{11}$/
+
 const parseVideoId = (input: string): string | null => {
   const trimmed = input.trim()
+  const validate = (id: string | null) => (id && VIDEO_ID_RE.test(id) ? id : null)
   try {
     const url = new URL(trimmed)
     if (url.hostname.includes('youtube.com')) {
-      return url.searchParams.get('v')
+      return validate(url.searchParams.get('v'))
     }
     if (url.hostname === 'youtu.be') {
-      const id = url.pathname.slice(1).split('?')[0]
-      return id || null
+      return validate(url.pathname.slice(1).split('?')[0])
     }
   } catch {
-    if (/^[a-zA-Z0-9_-]{11}$/.test(trimmed)) return trimmed
+    return validate(trimmed)
   }
   return null
 }
@@ -198,7 +200,8 @@ const LandingWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1.5rem 3rem;
+  min-height: calc(65vh - 80px);
+  padding: 6rem 1.5rem 9rem;
 
   @media (max-width: 768px) and (orientation: portrait) {
     padding-top: 1.5rem;
