@@ -157,6 +157,8 @@ const YouTubePage: React.FC = () => {
         </ClockScaler>
       </ClockPanel>
 
+      <PageBlurb>{locals.youtubeBlurb}</PageBlurb>
+
       <MobileLandscapeBanner>
         <RotatePortraitIcon />
         For the best experience, switch to portrait mode
@@ -415,6 +417,16 @@ const PortraitBanner = styled.div`
     text-align: center;
     box-sizing: border-box;
   }
+`
+
+const PageBlurb = styled.p`
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 1rem;
+  padding: 0 1.5rem;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: ${props => props.theme.subtleText};
 `
 
 const MobileLandscapeBanner = styled.div`

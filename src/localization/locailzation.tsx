@@ -268,6 +268,7 @@ const AppLocalization: AppLocalizationType = {
     youtubeLoadVideo: 'Load',
     youtubeChangeVideo: 'Change Video',
     youtubeInvalidUrl: 'Please paste a valid YouTube URL',
+    youtubeBlurb: 'Paste any YouTube basketball game link and operate the 24-second shot clock in real time alongside it. Start and stop the clock on possessions, reset to 14 seconds after offensive rebounds, and hear the buzzer when time expires — just like a real FIBA or NBA game. Great for referees in training, coaches reviewing film, and basketball fans who want to feel the pressure of the shot clock while watching real game footage.',
   },
   it: {
     title: "Practica dell'orologio di pallacanestro",
@@ -531,6 +532,7 @@ const AppLocalization: AppLocalizationType = {
     youtubeLoadVideo: 'Carica',
     youtubeChangeVideo: 'Cambia video',
     youtubeInvalidUrl: 'Inserisci un URL YouTube valido',
+    youtubeBlurb: 'Incolla qualsiasi link YouTube di una partita di basket e gestisci il cronometro da 24 secondi in tempo reale. Avvia e ferma il cronometro sulle possessi, resetta a 14 secondi dopo i rimbalzi offensivi e ascolta il buzzer allo scadere del tempo — proprio come in una vera partita FIBA o NBA.',
   },
   es: {
     title: 'Práctica de reloj de baloncesto',
@@ -794,6 +796,7 @@ const AppLocalization: AppLocalizationType = {
     youtubeLoadVideo: 'Cargar',
     youtubeChangeVideo: 'Cambiar video',
     youtubeInvalidUrl: 'Por favor pega una URL de YouTube válida',
+    youtubeBlurb: 'Pega cualquier enlace de YouTube de un partido de baloncesto y opera el reloj de posesión de 24 segundos en tiempo real. Inicia y detén el reloj en cada posesión, reinicia a 14 segundos tras rebotes ofensivos y escucha el buzzer al expirar — igual que en un partido real de FIBA o NBA.',
   },
   fr: {
     title: 'Entraînement au chronomètre des tirs',
@@ -1058,6 +1061,7 @@ const AppLocalization: AppLocalizationType = {
     youtubeLoadVideo: 'Charger',
     youtubeChangeVideo: 'Changer de vidéo',
     youtubeInvalidUrl: 'Veuillez coller une URL YouTube valide',
+    youtubeBlurb: 'Collez n\'importe quel lien YouTube d\'un match de basket et opérez le chronomètre de 24 secondes en temps réel. Démarrez et arrêtez le chronomètre sur chaque possession, réinitialisez à 14 secondes après les rebonds offensifs et entendez le buzzer à l\'expiration — exactement comme dans un vrai match FIBA ou NBA.',
   },
   el: {
     title: 'Δωρεάν Διαδικτυακό Χρονόμετρο Κατοχής Μπάσκετ',
@@ -1321,6 +1325,7 @@ const AppLocalization: AppLocalizationType = {
     youtubeLoadVideo: 'Φόρτωση',
     youtubeChangeVideo: 'Αλλαγή βίντεο',
     youtubeInvalidUrl: 'Παρακαλώ επικολλήστε έγκυρο URL YouTube',
+    youtubeBlurb: 'Επικολλήστε οποιονδήποτε σύνδεσμο YouTube αγώνα μπάσκετ και χειριστείτε το χρονόμετρο κατοχής 24 δευτερολέπτων σε πραγματικό χρόνο. Εκκινήστε και σταματήστε το χρονόμετρο ανά κατοχή, επαναφέρετε στα 14 δευτερόλεπτα μετά από επιθετικά ριμπάουντ και ακούστε το buzzer όταν λήξει ο χρόνος — ακριβώς όπως σε πραγματικό αγώνα FIBA ή NBA.',
   },
 }
 

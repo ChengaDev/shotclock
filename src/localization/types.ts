@@ -148,4 +148,5 @@ export type LocalizationType = {
 	youtubeLoadVideo: string;
 	youtubeChangeVideo: string;
 	youtubeInvalidUrl: string;
+	youtubeBlurb: string;
 };
