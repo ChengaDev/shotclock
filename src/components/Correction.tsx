@@ -1,19 +1,27 @@
 import styled from 'styled-components'
+import { formatKey } from '../constants/defaultKeyBindings'
 
 type CorrectionProps = {
   decrementSecond: () => void
   incrementSecond: () => void
+  keyLabels?: {
+    increment?: string
+    decrement?: string
+  }
 }
 
 const Correction = (props: CorrectionProps) => {
+  const kl = props.keyLabels ?? {}
   return (
     <Container>
       <AdjustButton onClick={props.decrementSecond} aria-label="Subtract one second">
         −
+        {kl.decrement && <KeyHint>{formatKey(kl.decrement)}</KeyHint>}
       </AdjustButton>
       <CorrectionSign>C</CorrectionSign>
       <AdjustButton onClick={props.incrementSecond} aria-label="Add one second">
         +
+        {kl.increment && <KeyHint>{formatKey(kl.increment)}</KeyHint>}
       </AdjustButton>
     </Container>
   )
@@ -56,6 +64,15 @@ const AdjustButton = styled.button`
   &:active {
     transform: scale(0.8) translateY(2px);
   }
+`
+
+const KeyHint = styled.span`
+  display: block;
+  font-size: 0.55em;
+  font-family: 'Courier New', monospace;
+  opacity: 0.6;
+  margin-top: 1px;
+  line-height: 1;
 `
 
 const CorrectionSign = styled.span`

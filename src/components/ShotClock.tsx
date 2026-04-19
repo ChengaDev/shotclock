@@ -4,8 +4,11 @@ import Controls from './Controls';
 import Correction from './Correction';
 import ShotClockReset from '../Constants';
 import { useSpring, animated } from 'react-spring';
-
 import { useLocalization } from '../contexts/Language/LanguageProvider';
+import { keyBindingsService } from '../services/keyBindingsService';
+import { KeyBindings, formatKey } from '../constants/defaultKeyBindings';
+import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
+import KeyboardSettingsModal from './KeyboardSettingsModal';
 
 const ShotClock = () => {
 	const { locals } = useLocalization();
@@ -17,6 +20,8 @@ const ShotClock = () => {
 	const [isTimeDisplay, setIsTimeDisplay] = useState<boolean>(true);
 	const [tickInterval, setTickInterval] = useState<any>(null);
 	const [timeReset, setTimeReset] = useState<boolean>(true);
+	const [keyBindings, setKeyBindings] = useState<KeyBindings>(() => keyBindingsService.load());
+	const [showKeyboardModal, setShowKeyboardModal] = useState<boolean>(false);
 
 	const secondsRef = useRef<number>();
 	const isTickingRef = useRef<boolean>();
@@ -145,6 +150,16 @@ const ShotClock = () => {
 		}
 	};
 
+	useKeyboardShortcuts(keyBindings, {
+		onHorn: onHornClick,
+		onStartStop: onTickToggle,
+		onReset14: on14SecondsClick,
+		onReset24: on24SecondsClick,
+		onClear: toggleDisplay,
+		onIncrementSecond: incrementSecond,
+		onDecrementSecond: decrementSecond,
+	});
+
 	const titleAnimationProps = useSpring({
 		opacity: 1,
 		from: { opacity: 0 },
@@ -163,13 +178,26 @@ const ShotClock = () => {
 		: (currentSeconds > 9 ? `${currentSeconds}` : `0${currentSeconds}`);
 
 	return (
-		<>
+		<ShotClockWrapper>
 			<audio
 				loop={false}
 				ref={buzzerSoundElementRef}
 				src='/BuzzerShort.mp3'
 				style={{ display: 'none' }}
 			></audio>
+
+			<KeyboardSettingsButton onClick={() => setShowKeyboardModal(true)} title="Keyboard shortcuts">
+				<KeyboardIcon />
+			</KeyboardSettingsButton>
+
+			{showKeyboardModal && (
+				<KeyboardSettingsModal
+					bindings={keyBindings}
+					onClose={() => setShowKeyboardModal(false)}
+					onSave={(b) => setKeyBindings(b)}
+				/>
+			)}
+
 			<animated.div style={titleAnimationProps}>
 				<Title>{locals.title}</Title>
 				<SubTitle>{locals.subtitle}</SubTitle>
@@ -184,7 +212,7 @@ const ShotClock = () => {
 						</TimeDisplay>
 					</DisplayCell>
 
-					{/* clear: col 3, row 1 — directly above reset poss */}
+					{/* clear: col 3, row 1 */}
 					<ClearCell>
 						<Controls
 							isTicking={isTicking}
@@ -193,19 +221,28 @@ const ShotClock = () => {
 							onTickToggle={onTickToggle}
 							toggleDisplay={toggleDisplay}
 							layout="clearOnly"
+							keyLabels={{ clear: keyBindings.clear }}
 						/>
 					</ClearCell>
 
-					{/* horn: col 1, row 2 — directly above start */}
+					{/* horn: col 1, row 2 */}
 					<HornCell>
 						<HornButton onClick={onHornClick}>
 							<HornIcon />
+							{keyBindings.horn && <HornKeyHint>{formatKey(keyBindings.horn)}</HornKeyHint>}
 						</HornButton>
 					</HornCell>
 
 					{/* correction: col 2, row 2 */}
 					<CorrCell>
-						<Correction decrementSecond={decrementSecond} incrementSecond={incrementSecond} />
+						<Correction
+							decrementSecond={decrementSecond}
+							incrementSecond={incrementSecond}
+							keyLabels={{
+								increment: keyBindings.incrementSecond,
+								decrement: keyBindings.decrementSecond,
+							}}
+						/>
 					</CorrCell>
 
 					{/* start: col 1, row 3 */}
@@ -217,6 +254,7 @@ const ShotClock = () => {
 							onTickToggle={onTickToggle}
 							toggleDisplay={toggleDisplay}
 							layout="startOnly"
+							keyLabels={{ startStop: keyBindings.startStop }}
 						/>
 					</StartCell>
 
@@ -229,10 +267,11 @@ const ShotClock = () => {
 							onTickToggle={onTickToggle}
 							toggleDisplay={toggleDisplay}
 							layout="reset14Only"
+							keyLabels={{ reset14: keyBindings.reset14 }}
 						/>
 					</Reset14Cell>
 
-					{/* reset poss: col 3, row 3 — directly below clear */}
+					{/* reset poss: col 3, row 3 */}
 					<Reset24Cell>
 						<Controls
 							isTicking={isTicking}
@@ -241,11 +280,12 @@ const ShotClock = () => {
 							onTickToggle={onTickToggle}
 							toggleDisplay={toggleDisplay}
 							layout="reset24Only"
+							keyLabels={{ reset24: keyBindings.reset24 }}
 						/>
 					</Reset24Cell>
 				</LayoutGrid>
 			</animated.div>
-		</>
+		</ShotClockWrapper>
 	);
 };
 
@@ -451,6 +491,50 @@ const HornButton = styled.button`
 		height: 70px;
 		width: 70px;
 	}
+`;
+
+const ShotClockWrapper = styled.div`
+	position: relative;
+	display: inline-block;
+	width: 100%;
+`;
+
+const KeyboardSettingsButton = styled.button`
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: transparent;
+	border: 1.5px solid ${props => props.theme.cardBorder};
+	border-radius: 8px;
+	color: ${props => props.theme.subtleText};
+	padding: 0.3rem 0.45rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.15s, border-color 0.15s;
+	z-index: 10;
+
+	&:hover {
+		color: ${props => props.theme.text};
+		border-color: ${props => props.theme.accent};
+	}
+`;
+
+const KeyboardIcon = () => (
+	<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+		<rect x="2" y="4" width="20" height="16" rx="2" />
+		<path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10" />
+	</svg>
+);
+
+const HornKeyHint = styled.span`
+	display: block;
+	font-size: 0.45em;
+	font-family: 'Courier New', monospace;
+	opacity: 0.6;
+	margin-top: 2px;
+	line-height: 1;
 `;
 
 const HornIcon = () => (

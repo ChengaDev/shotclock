@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useLocalization } from '../contexts/Language/LanguageProvider';
+import { formatKey } from '../constants/defaultKeyBindings';
 
 type ControlsProps = {
 	isTicking: boolean;
@@ -10,11 +11,18 @@ type ControlsProps = {
 	on24SecondsClick: () => void;
 	toggleDisplay: () => void;
 	layout?: 'all' | 'clearOnly' | 'actionsOnly' | 'startOnly' | 'reset14Only' | 'reset24Only';
+	keyLabels?: {
+		startStop?: string;
+		reset14?: string;
+		reset24?: string;
+		clear?: string;
+	};
 };
 
 function Buttons(props: ControlsProps) {
 	const { locals } = useLocalization();
 	const layout = props.layout ?? 'all';
+	const kl = props.keyLabels ?? {};
 
 	const showStart   = layout === 'all' || layout === 'actionsOnly' || layout === 'startOnly';
 	const showReset14 = layout === 'all' || layout === 'actionsOnly' || layout === 'reset14Only';
@@ -26,23 +34,27 @@ function Buttons(props: ControlsProps) {
 			{showStart && (
 				<TimeToggleButton id='btnStart' onClick={props.onTickToggle} $isCurrentlyTicking={props.isTicking}>
 					{props.isTicking ? locals.stopLabel : locals.startLabel}
+					{kl.startStop && <KeyHint>{formatKey(kl.startStop)}</KeyHint>}
 				</TimeToggleButton>
 			)}
 			{showReset14 && (
 				<ResetButton id='btnReset14' onClick={props.on14SecondsClick}>
 					<div>{locals.resetButtonText}</div>
 					<div>14s</div>
+					{kl.reset14 && <KeyHint>{formatKey(kl.reset14)}</KeyHint>}
 				</ResetButton>
 			)}
 			{showClear && (
 				<ClockButton id='btnToggleDisplay' onClick={props.toggleDisplay}>
 					{locals.removeDisplayLabel}
+					{kl.clear && <KeyHint>{formatKey(kl.clear)}</KeyHint>}
 				</ClockButton>
 			)}
 			{showReset24 && (
 				<ResetButton id='btnReset24' onClick={props.on24SecondsClick}>
 					<div>{locals.resetButtonText}</div>
 					<div>{locals.possessionLabel}</div>
+					{kl.reset24 && <KeyHint>{formatKey(kl.reset24)}</KeyHint>}
 				</ResetButton>
 			)}
 		</Container>
@@ -121,6 +133,15 @@ const ResetButton = styled(ClockButton)`
 		width: 70px;
 		font-size: 13px;
 	}
+`;
+
+export const KeyHint = styled.span`
+	display: block;
+	font-size: 0.6em;
+	font-family: 'Courier New', monospace;
+	opacity: 0.6;
+	margin-top: 2px;
+	line-height: 1;
 `;
 
 export default Buttons;
