@@ -3,6 +3,7 @@ import Themes from '../constants/Themes'
 import AppRoutes from '../AppRoutes'
 import { Link, useLocation } from 'react-router-dom'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
+import { useKeyBindings } from '../contexts/KeyBindings/KeyBindingsProvider'
 import { useState, useRef, useEffect } from 'react'
 import featureFlags from '../featureFlags'
 
@@ -17,6 +18,7 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
   const routes = AppRoutes(languageCode)
   const [expanded, setExpanded] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
+  const { openModal } = useKeyBindings()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -94,6 +96,9 @@ const Navigation = ({ currentTheme, setTheme }: NavigationProps) => {
           >
             {locals.faq}
           </NavLink>
+          <KeyboardButton onClick={openModal} title="Keyboard shortcuts" aria-label="Keyboard shortcuts">
+            <KeyboardIcon />
+          </KeyboardButton>
           <ThemeToggle>
             <ThemeButton
               $active={currentTheme === Themes.Light}
@@ -310,5 +315,39 @@ const ThemeDivider = styled.span`
   color: rgba(255, 255, 255, 0.3);
   margin: 0 0.25rem;
 `
+
+const KeyboardButton = styled.button`
+  background: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.3rem 0.45rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+  transition: color 0.2s, border-color 0.2s;
+
+  &:hover {
+    color: #ffd700;
+    border-color: #ffd700;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: 768px), (max-height: 500px) {
+    display: none;
+  }
+`
+
+const KeyboardIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10" />
+  </svg>
+)
 
 export default Navigation

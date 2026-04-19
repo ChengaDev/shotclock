@@ -22,7 +22,10 @@ const ShotClockPage = () => {
         <MobileIcon />
         For the best shot clock experience, open this page on your mobile device in landscape mode
       </DesktopBanner>
-      <ShotClock />
+      <PageTitle>Shot Clock Panel</PageTitle>
+      <LandscapeScaler>
+        <ShotClock />
+      </LandscapeScaler>
       <PageBlurb>{locals.pageBlurb}</PageBlurb>
     </PageContainer>
   )
@@ -117,6 +120,25 @@ const DesktopBanner = styled.div`
     padding: 10px 16px;
     text-align: center;
     box-sizing: border-box;
+  }
+`
+
+const PageTitle = styled.h1`
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  text-align: center;
+  margin: -20px 0 30px;
+  font-weight: 500;
+  background: linear-gradient(135deg, ${props => props.theme.titleColor} 20%, ${props => props.theme.accent});
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`
+
+const LandscapeScaler = styled.div`
+  @media (orientation: landscape) and (max-height: 500px) {
+    zoom: 0.75;
   }
 `
 

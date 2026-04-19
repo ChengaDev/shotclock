@@ -3,6 +3,7 @@ import featureFlags from './featureFlags'
 import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Outlet, useNavigate } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import LanguageProvider, { useLocalization } from './contexts/Language/LanguageProvider'
+import { KeyBindingsProvider } from './contexts/KeyBindings/KeyBindingsProvider'
 import Navigation from './components/Navigation'
 import BasketballLoader from './components/BasketballLoader'
 import ShareButtons from './components/ShareButtons'
@@ -188,6 +189,7 @@ const App = () => {
       <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <LanguageProvider>
           <GlobalStyle />
+          <KeyBindingsProvider>
           <AppContainer>
             <Navigation currentTheme={selectedTheme} setTheme={handleSetTheme} />
             <PageWrapper>
@@ -215,6 +217,7 @@ const App = () => {
             </PageWrapper>
             <CookieBanner />
           </AppContainer>
+          </KeyBindingsProvider>
         </LanguageProvider>
       </Router>
     </ThemeProvider>

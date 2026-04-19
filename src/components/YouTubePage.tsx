@@ -4,6 +4,23 @@ import ShotClock from './ShotClock'
 import SEO from './SEO'
 import { useLocalization } from '../contexts/Language/LanguageProvider'
 
+const HISTORY_KEY = 'sc_yt_history'
+const MAX_HISTORY = 3
+
+type RecentVideo = { id: string; addedAt: number }
+
+function loadHistory(): RecentVideo[] {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]')
+  } catch { return [] }
+}
+
+function saveToHistory(id: string) {
+  const existing = loadHistory().filter(v => v.id !== id)
+  const updated = [{ id, addedAt: Date.now() }, ...existing].slice(0, MAX_HISTORY)
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(updated))
+}
+
 const parseVideoId = (input: string): string | null => {
   const trimmed = input.trim()
   try {
@@ -26,34 +43,23 @@ const YouTubePage: React.FC = () => {
   const [urlInput, setUrlInput] = useState('')
   const [videoId, setVideoId] = useState<string | null>(null)
   const [error, setError] = useState(false)
+  const [recentVideos, setRecentVideos] = useState<RecentVideo[]>(() => loadHistory())
   const [showChangeInput, setShowChangeInput] = useState(false)
-  const [changeInput, setChangeInput] = useState('')
-  const [changeError, setChangeError] = useState(false)
+
+  const loadVideo = (id: string) => {
+    saveToHistory(id)
+    setRecentVideos(loadHistory())
+    setVideoId(id)
+    setError(false)
+    setUrlInput('')
+    setShowChangeInput(false)
+  }
 
   const handleLoad = (e: React.FormEvent) => {
     e.preventDefault()
     const id = parseVideoId(urlInput)
-    if (id) { setVideoId(id); setError(false) }
-    else { setError(true) }
-  }
-
-  const handleChange = (e: React.FormEvent) => {
-    e.preventDefault()
-    const id = parseVideoId(changeInput)
-    if (id) {
-      setVideoId(id)
-      setShowChangeInput(false)
-      setChangeInput('')
-      setChangeError(false)
-    } else {
-      setChangeError(true)
-    }
-  }
-
-  const openChangeInput = () => {
-    setChangeInput('')
-    setChangeError(false)
-    setShowChangeInput(true)
+    if (id) loadVideo(id)
+    else setError(true)
   }
 
   const youtubeSchema = {
@@ -96,6 +102,26 @@ const YouTubePage: React.FC = () => {
           <LoadButton type="submit">{locals.youtubeLoadVideo}</LoadButton>
         </LandingForm>
         {error && <ErrorText inline>{locals.youtubeInvalidUrl}</ErrorText>}
+
+        {recentVideos.length > 0 && (
+          <RecentSection>
+            <RecentLabel>Recently watched</RecentLabel>
+            <RecentGrid>
+              {recentVideos.map(v => (
+                <RecentCard key={v.id} onClick={() => loadVideo(v.id)}>
+                  <RecentThumb
+                    src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`}
+                    alt="Video thumbnail"
+                    loading="lazy"
+                  />
+                  <PlayOverlay>
+                    <PlayTriangle />
+                  </PlayOverlay>
+                </RecentCard>
+              ))}
+            </RecentGrid>
+          </RecentSection>
+        )}
       </LandingWrapper>
     )
   }
@@ -111,35 +137,6 @@ const YouTubePage: React.FC = () => {
 
       <PageTitle>{locals.youtubePageTitle}</PageTitle>
 
-      {/* Change video bar — outside/above the video */}
-      <ChangeBar>
-        {showChangeInput ? (
-          <ChangeForm onSubmit={handleChange}>
-            <UrlInput
-              type="text"
-              value={changeInput}
-              onChange={e => { setChangeInput(e.target.value); setChangeError(false) }}
-              placeholder={locals.youtubeUrlPlaceholder}
-              autoFocus
-            />
-            <LoadButton type="submit">{locals.youtubeLoadVideo}</LoadButton>
-            <CancelButton
-              type="button"
-              onClick={() => { setShowChangeInput(false); setChangeError(false) }}
-              aria-label="Cancel"
-            >
-              ✕
-            </CancelButton>
-            {changeError && <ErrorText>{locals.youtubeInvalidUrl}</ErrorText>}
-          </ChangeForm>
-        ) : (
-          <ChangeVideoButton onClick={openChangeInput}>
-            <VideoIcon />
-            {locals.youtubeChangeVideo}
-          </ChangeVideoButton>
-        )}
-      </ChangeBar>
-
       {/* Video */}
       <VideoAspect>
         <iframe
@@ -150,12 +147,33 @@ const YouTubePage: React.FC = () => {
         />
       </VideoAspect>
 
-      {/* Clock panel below the video */}
       <ClockPanel>
         <ClockScaler>
           <ShotClock />
         </ClockScaler>
       </ClockPanel>
+
+      <TopBar>
+        {showChangeInput ? (
+          <TopForm onSubmit={handleLoad}>
+            <UrlInput
+              type="text"
+              value={urlInput}
+              onChange={e => { setUrlInput(e.target.value); setError(false) }}
+              placeholder={locals.youtubeUrlPlaceholder}
+              autoFocus
+            />
+            <LoadButton type="submit">{locals.youtubeLoadVideo}</LoadButton>
+            <CancelButton type="button" onClick={() => { setShowChangeInput(false); setError(false) }}>✕</CancelButton>
+            {error && <ErrorText>{locals.youtubeInvalidUrl}</ErrorText>}
+          </TopForm>
+        ) : (
+          <ChangeVideoButton onClick={() => setShowChangeInput(true)}>
+            <VideoIcon />
+            {locals.youtubeChangeVideo}
+          </ChangeVideoButton>
+        )}
+      </TopBar>
 
       <PageBlurb>{locals.youtubeBlurb}</PageBlurb>
 
@@ -168,20 +186,6 @@ const YouTubePage: React.FC = () => {
 }
 
 /* ── Icons ── */
-const VideoIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2" />
-    <polygon points="10 9 16 12 10 15" fill="currentColor" stroke="none" />
-  </svg>
-)
-
-const RotateIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="4" y="2" width="16" height="20" rx="2" />
-    <path d="M9 22h6" />
-  </svg>
-)
-
 const RotatePortraitIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="6" width="20" height="14" rx="2" />
@@ -191,12 +195,14 @@ const RotatePortraitIcon = () => (
 
 /* ── Landing ── */
 const LandingWrapper = styled.div`
-  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2rem 1.5rem;
+  padding: 2rem 1.5rem 3rem;
+
+  @media (max-width: 768px) and (orientation: portrait) {
+    padding-top: 1.5rem;
+  }
   background: ${props => props.theme.mainBackgroundColor};
 `
 
@@ -236,9 +242,13 @@ const LandingForm = styled.form`
 const PlayWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0;
+  padding: 10px 0 0;
   background: ${props => props.theme.mainBackgroundColor};
   box-sizing: border-box;
+
+  @media (max-width: 1200px) and (orientation: landscape) and (max-height: 500px) {
+    padding-top: 46px;
+  }
 `
 
 const PageTitle = styled.h1`
@@ -253,32 +263,48 @@ const PageTitle = styled.h1`
   background-clip: text;
 `
 
-/* Change video bar — sits above the video, outside it */
-const ChangeBar = styled.div`
+/* URL input bar — pinned at the top of the play view */
+const TopBar = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0.4rem 0;
-  margin-bottom: 0.4rem;
-  min-height: 36px;
+  padding: 0.6rem 1rem 0.25rem;
+  gap: 0.25rem;
+  margin-top: -20px;
+`
+
+const TopForm = styled.form`
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 560px;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `
 
 /* 16:9 video, capped small so the clock panel has room */
 const VideoAspect = styled.div`
   position: relative;
   width: 100%;
-  max-width: 640px;
-  margin: 0 auto;
-  padding-bottom: min(56.25%, 36vh);
-
-  @media (max-width: 900px) and (orientation: portrait) {
-    padding-bottom: 0;
-    height: 48vh;
-  }
+  max-width: 800px;
+  margin: 20px auto 0;
+  padding-bottom: min(56.25%, 47vh);
   height: 0;
   border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
+
+  @media (max-width: 900px) and (orientation: portrait) {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding-bottom: 56.25vw;
+    height: 0;
+    border-radius: 0;
+  }
+
 
   iframe {
     position: absolute;
@@ -295,11 +321,12 @@ const ClockPanel = styled.div`
   align-items: center;
   justify-content: center;
   padding: 2.5rem 0;
+
 `
 
 /* Scale the clock down so it fits under the video without crowding */
 const ClockScaler = styled.div`
-  zoom: 0.45;
+  zoom: 0.55;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -307,6 +334,7 @@ const ClockScaler = styled.div`
   @media (orientation: portrait) {
     zoom: 1.0;
   }
+
 
   /* Collapse all internal vertical margins */
   * {
@@ -348,6 +376,85 @@ const LoadButton = styled.button`
   &:active { opacity: 0.75; }
 `
 
+const RecentSection = styled.div`
+  margin-top: calc(2.5rem + 15px);
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const RecentLabel = styled.p`
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: ${props => props.theme.subtleText};
+  margin: 0 0 0.75rem;
+`
+
+const RecentGrid = styled.div`
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+
+  @media (max-width: 768px) and (orientation: portrait) {
+    flex-direction: column;
+    align-items: center;
+  }
+`
+
+const RecentCard = styled.button`
+  position: relative;
+  flex: 0 0 230px;
+  width: 230px;
+  height: 230px;
+  border: 2px solid ${props => props.theme.cardBorder};
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  transition: border-color 0.2s, transform 0.15s;
+
+  &:hover {
+    border-color: ${props => props.theme.accent};
+    transform: scale(1.03);
+  }
+`
+
+const RecentThumb = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+`
+
+const PlayOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  ${RecentCard}:hover & {
+    opacity: 1;
+  }
+`
+
+const PlayTriangle = styled.div`
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 18px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 4px;
+`
+
 const CancelButton = styled.button`
   padding: 0.45rem 0.7rem;
   background: transparent;
@@ -361,19 +468,12 @@ const CancelButton = styled.button`
   &:hover { color: ${props => props.theme.text}; }
 `
 
-const ChangeForm = styled.form`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-`
-
 const ChangeVideoButton = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   padding: 0.35rem 0.75rem;
+  margin: 7px 0;
   background: transparent;
   color: ${props => props.theme.subtleText};
   border: 1.5px solid ${props => props.theme.cardBorder};
@@ -389,6 +489,13 @@ const ChangeVideoButton = styled.button`
   }
 `
 
+const VideoIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <polygon points="10 9 16 12 10 15" fill="currentColor" stroke="none" />
+  </svg>
+)
+
 const ErrorText = styled.p<{ inline?: boolean }>`
   color: ${props => props.theme.colors.red};
   font-size: 0.78rem;
@@ -396,33 +503,10 @@ const ErrorText = styled.p<{ inline?: boolean }>`
   width: 100%;
 `
 
-const PortraitBanner = styled.div`
-  display: none;
-
-  @media (max-width: 1024px) and (orientation: portrait) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    background: ${props => props.theme.defaulButtonBackground};
-    color: #111;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 8px 16px;
-    text-align: center;
-    box-sizing: border-box;
-  }
-`
-
 const PageBlurb = styled.p`
   text-align: center;
   max-width: 640px;
-  margin: 0 auto 1rem;
+  margin: 20px auto 1rem;
   padding: 0 1.5rem;
   font-size: 0.82rem;
   line-height: 1.65;
@@ -432,7 +516,7 @@ const PageBlurb = styled.p`
 const MobileLandscapeBanner = styled.div`
   display: none;
 
-  @media (max-width: 900px) and (orientation: landscape) {
+  @media (max-width: 1200px) and (orientation: landscape) and (max-height: 500px) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -442,7 +526,7 @@ const MobileLandscapeBanner = styled.div`
     left: 0;
     right: 0;
     z-index: 999;
-    background: ${props => props.theme.defaulButtonBackground};
+    background: #fdcd27;
     color: #111;
     font-size: 0.8rem;
     font-weight: 600;

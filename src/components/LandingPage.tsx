@@ -536,11 +536,11 @@ const ClockDigits = styled.div<{ $buzzing: boolean }>`
 
 /* ─── Modes Section ─── */
 const ModesSection = styled.section`
-  padding: 2rem 6vw 3.5rem;
+  padding: 5.5rem 6vw 3.5rem;
   background: ${props => props.theme.pageCard || props.theme.cardBackground};
 
   @media (max-width: 768px) {
-    padding: 1.5rem 1.5rem 2.5rem;
+    padding: 4rem 1.5rem 2.5rem;
   }
 `
 
@@ -765,11 +765,11 @@ const ModeShimmer = styled.div`
 
 /* ─── Features Strip ─── */
 const FeaturesSection = styled.section`
-  padding: 3.5rem 6vw;
+  padding: 2rem 6vw 3.5rem;
   background: ${props => props.theme.mainBackgroundColor};
 
   @media (max-width: 768px) {
-    padding: 2.5rem 1.5rem;
+    padding: 1.5rem 1.5rem 2.5rem;
   }
 `
 

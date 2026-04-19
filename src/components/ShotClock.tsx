@@ -1,14 +1,13 @@
 import React, { useState, useRef, useCallback } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import Controls from './Controls';
 import Correction from './Correction';
 import ShotClockReset from '../Constants';
 import { useSpring, animated } from 'react-spring';
 import { useLocalization } from '../contexts/Language/LanguageProvider';
-import { keyBindingsService } from '../services/keyBindingsService';
-import { KeyBindings, formatKey } from '../constants/defaultKeyBindings';
+import { formatKey } from '../constants/defaultKeyBindings';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
-import KeyboardSettingsModal from './KeyboardSettingsModal';
+import { useKeyBindings } from '../contexts/KeyBindings/KeyBindingsProvider';
 
 const ShotClock = () => {
 	const { locals } = useLocalization();
@@ -20,8 +19,7 @@ const ShotClock = () => {
 	const [isTimeDisplay, setIsTimeDisplay] = useState<boolean>(true);
 	const [tickInterval, setTickInterval] = useState<any>(null);
 	const [timeReset, setTimeReset] = useState<boolean>(true);
-	const [keyBindings, setKeyBindings] = useState<KeyBindings>(() => keyBindingsService.load());
-	const [showKeyboardModal, setShowKeyboardModal] = useState<boolean>(false);
+	const { keyBindings } = useKeyBindings();
 
 	const secondsRef = useRef<number>();
 	const isTickingRef = useRef<boolean>();
@@ -178,6 +176,8 @@ const ShotClock = () => {
 		: (currentSeconds > 9 ? `${currentSeconds}` : `0${currentSeconds}`);
 
 	return (
+		<DeviceFrame>
+		<DeviceInner>
 		<ShotClockWrapper>
 			<audio
 				loop={false}
@@ -185,18 +185,6 @@ const ShotClock = () => {
 				src='/BuzzerShort.mp3'
 				style={{ display: 'none' }}
 			></audio>
-
-			<KeyboardSettingsButton onClick={() => setShowKeyboardModal(true)} title="Keyboard shortcuts">
-				<KeyboardIcon />
-			</KeyboardSettingsButton>
-
-			{showKeyboardModal && (
-				<KeyboardSettingsModal
-					bindings={keyBindings}
-					onClose={() => setShowKeyboardModal(false)}
-					onSave={(b) => setKeyBindings(b)}
-				/>
-			)}
 
 			<animated.div style={titleAnimationProps}>
 				<Title>{locals.title}</Title>
@@ -206,10 +194,13 @@ const ShotClock = () => {
 				<LayoutGrid>
 					{/* display spans cols 1-2 */}
 					<DisplayCell>
-						<TimeDisplay $isClockEnded={currentSeconds === 0 && !isTicking} $markSeconds={currentSeconds < 5}>
-							<FakeDigitsDisplay>{showTenths ? '8.8' : '88'}</FakeDigitsDisplay>
-							{isTimeDisplay ? timeDisplayText : ''}
-						</TimeDisplay>
+						<DisplayRow>
+							<TimeDisplay $isClockEnded={currentSeconds === 0 && !isTicking} $markSeconds={currentSeconds < 5}>
+								<FakeDigitsDisplay>{showTenths ? '8.8' : '88'}</FakeDigitsDisplay>
+								{isTimeDisplay ? timeDisplayText : ''}
+							</TimeDisplay>
+							<StatusLed $running={isTicking} />
+						</DisplayRow>
 					</DisplayCell>
 
 					{/* clear: col 3, row 1 */}
@@ -286,6 +277,8 @@ const ShotClock = () => {
 				</LayoutGrid>
 			</animated.div>
 		</ShotClockWrapper>
+		</DeviceInner>
+		</DeviceFrame>
 	);
 };
 
@@ -333,7 +326,9 @@ const BaseTimeDisplay = styled.div`
 
 const TimeDisplay = styled(BaseTimeDisplay)<TimeDisplayProps>`
 	border: 4px solid ${(props) => (props.$isClockEnded ? props.theme.colors.red : '#8993a3')};
+	border-radius: 10px;
 	color: ${(props) => (props.$markSeconds ? props.theme.colors.red : props.theme.colors.white)};
+	margin: 0;
 
 	position: relative;
 	background: transparent linear-gradient(134deg, #1d1b1b 0%, #383834 55%, #1d1d1b 55%, #1d1d1b 100%) 0% 0% no-repeat
@@ -419,7 +414,44 @@ const LayoutGrid = styled.div`
 const DisplayCell  = styled.div`
 	grid-area: display;
 	& > * { margin-bottom: 0 !important; margin-top: 0 !important; }
-`;
+`
+
+const DisplayRow = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+`
+
+const ledPulse = keyframes`
+	0%, 100% { box-shadow: 0 0 4px 1px currentColor; }
+	50%       { box-shadow: 0 0 10px 3px currentColor; }
+`
+
+const StatusLed = styled.div<{ $running: boolean }>`
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	position: absolute;
+	right: -8px;
+
+	@media ${'(orientation: portrait)'} {
+		width: 7px;
+		height: 7px;
+		right: -16px;
+	}
+
+	@media ${'(orientation: landscape) and (max-height: 500px)'} {
+		right: 9px;
+	}
+	top: 50%;
+	transform: translateY(-50%);
+	background: ${props => props.$running ? '#22c55e' : '#ef4444'};
+	color: ${props => props.$running ? '#22c55e' : '#ef4444'};
+	box-shadow: 0 0 6px 2px currentColor;
+	animation: ${props => props.$running ? css`${ledPulse} 1.2s ease-in-out infinite` : 'none'};
+	transition: background 0.3s ease, box-shadow 0.3s ease;
+`
 const ClearCell    = styled.div`
 	grid-area: clear;
 	display: flex;
@@ -493,40 +525,63 @@ const HornButton = styled.button`
 	}
 `;
 
+const DeviceFrame = styled.div`
+	display: block;
+	width: fit-content;
+	background: linear-gradient(160deg, #2a2a2e 0%, #1a1a1d 60%, #222226 100%);
+	border-radius: 28px;
+	border: 3px solid #444;
+	box-shadow:
+		0 0 0 1px #111,
+		0 8px 40px rgba(0, 0, 0, 0.6),
+		inset 0 1px 0 rgba(255, 255, 255, 0.06);
+	padding: 28px 36px;
+	margin: 0 auto;
+	position: relative;
+
+	&::before {
+		content: 'ShotClock Pro';
+		display: block;
+		text-align: center;
+		font-size: 0.6rem;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.25);
+		margin-bottom: 18px;
+	}
+
+	@media ${(props) => props.theme.mediaQueries.mobile} {
+		padding: 20px 16px;
+		border-radius: 20px;
+
+		&::before {
+			margin-bottom: 12px;
+		}
+	}
+`
+
+const DeviceInner = styled.div`
+	background: linear-gradient(180deg, #111113 0%, #1c1c1f 100%);
+	border-radius: 16px;
+	border: 1.5px solid #333;
+	padding: 24px 28px;
+	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+
+	@media ${(props) => props.theme.mediaQueries.mobile} {
+		padding: 16px 12px;
+		border-radius: 12px;
+	}
+`
+
 const ShotClockWrapper = styled.div`
 	position: relative;
 	display: inline-block;
-	width: 100%;
+	width: fit-content;
+	margin: 0 auto;
+	left: 50%;
+	transform: translateX(-50%);
 `;
-
-const KeyboardSettingsButton = styled.button`
-	position: absolute;
-	top: 0;
-	right: 0;
-	background: transparent;
-	border: 1.5px solid ${props => props.theme.cardBorder};
-	border-radius: 8px;
-	color: ${props => props.theme.subtleText};
-	padding: 0.3rem 0.45rem;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: color 0.15s, border-color 0.15s;
-	z-index: 10;
-
-	&:hover {
-		color: ${props => props.theme.text};
-		border-color: ${props => props.theme.accent};
-	}
-`;
-
-const KeyboardIcon = () => (
-	<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-		<rect x="2" y="4" width="20" height="16" rx="2" />
-		<path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10" />
-	</svg>
-);
 
 const HornKeyHint = styled.span`
 	display: block;

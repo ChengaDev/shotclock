@@ -189,14 +189,17 @@ const ringPulse = keyframes`
 
 /* ── Layout ── */
 const Wrapper = styled.div`
-  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 5vw 3.5rem;
+  padding: 2.5rem 5vw 150px;
   background: ${props => props.theme.mainBackgroundColor};
 
   @media (max-width: 768px) {
     padding: 1.75rem 1.25rem 2.5rem;
+  }
+
+  @media (orientation: landscape) and (max-height: 500px) {
+    padding-bottom: 2.5rem;
   }
 `
 
