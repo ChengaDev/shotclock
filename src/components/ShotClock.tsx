@@ -12,6 +12,7 @@ const ShotClock = () => {
 	const buzzerSoundElementRef = useRef<HTMLAudioElement>(null);
 
 	const [currentSeconds, setCurrentSeconds] = useState<number>(ShotClockReset.BackCountPosition);
+	const [currentTenths, setCurrentTenths] = useState<number>(9);
 	const [isTicking, setIsTicking] = useState<boolean>(false);
 	const [isTimeDisplay, setIsTimeDisplay] = useState<boolean>(true);
 	const [tickInterval, setTickInterval] = useState<any>(null);
@@ -20,6 +21,8 @@ const ShotClock = () => {
 	const secondsRef = useRef<number>();
 	const isTickingRef = useRef<boolean>();
 	const intervalRef = useRef<any>();
+	const lastSecondTimestampRef = useRef<number>(0);
+	const pausedElapsedRef = useRef<number>(0);
 
 	secondsRef.current = currentSeconds;
 	isTickingRef.current = isTicking;
@@ -28,6 +31,8 @@ const ShotClock = () => {
 	const incrementSecond = useCallback(() => {
 		if (currentSeconds < ShotClockReset.BackCountPosition && !isTickingRef.current) {
 			setCurrentSeconds(currentSeconds + 1);
+			setCurrentTenths(9);
+			pausedElapsedRef.current = 0;
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, currentSeconds]);
@@ -35,6 +40,8 @@ const ShotClock = () => {
 	const decrementSecond = useCallback(() => {
 		if (currentSeconds > 0 && !isTickingRef.current) {
 			setCurrentSeconds(currentSeconds - 1);
+			setCurrentTenths(9);
+			pausedElapsedRef.current = 0;
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, currentSeconds]);
@@ -45,9 +52,13 @@ const ShotClock = () => {
 			clearInterval(intervalRef.current);
 			setTickInterval(null);
 		}
-
+		if (isTickingRef.current) {
+			lastSecondTimestampRef.current = Date.now();
+		}
+		pausedElapsedRef.current = 0;
 		setIsTimeDisplay(true);
 		setCurrentSeconds(ShotClockReset.FrontCountPosition);
+		setCurrentTenths(9);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, intervalRef.current]);
 
@@ -57,9 +68,13 @@ const ShotClock = () => {
 			clearInterval(intervalRef.current);
 			setTickInterval(null);
 		}
-
+		if (isTickingRef.current) {
+			lastSecondTimestampRef.current = Date.now();
+		}
+		pausedElapsedRef.current = 0;
 		setIsTimeDisplay(true);
 		setCurrentSeconds(ShotClockReset.BackCountPosition);
+		setCurrentTenths(9);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTickingRef.current, intervalRef.current]);
 
@@ -77,10 +92,17 @@ const ShotClock = () => {
 					setCurrentSeconds(13);
 					setTimeReset(false);
 				}
-				const interval = setInterval(tickIntervalHandler, 1000);
+				lastSecondTimestampRef.current = Date.now();
+				const interval = setInterval(tickIntervalHandler, 100);
 				setTickInterval(interval);
+			} else {
+				// Resuming — restore the elapsed position within the current second
+				lastSecondTimestampRef.current = Date.now() - pausedElapsedRef.current;
 			}
 			setIsTimeDisplay(true);
+		} else {
+			// Pausing — save how far into the current second we are
+			pausedElapsedRef.current = Date.now() - lastSecondTimestampRef.current;
 		}
 		setIsTicking(!isTickingRef.current);
 	};
@@ -90,15 +112,36 @@ const ShotClock = () => {
 	};
 
 	const tickIntervalHandler = () => {
-		const currentSecondsValue = secondsRef.current || 0;
-		if (isTickingRef.current && currentSecondsValue > 0) {
-			setCurrentSeconds(currentSecondsValue - 1);
+		if (!isTickingRef.current) return;
+
+		const currentSecondsValue = secondsRef.current ?? 0;
+		const elapsed = Date.now() - lastSecondTimestampRef.current;
+
+		// Show tenths when below 5 seconds (including the 0.x countdown)
+		if (currentSecondsValue < 5) {
+			setCurrentTenths(Math.max(0, 9 - Math.floor(elapsed / 100)));
 		}
-		if (currentSecondsValue === 0) {
-			if (isTickingRef.current) {
+
+		// Decrement seconds once 1000ms has elapsed
+		if (elapsed >= 1000) {
+			lastSecondTimestampRef.current += 1000;
+
+			if (currentSecondsValue === 0) {
+				// Buzzer fires after the 0.x second finishes
 				buzzerSoundElementRef.current?.play();
+				setIsTicking(false);
+				clearInterval(intervalRef.current);
+				setTickInterval(null);
+				setCurrentTenths(0);
+			} else {
+				const newSeconds = currentSecondsValue - 1;
+				setCurrentSeconds(newSeconds);
+				if (newSeconds < 5) {
+					// Reset timestamp precisely so first tenths tick reads 0ms elapsed → shows 4.9
+					lastSecondTimestampRef.current = Date.now();
+					setCurrentTenths(9);
+				}
 			}
-			setIsTicking(false);
 		}
 	};
 
@@ -114,7 +157,10 @@ const ShotClock = () => {
 		config: { duration: 2000 }
 	});
 
-	const timeDisplayText = currentSeconds > 9 ? currentSeconds : `0${currentSeconds}`;
+	const showTenths = currentSeconds < 5;
+	const timeDisplayText = showTenths
+		? `${currentSeconds}.${currentTenths}`
+		: (currentSeconds > 9 ? `${currentSeconds}` : `0${currentSeconds}`);
 
 	return (
 		<>
@@ -132,8 +178,8 @@ const ShotClock = () => {
 				<LayoutGrid>
 					{/* display spans cols 1-2 */}
 					<DisplayCell>
-						<TimeDisplay $isClockEnded={currentSeconds === 0} $markSeconds={currentSeconds < 5}>
-							<FakeDigitsDisplay>88</FakeDigitsDisplay>
+						<TimeDisplay $isClockEnded={currentSeconds === 0 && !isTicking} $markSeconds={currentSeconds < 5}>
+							<FakeDigitsDisplay>{showTenths ? '8.8' : '88'}</FakeDigitsDisplay>
 							{isTimeDisplay ? timeDisplayText : ''}
 						</TimeDisplay>
 					</DisplayCell>
