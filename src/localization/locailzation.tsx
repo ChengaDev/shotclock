@@ -262,8 +262,8 @@ const AppLocalization: AppLocalizationType = {
       f: 'Missed',
     },
     // YouTube Free Play
-    youtubePageTitle: 'YouTube Free Play',
-    youtubePageDescription: 'Paste a YouTube basketball game link and operate the shot clock alongside it in real time.',
+    youtubePageTitle: 'YouTube Basketball Free Play',
+    youtubePageDescription: 'Watch any YouTube basketball game and operate a real 24-second FIBA shot clock alongside it — free, instant, no installation needed.',
     youtubeUrlPlaceholder: 'Paste a YouTube URL...',
     youtubeLoadVideo: 'Load',
     youtubeChangeVideo: 'Change Video',

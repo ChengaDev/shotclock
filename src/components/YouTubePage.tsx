@@ -56,6 +56,24 @@ const YouTubePage: React.FC = () => {
     setShowChangeInput(true)
   }
 
+  const youtubeSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: locals.youtubePageTitle,
+    url: 'https://www.24shotclock.com/youtube',
+    description: locals.youtubePageDescription,
+    applicationCategory: 'SportsApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    featureList: [
+      'Paste any YouTube basketball game URL',
+      '24-second FIBA shot clock panel',
+      '14-second offensive rebound reset',
+      'Real-time buzzer sound',
+      'Works on mobile and desktop',
+    ],
+  }
+
   /* ── Landing: no video yet ── */
   if (!videoId) {
     return (
@@ -63,6 +81,7 @@ const YouTubePage: React.FC = () => {
         <SEO
           title={`${locals.youtubePageTitle} | ShotClock Pro`}
           description={locals.youtubePageDescription}
+          schema={youtubeSchema}
         />
         <LandingTitle>{locals.youtubePageTitle}</LandingTitle>
         <LandingSubtitle>{locals.youtubePageDescription}</LandingSubtitle>
@@ -87,6 +106,7 @@ const YouTubePage: React.FC = () => {
       <SEO
         title={`${locals.youtubePageTitle} | ShotClock Pro`}
         description={locals.youtubePageDescription}
+        schema={youtubeSchema}
       />
 
       <PageTitle>{locals.youtubePageTitle}</PageTitle>

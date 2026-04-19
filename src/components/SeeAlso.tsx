@@ -6,7 +6,7 @@ import AppRoutes from '../AppRoutes'
 import featureFlags from '../featureFlags'
 
 interface SeeAlsoProps {
-  exclude?: ('instructions' | 'faq' | 'fiba-resources' | 'reaction-training')[]
+  exclude?: ('instructions' | 'faq' | 'fiba-resources' | 'reaction-training' | 'youtube')[]
 }
 
 const SeeAlso: React.FC<SeeAlsoProps> = ({ exclude = [] }) => {
@@ -19,6 +19,9 @@ const SeeAlso: React.FC<SeeAlsoProps> = ({ exclude = [] }) => {
     { key: 'fiba-resources', label: locals.fibaResources, to: routes.FIBAResources },
     ...(featureFlags.reactionTraining
       ? [{ key: 'reaction-training', label: locals.reactionTraining, to: routes.ReactionTraining }]
+      : []),
+    ...(featureFlags.youtube
+      ? [{ key: 'youtube', label: locals.youtubePageTitle, to: routes.YouTube }]
       : []),
   ].filter(l => !exclude.includes(l.key as any))
 
