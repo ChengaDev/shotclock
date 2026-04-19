@@ -141,4 +141,11 @@ export type LocalizationType = {
 		d: string;
 		f: string;
 	};
+	// YouTube Free Play
+	youtubePageTitle: string;
+	youtubePageDescription: string;
+	youtubeUrlPlaceholder: string;
+	youtubeLoadVideo: string;
+	youtubeChangeVideo: string;
+	youtubeInvalidUrl: string;
 };

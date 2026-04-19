@@ -23,6 +23,7 @@ const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
 const NotFound = lazy(() => import('./components/NotFound'))
 const ReactionTrainingPage = lazy(() => import('./components/training/ReactionTrainingPage'))
 const PlayPage = lazy(() => import('./components/PlayPage'))
+const YouTubePage = lazy(() => import('./components/YouTubePage'))
 
 const NON_ENGLISH_LANGS = ['it', 'es', 'fr', 'el']
 
@@ -162,6 +163,9 @@ const pageRoutes = (
           <ReactionTrainingPage />
         </PageContent>
       } />
+    )}
+    {featureFlags.youtube && (
+      <Route path="youtube" element={<YouTubePage />} />
     )}
   </>
 )

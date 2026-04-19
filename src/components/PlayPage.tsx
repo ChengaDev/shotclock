@@ -48,17 +48,18 @@ const PlayPage: React.FC = () => {
       to: routes.Clock,
     },
     {
+      key: 'youtube',
+      icon: <IconPlay color="#f87171" />,
+      accentColor: '#f87171',
+      to: featureFlags.youtube ? routes.YouTube : undefined,
+      badge: featureFlags.youtube ? undefined : locals.comingSoon,
+    },
+    {
       key: 'training',
       icon: <IconLightning color="#818cf8" />,
       accentColor: '#818cf8',
       to: featureFlags.reactionTraining ? routes.ReactionTraining : undefined,
       badge: featureFlags.reactionTraining ? undefined : locals.comingSoon,
-    },
-    {
-      key: 'youtube',
-      icon: <IconPlay color="#f87171" />,
-      accentColor: '#f87171',
-      badge: locals.comingSoon,
     },
   ]
 

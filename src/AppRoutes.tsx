@@ -7,6 +7,7 @@ const AppRoutes = (lang: string) => ({
   Play: lang === 'en' ? '/play' : `/${lang}/play`,
   Clock: lang === 'en' ? '/clock' : `/${lang}/clock`,
   ReactionTraining: lang === 'en' ? '/reaction-training' : `/${lang}/reaction-training`,
+  YouTube: lang === 'en' ? '/youtube' : `/${lang}/youtube`,
 })
 
 export default AppRoutes

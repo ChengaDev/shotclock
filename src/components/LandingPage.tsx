@@ -171,8 +171,8 @@ const LandingPage: React.FC = () => {
           <ModesGrid>
             {[
               { icon: <IconClock color="#E8761A" />, accent: '#E8761A', title: locals.landingModeClockTitle, desc: locals.landingModeClockDesc, to: routes.Clock },
+              { icon: <IconPlayBtn color="#f87171" />, accent: '#f87171', title: locals.landingModeYoutubeTitle, desc: locals.landingModeYoutubeDesc, to: featureFlags.youtube ? routes.YouTube : undefined, badge: featureFlags.youtube ? undefined : locals.comingSoon },
               { icon: <IconLightning color="#818cf8" />, accent: '#818cf8', title: locals.landingModeTrainingTitle, desc: locals.landingModeTrainingDesc, to: featureFlags.reactionTraining ? routes.ReactionTraining : undefined, badge: featureFlags.reactionTraining ? undefined : locals.comingSoon },
-              { icon: <IconPlayBtn color="#f87171" />, accent: '#f87171', title: locals.landingModeYoutubeTitle, desc: locals.landingModeYoutubeDesc, badge: locals.comingSoon },
             ].map((mode, i) => {
               const disabled = !mode.to
               const inner = (
