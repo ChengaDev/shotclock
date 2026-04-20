@@ -74,10 +74,11 @@ const YouTubePage: React.FC = () => {
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     featureList: [
-      'Paste any YouTube basketball game URL',
+      'Load any YouTube basketball game as a reference',
       '24-second FIBA shot clock panel',
       '14-second offensive rebound reset',
       'Real-time buzzer sound',
+      'Recently used games history',
       'Works on mobile and desktop',
     ],
   }
@@ -107,7 +108,7 @@ const YouTubePage: React.FC = () => {
 
         {recentVideos.length > 0 && (
           <RecentSection>
-            <RecentLabel>Recently watched</RecentLabel>
+            <RecentLabel>Recent games</RecentLabel>
             <RecentGrid>
               {recentVideos.map(v => (
                 <RecentCard key={v.id} onClick={() => loadVideo(v.id)}>
